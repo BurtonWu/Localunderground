@@ -10,6 +10,7 @@ using IdentityServer.Data.Models.Identity;
 using IdentityServer.Features.Billboard.Engine;
 using IdentityServer.Features.Billboard.Models;
 using IdentityServer.Infrastructure;
+using IdentityServer.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,11 +39,19 @@ namespace IdentityServer.Features.Billboard
         [Authorize]
         [HttpGet]
         [Route(Routes.Billboard.Base)]
-        public async Task<ActionResult> GetBillboards()
+        public async Task<ActionResult<List<BillboardServiceModel>>> GetBillboards()
         {
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             var billboards = await _billboardEngine.GetBillboards(userId);
             return Ok(billboards);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(Routes.Billboard.Details)]
+        public async Task<ActionResult<BillboardDetailServiceModel>> GetBillboardDetails([FromQuery]int id)
+        {
+            return await _billboardEngine.GetBillboardDetails(id);
         }
 
         [Authorize]

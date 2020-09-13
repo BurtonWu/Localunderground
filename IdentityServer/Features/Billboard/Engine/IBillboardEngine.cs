@@ -9,6 +9,7 @@ namespace IdentityServer.Features.Billboard.Engine
     public interface IBillboardEngine
     {
         Task<int> CreateBillboard(string description, string imageUrl, string userId);
-        Task<List<BillboardResponseModel>> GetBillboards(string userId);
+        Task<IEnumerable<BillboardServiceModel>> GetBillboards(string userId);
+        Task<BillboardDetailServiceModel> GetBillboardDetails(int id);
     }
 }

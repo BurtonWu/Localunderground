@@ -4,6 +4,7 @@ using IdentityServer.Data.Models;
 using IdentityServer.Data.Models.Identity;
 using IdentityServer.Features.Billboard.Engine;
 using IdentityServer.Features.Identity.Engine;
+using IdentityServer.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityServer.Infrastructure
+namespace IdentityServer.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -109,6 +110,11 @@ namespace IdentityServer.Infrastructure
                     }
                 });
             });
+        }
+
+        public static void AddApiControllers(this IServiceCollection services)
+        {
+            services.AddControllers(config => config.Filters.Add<ModelOrNotFoundActionFilter>());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.Features.Billboard.Models
 {
-    public class BillboardResponseModel
+    public class BillboardServiceModel
     {
         public int Id { get; set; }
         public string ImageUrl { get; set; }

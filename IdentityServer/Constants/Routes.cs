@@ -16,6 +16,7 @@ namespace IdentityServer.Constants
         public static class Billboard
         {
             public const string Base = "api/billboard";
+            public const string Details = "api/billboard/details";
         }
     }
 }

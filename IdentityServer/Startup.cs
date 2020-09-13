@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IdentityServer.Constants;
 using IdentityServer.Data;
 using IdentityServer.Data.Models;
-using IdentityServer.Infrastructure;
+using IdentityServer.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,8 +41,7 @@ namespace IdentityServer
                 .Configure<ApplicationSettings>(_configuration.GetSection("AppSettings"))
                 .InjectServiceEngines()
                 .AddSwagger()
-                //controllers to connect with view files
-                .AddControllers();
+                .AddApiControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
