@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterUserModel } from './auth-login.interface';
-import { AuthorizationService } from './auth-login.services';
+import { AuthorizationService } from './auth.services';
 import { FormGroup, FormBuilder, Validators, AbstractControlOptions } from '@angular/forms';
 
 @Component({

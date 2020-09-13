@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { BillboardCreateRequestModel } from "./billboard-create.interface";
-import { AuthorizationService } from "../auth/auth-login.services";
+import { AuthorizationService } from "../auth/auth.services";
 
 @Injectable()
 export class BillboardService {
@@ -13,11 +13,7 @@ export class BillboardService {
     }
 
     public create(params: BillboardCreateRequestModel): Observable<any> {
-        var token = this.authService.getToken();
-        let headers = new HttpHeaders(
-            { 'authorization': `bearer ${token}` }
-        );
-        return this.http.post(this.baseUrl, params, { headers: headers });
+        return this.http.post(this.baseUrl, params);
     }
 
     // public register(params: RegisterUserModel): Observable<any> {

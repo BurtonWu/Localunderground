@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AuthLoginComponent } from './auth-login.component';
-import { AuthorizationService } from './auth-login.services';
+import { AuthorizationService } from './auth.services';
 import { AuthRegisterComponent } from './auth-register.component';
 import { AppBaseModule } from '../app-base.module';
-import { AuthorizationGuardService } from './auth-guard.service';
+import { AuthorizationGuardService } from '../app-auth-guard.service';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginCredentials } from './auth-login.interface';
-import { AuthorizationService } from './auth-login.services';
+import { AuthorizationService } from './auth.services';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 

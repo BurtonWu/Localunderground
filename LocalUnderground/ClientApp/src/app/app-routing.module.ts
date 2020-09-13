@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLoginComponent } from './auth/auth-login.component';
 import { AuthRegisterComponent } from './auth/auth-register.component';
 import { BillboardCreateComponent } from './billboard/billboard-create.component';
-import { AuthorizationGuardService } from './auth/auth-guard.service';
+import { AuthorizationGuardService } from './app-auth-guard.service';
 
 const routes: Routes = [
     // { path: '', component: AuthLoginComponent, pathMatch: 'full' },

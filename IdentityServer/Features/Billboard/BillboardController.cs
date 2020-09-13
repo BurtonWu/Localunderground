@@ -36,6 +36,16 @@ namespace IdentityServer.Features.Billboard
         }
 
         [Authorize]
+        [HttpGet]
+        [Route(Routes.Billboard.Base)]
+        public async Task<ActionResult> GetBillboards()
+        {
+            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            var billboards = await _billboardEngine.GetBillboards(userId);
+            return Ok(billboards);
+        }
+
+        [Authorize]
         [HttpPost]
         [Route(Routes.Billboard.Base)]
         public async Task<ActionResult> Create(BillboardCreateRequestModel model)

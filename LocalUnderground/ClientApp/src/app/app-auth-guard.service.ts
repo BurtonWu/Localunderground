@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { LoginCredentials, RegisterUserModel } from "./auth-login.interface";
+import { LoginCredentials, RegisterUserModel } from "./auth/auth-login.interface";
 import { Subscription, Observable } from "rxjs";
-import { environment } from "../../environments/environment";
-import { AuthorizationService } from "./auth-login.services";
+import { environment } from "../environments/environment";
+import { AuthorizationService } from "./auth/auth.services";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 
 @Injectable()
