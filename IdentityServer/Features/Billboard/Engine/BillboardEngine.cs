@@ -67,5 +67,26 @@ namespace IdentityServer.Features.Billboard.Engine
                 }).SingleOrDefaultAsync();
 
         }
+
+        public async Task<bool> UpdateBillboard(int id, string description, string userId)
+        {
+            var billboard = await _context.BillboardPost.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+            if(billboard == null) return false;
+
+            billboard.Description = description;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteBillboard(int id, string userId)
+        {
+            var billboard = await _context.BillboardPost.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+            if (billboard == null) return false;
+
+            _context.BillboardPost.Remove(billboard);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
+
 }

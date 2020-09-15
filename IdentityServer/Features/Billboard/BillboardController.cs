@@ -55,6 +55,28 @@ namespace IdentityServer.Features.Billboard
         }
 
         [Authorize]
+        [HttpPut]
+        [Route(Routes.Billboard.Base)]
+        public async Task<ActionResult<bool>> UpdateBillboard([FromBody]BillboardUpdateRequestModel model)
+        {
+
+            var updated = await _billboardEngine.UpdateBillboard(model.Id, model.Description, User.GetClaim(ClaimTypes.NameIdentifier));
+            if (updated) return Ok();
+            else return BadRequest();
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route(Routes.Billboard.Base)]
+        public async Task<ActionResult<bool>> DeleteBillboard([FromQuery]int id)
+        {
+
+            var deleted = await _billboardEngine.DeleteBillboard(id, User.GetClaim(ClaimTypes.NameIdentifier));
+            if (deleted) return Ok();
+            else return BadRequest();
+        }
+
+        [Authorize]
         [HttpPost]
         [Route(Routes.Billboard.Base)]
         public async Task<ActionResult> Create(BillboardCreateRequestModel model)

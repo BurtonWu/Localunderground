@@ -11,5 +11,8 @@ namespace IdentityServer.Features.Billboard.Engine
         Task<int> CreateBillboard(string description, string imageUrl, string userId);
         Task<IEnumerable<BillboardServiceModel>> GetBillboards(string userId);
         Task<BillboardDetailServiceModel> GetBillboardDetails(int id);
+        Task<bool> UpdateBillboard(int id, string description, string userId);
+        Task<bool> DeleteBillboard(int id, string userId);
+
     }
 }
