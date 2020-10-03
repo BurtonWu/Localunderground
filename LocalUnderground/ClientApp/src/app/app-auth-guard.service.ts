@@ -13,11 +13,11 @@ export class AuthorizationGuardService implements CanActivate {
     constructor(
         private authService: AuthorizationService,
         private router: Router
-        ) {
+    ) {
 
     }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | import("@angular/router").UrlTree | Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {
-        if(this.authService.isAuthenticated()){
+        if (this.authService.isAuthenticated()) {
             return true;
         } else {
             this.router.navigate(["login"]);

@@ -3,6 +3,7 @@ import { LoginCredentials } from './auth-login.interface';
 import { AuthorizationService } from './auth.services';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'auth-login',
@@ -16,12 +17,15 @@ export class AuthLoginComponent {
     public submitted: boolean;
     public loginForm: FormGroup;
     private _authService: AuthorizationService;
+    private _router: Router;
 
     public constructor(
         authService: AuthorizationService,
-        fb: FormBuilder
+        fb: FormBuilder,
+        router: Router
     ) {
         this._authService = authService;
+        this._router = router;
         // this.loginForm = fb.group({
         //     username: new FormControl(this.username, Validators.required),
         //     password: new FormControl(this.password, Validators.required),
@@ -38,6 +42,7 @@ export class AuthLoginComponent {
         this._authService.login(this.loginForm.value).subscribe((response) => {
             console.log(response);
             this._authService.saveToken(response['token']);
+            this._router.navigate(['billboard']);
         });
     }
 

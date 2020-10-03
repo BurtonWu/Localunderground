@@ -6,8 +6,10 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthLoginModule } from './auth/auth-login.module';
 import { AppRoutingModule } from './app-routing.module';
-import { BillboardModule } from './billboard/billboard-create.module';
+import { BillboardModule } from './billboard/billboard.module';
 import { TokenInterceptorService } from './app-token-interceptor.service';
+import { SharedModule } from './shared/shared.module';
+import { AppBaseModule } from './app-base.module';
 
 @NgModule({
   declarations: [
@@ -16,19 +18,10 @@ import { TokenInterceptorService } from './app-token-interceptor.service';
     AppComponent,
   ],
   imports: [
-    ReactiveFormsModule,
-    FormsModule,
-
-
     AppRoutingModule,
     AuthLoginModule,
     BillboardModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BrowserModule,
-    HttpClientModule,
-
-
-
 
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },
