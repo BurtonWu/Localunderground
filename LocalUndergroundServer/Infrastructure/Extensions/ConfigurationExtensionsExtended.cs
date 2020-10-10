@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Infrastructure.Extensions
 {
-    public static class ConfigurationExtensions
+    public static class ConfigurationExtensionsExtended
     {
         public static string GetDefaultConnectionString(this IConfiguration configuration)
             => configuration.GetConnectionString("LocalConnection");

@@ -1,11 +1,15 @@
 ﻿using LocalUndergroundServer.Data;
+using LocalUndergroundServer.Data.DTO.Panel;
 using LocalUndergroundServer.Data.Models.Billboard;
 using LocalUndergroundServer.Features.Billboard.Models;
 using LocalUndergroundServer.Features.Panel.Models;
+using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndgroundServer.Data.Models.Panel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,10 +18,15 @@ namespace LocalUndergroundServer.Features.Panel.Engine
     public class PanelEngine : IPanelEngine
     {
         private readonly AuthDbContext _context;
+        private readonly IPanelStore _panelStore;
 
-        public PanelEngine(AuthDbContext context)
+        public PanelEngine(
+            AuthDbContext context,
+            IPanelStore panelStore
+            )
         {
             _context = context;
+            _panelStore = panelStore;
         }
         public async Task<int> CreatePanel(string description, string imageUrl, string userId)
         {
@@ -83,6 +92,33 @@ namespace LocalUndergroundServer.Features.Panel.Engine
             _context.PanelCore.Remove(panelCore);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<int> UploadPanelImage(IFormFile file)
+        {
+            var filename = Path.GetFileName(file.FileName);
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+            var fileSize = file.Length;
+
+            if (fileExtension == ".jpg" || fileExtension == ".png")
+            {
+                using (var fileStream = file.OpenReadStream())
+                {
+                    var stream = new MemoryStream();
+                    await fileStream.CopyToAsync(stream);
+                    var bytes = stream.ToArray();
+
+                    var panelImage = new PanelImageDTO()
+                    {
+                        Name = filename,
+                        Data = bytes,
+                        Size = fileSize
+                    };
+                    return await _panelStore.UploadImage(panelImage);
+                }
+            }
+
+            return 0;
         }
     }
 

@@ -5,6 +5,8 @@ using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Features.Billboard.Engine;
 using LocalUndergroundServer.Features.Identity.Engine;
 using LocalUndergroundServer.Features.Panel.Engine;
+using LocalUndergroundServer.Infrastructure.DataAccess;
+using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using LocalUndergroundServer.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -85,8 +87,11 @@ namespace LocalUndergroundServer.Infrastructure.Extensions
         public static IServiceCollection InjectServiceEngines(this IServiceCollection services)
         {
             return services.AddTransient<IIdentityEngine, IdentityEngine>()
+                           .AddTransient<ISqlEngine, SqlEngine>()
                            .AddTransient<IBillboardEngine, BillboardEngine>()
-                           .AddTransient<IPanelEngine, PanelEngine>();
+                           .AddTransient<IPanelEngine, PanelEngine>()
+                           .AddTransient<IPanelStore, PanelStore>();
+
 
         }
 

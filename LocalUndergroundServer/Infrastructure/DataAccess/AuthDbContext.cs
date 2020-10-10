@@ -1,7 +1,6 @@
 ﻿using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Billboard;
 using LocalUndergroundServer.Data.Models.Identity;
-using LocalUndergroundServer.Data.Models.Panel;
 using LocalUndergroundServer.Features.Billboard.Models;
 using LocalUndgroundServer.Data.Models.Panel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Data
+namespace LocalUndergroundServer.Infrastructure.DataAccess
 {
     public class AuthDbContext : IdentityDbContext<User>
     {
@@ -23,7 +22,7 @@ namespace LocalUndergroundServer.Data
 
         public DbSet<BillboardCore> BillboardCore { get; set; }
         public DbSet<PanelCore> PanelCore { get; set; }
-        public DbSet<PanelImage> PanelImage { get; set; }
+        //public DbSet<PanelImage> PanelImage { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -35,12 +34,12 @@ namespace LocalUndergroundServer.Data
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder
-                .Entity<PanelImage>()
-                .HasOne(x => x.Panel)
-                .WithMany(x => x.PanelImages)
-                .HasForeignKey(x => x.PanelId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<PanelImage>()
+            //    .HasOne(x => x.Panel)
+            //    .WithMany(x => x.PanelImages)
+            //    .HasForeignKey(x => x.PanelId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
 
             base.OnModelCreating(builder);

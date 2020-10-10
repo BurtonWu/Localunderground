@@ -1,6 +1,5 @@
 ﻿using LocalUndergroundServer.Data.Models.Billboard;
 using LocalUndergroundServer.Data.Models.Identity;
-using LocalUndergroundServer.Data.Models.Panel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,6 @@ namespace LocalUndgroundServer.Data.Models.Panel
         public string UserId { get; set; }
         public User User { get; set; }
         public BillboardCore Billboard { get; set; }
-        public IEnumerable<PanelImage> PanelImages { get; set; }
+        //public IEnumerable<PanelImage> PanelImages { get; set; }
     }
 }

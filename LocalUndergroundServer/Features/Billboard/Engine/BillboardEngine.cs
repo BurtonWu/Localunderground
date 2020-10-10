@@ -1,6 +1,7 @@
 ﻿using LocalUndergroundServer.Data;
 using LocalUndergroundServer.Data.Models.Billboard;
 using LocalUndergroundServer.Features.Billboard.Models;
+using LocalUndergroundServer.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
 ﻿using LocalUndergroundServer.Features.Panel.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace LocalUndergroundServer.Features.Panel.Engine
         Task<PanelDetailServiceModel> GetPanelDetails(int id);
         Task<bool> UpdatePanel(int id, string description, string userId);
         Task<bool> DeletePanel(int id, string userId);
+        Task<int> UploadPanelImage(IFormFile file);
+
 
     }
 }

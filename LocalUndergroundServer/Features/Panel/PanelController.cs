@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,8 +27,9 @@ namespace LocalUndergroundServer.Features.Panel
         [Route(Routes.Panel.UploadImage)]
         public async Task<ActionResult> Upload()
         {
-            var a = Request.Form.Files[0];
-            return Ok();
+
+            var id = await _panelEngine.UploadPanelImage(Request.Form.Files[0]);
+            return Ok(id);
         }
     }
 }
