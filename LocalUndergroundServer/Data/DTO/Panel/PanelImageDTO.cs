@@ -9,6 +9,6 @@ namespace LocalUndergroundServer.Data.DTO.Panel
     {
         public string Name { get; set; }
         public long Size { get; set; }
-        public byte[] Data { get; set; } 
+        public byte[] ImageData { get; set; } 
     }
 }

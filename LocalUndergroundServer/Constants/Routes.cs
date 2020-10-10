@@ -22,7 +22,7 @@ namespace LocalUndergroundServer.Constants
         public static class Panel
         {
             public const string BasePanel = "api/panel";
-            public const string UploadImage = "api/panel/uploadimage";
+            public const string Images = "api/panel/images";
         }
     }
 }

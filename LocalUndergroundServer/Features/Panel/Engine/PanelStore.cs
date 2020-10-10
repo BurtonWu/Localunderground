@@ -1,4 +1,5 @@
 ﻿using LocalUndergroundServer.Data.DTO.Panel;
+using LocalUndergroundServer.Features.Panel.Models;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,26 @@ namespace LocalUndergroundServer.Features.Panel.Engine
         {
             var sqlParameters = _sqlEngine.AddSqlParameter("@Name", panelImage.Name);
             _sqlEngine.AddSqlParameter("@Size", panelImage.Size, sqlParameters);
-            _sqlEngine.AddSqlParameter("@ImageData", panelImage.Data, sqlParameters);
+            _sqlEngine.AddSqlParameter("@ImageData", panelImage.ImageData, sqlParameters);
             _sqlEngine.AddSqlParameterOutput("@Id", SqlDbType.Int, sqlParameters);
 
             var outputParameters = await _sqlEngine.ExecuteStoredProcedure("spUploadPanelImage", sqlParameters);
             return (int)outputParameters[0].Value;
+        }
+
+        public async Task<List<PanelImage>> GetImages()
+        {
+            //var sqlParameters = _sqlEngine.AddSqlParameter("@Name", panelImage.Name);
+            //_sqlEngine.AddSqlParameter("@Size", panelImage.Size, sqlParameters);
+            //_sqlEngine.AddSqlParameter("@ImageData", panelImage.ImageData, sqlParameters);
+            //_sqlEngine.AddSqlParameterOutput("@Id", SqlDbType.Int, sqlParameters);
+
+            var data = await _sqlEngine.ExecuteStoredProcedure<PanelImageDTO>("spGetPanelImages", null);
+            return data.Select(x => new PanelImage()
+            {
+                ImageData = Convert.ToBase64String(x.ImageData),
+                Name = x.Name
+            }).ToList();
         }
     }
 }

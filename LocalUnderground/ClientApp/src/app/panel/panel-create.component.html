@@ -16,6 +16,12 @@
                 <button type="submit" class="btn btn-primary">Create</button>
               </form> -->
               <dnd (imageUploadChange)="imageUploadHandler($event)"></dnd>
+              <button (click)="getImage()"></button>
+              <div *ngFor="let a of panelImages">
+                <!-- <img [src]="transform(a.imageData)"> -->
+                <img [src]="a.imageData">
+
+              </div>
             </div>
     </div>
 </div>

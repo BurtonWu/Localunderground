@@ -37,15 +37,22 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess.SQL
             var objs = new List<T>();
             var dataReader = GetDataReader(procedureName, sqlParameters);
             var columnSchema = dataReader.GetColumnSchema();
-            while (dataReader.HasRows)
+            try
             {
-                await dataReader.ReadAsync();
-                var obj = new T();
-                for (var i = 0; i < columnSchema.Count; i++)
+                while (await dataReader.ReadAsync())
                 {
-                    obj.GetType().GetProperty(columnSchema[i].ColumnName).SetValue(obj, dataReader.GetSqlValue(i));
+                    var obj = new T();
+                    for (var i = 0; i < columnSchema.Count; i++)
+                    {
+                        var a = obj.GetType().GetProperty(columnSchema[i].ColumnName);
+                        var b = dataReader.GetValue(i);
+                        obj.GetType().GetProperty(columnSchema[i].ColumnName).SetValue(obj, dataReader.GetValue(i));
+                    }
+                    objs.Add(obj);
                 }
-                objs.Add(obj);
+            }catch(Exception e)
+            {
+                var a = 1;
             }
             return objs;
         }

@@ -111,7 +111,7 @@ namespace LocalUndergroundServer.Features.Panel.Engine
                     var panelImage = new PanelImageDTO()
                     {
                         Name = filename,
-                        Data = bytes,
+                        ImageData = bytes,
                         Size = fileSize
                     };
                     return await _panelStore.UploadImage(panelImage);
@@ -120,6 +120,11 @@ namespace LocalUndergroundServer.Features.Panel.Engine
 
             return 0;
         }
+
+        //public async Task<PanelImage> GetPanelImages()
+        //{
+
+        //}
     }
 
 }
