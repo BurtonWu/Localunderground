@@ -1,4 +1,6 @@
 <div>
     <input type="file" multiple (change)="imageUploadHandler($event.target.files)" />
-    <img src="assets/images/upload_icon.png" />
+    <div *ngFor="let image of images">
+        <img [src]="image" />
+    </div>
 </div>

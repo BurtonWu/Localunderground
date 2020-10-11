@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-base.module';
 import { DndComponent } from './dnd.component';
 import { SharedService } from './shared.services';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { SharedService } from './shared.services';
     DndComponent
   ],
   imports: [
+    CommonModule
   ],
   exports: [
     DndComponent

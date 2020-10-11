@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
+import { HTMLInputEvent } from './shared.interface';
 
 @Component({
     selector: 'dnd',
@@ -17,33 +18,46 @@ export class DndComponent implements OnInit {
     public emblem: string;
     public title: string;
     public description: string;
-    public image: File;
-
+    public images: string[] = [];
+    public reader: FileReader;
+    public files: FileList;
     public constructor(
         fb: FormBuilder
     ) {
+        this.reader = new FileReader();
+        this.reader.onload = (e) => {
+            this.images.push(e.target.result.toString());
+        }
     }
 
     public ngOnInit() {
     }
 
-    @HostListener('dragover', ['$event']) onDragOver(evt) {
-        // console.log('dragover', evt);
+    // @HostListener('dragover', ['$event']) onDragOver(evt) {
+    //     // console.log('dragover', evt);
+    // }
+
+    // @HostListener('dragleave', ['$event']) onDragLeave(evt) {
+    //     // console.log('dragleave', evt);
+    // }
+
+    // @HostListener('drop', ['$event']) onDrop(evt: HTMLInputEvent) {
+    //     this.reader.readAsDataURL(evt.target.files.item(0));
+    // }
+
+    public imageUploadHandler(files: FileList) {
+        this.reader.readAsDataURL(files.item(0));
+        this.files = files;
+        // const formData = new FormData();
+        // formData.append('image', event.item(0), event.item(0).name);
+        // this.imageUploadChange.emit(formData);
     }
 
-    @HostListener('dragleave', ['$event']) onDragLeave(evt) {
-        // console.log('dragleave', evt);
-    }
-
-    @HostListener('drop', ['$event']) onDrop(evt) {
-        // console.log('drop', evt);
-        this.image = evt[0];
-    }
-
-    public imageUploadHandler(event: FileList) {
-        console.log('dnd', event.item(0));
+    public getImageFormData() {
         const formData = new FormData();
-        formData.append('image', event.item(0), event.item(0).name);
+        for(let i = 0; i < this.files.length; i++) {
+            formData.append('image' + i, this.files.item(i), this.files.item(i).name);
+        }
         this.imageUploadChange.emit(formData);
     }
 
