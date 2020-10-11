@@ -50,6 +50,21 @@ namespace LocalUndergroundServer.Features.Billboard
         }
 
         [Authorize]
+        [HttpPost]
+        [Route(Routes.Billboard.BaseBillboard)]
+        public async Task<ActionResult> Create()
+        {
+            //[FromBody]BillboardCreateRequestModel model
+
+            var file = Request.Form.Files[0];
+            //Request.Form["title"][0]
+            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            return Ok();
+            //var postId = await _billboardEngine.CreateBillboard(model.Description, model.ImageUrl, userId);
+            //return Created("Create", postId);
+        }
+
+        [Authorize]
         [HttpGet]
         [Route(Routes.Billboard.Details)]
         public async Task<ActionResult<BillboardDetailServiceModel>> GetBillboardDetails([FromQuery]int id)
@@ -79,14 +94,6 @@ namespace LocalUndergroundServer.Features.Billboard
             else return BadRequest();
         }
 
-        [Authorize]
-        [HttpPost]
-        [Route(Routes.Billboard.BaseBillboard)]
-        public async Task<ActionResult> Create(BillboardCreateRequestModel model)
-        {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            var postId = await _billboardEngine.CreateBillboard(model.Description, model.ImageUrl, userId);
-            return Created("Create", postId);
-        }
+     
     }
 }

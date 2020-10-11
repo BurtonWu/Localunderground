@@ -5,16 +5,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthLoginModule } from './auth/auth-login.module';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-config/app-routing.module';
 import { BillboardModule } from './billboard/billboard.module';
-import { TokenInterceptorService } from './app-token-interceptor.service';
+import { TokenInterceptorService } from './app-config/app-token-interceptor.service';
 import { SharedModule } from './shared/shared.module';
-import { AppBaseModule } from './app-base.module';
+import { AppBaseModule } from './app-config/app-base.module';
+import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interceptor.service';
 
 @NgModule({
   declarations: [
-
-
     AppComponent,
   ],
   imports: [
@@ -35,6 +34,11 @@ import { AppBaseModule } from './app-base.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeaderInterceptorService,
       multi: true
     }
   ],

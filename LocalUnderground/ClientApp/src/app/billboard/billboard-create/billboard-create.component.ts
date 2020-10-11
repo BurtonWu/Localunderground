@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { BillboardService } from '../billboard.services';
+import { BillboardCreateRequestModel } from '../billboard.interface';
 
 @Component({
     selector: 'billboard-create',
@@ -13,9 +14,9 @@ export class BillboardCreateComponent implements OnInit {
     public submitted: boolean;
 
     public billboardForm: FormGroup;
-    public emblem: string;
-    public title: string;
-    public description: string;
+    public imageData: FormData;
+    public title: string = 'a'
+    public description: string = 'b';
     private _billboardService: BillboardService;
 
     public constructor(
@@ -24,12 +25,34 @@ export class BillboardCreateComponent implements OnInit {
     ) {
         this._billboardService = billboardService;
         this.billboardForm = fb.group({
-            title: [this.title, [Validators.required, Validators.maxLength(20)]],
+            // title: [this.title, [Validators.required, Validators.maxLength(20)]],
             description: [this.description],
-            emblem: [this.emblem],
+            // emblem: [this.emblem],
         });
     }
 
     public ngOnInit() {
     }
+
+    public create() {
+        const params: BillboardCreateRequestModel = {
+            title: this.title,
+            description : this.description,
+            imageData: this.imageData
+        };
+        console.log(params);
+        this._billboardService.createBillboard(params).subscribe((response) => {
+            console.log(response);
+        });
+    }
+
+    public imageUploadHandler(imageData: FormData) {
+        this.imageData = imageData;
+        console.log(imageData);
+    }
 }
+
+
+// if(req.body as FormData && req.method == "POST") {
+//     req.headers.append('enctype', 'multipart/form-data');
+// }

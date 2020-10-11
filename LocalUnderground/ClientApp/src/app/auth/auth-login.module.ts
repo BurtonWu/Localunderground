@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 import { AuthLoginComponent } from './auth-login.component';
 import { AuthorizationService } from './auth.services';
 import { AuthRegisterComponent } from './auth-register.component';
-import { AppBaseModule } from '../app-base.module';
-import { AuthorizationGuardService } from '../app-auth-guard.service';
+import { AppBaseModule } from '../app-config/app-base.module';
+import { AuthorizationGuardService } from '../app-config/app-auth-guard.service';
 
 
 @NgModule({

@@ -9,10 +9,12 @@ namespace LocalUndergroundServer.Features.Billboard.Models
 {
     public class BillboardCreateRequestModel
     {
+        [Required]
+        [MaxLength(200)]
+        public string Title { get; set; }
+
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
-        
-        [Required]
-        public string ImageUrl { get; set; }
+        //public Microsoft.AspNetCore.Http.IFormCollection ImageData { get; set; }
     }
 }

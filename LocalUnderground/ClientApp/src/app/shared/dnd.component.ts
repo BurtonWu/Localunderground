@@ -26,7 +26,7 @@ export class DndComponent implements OnInit {
     ) {
         this.reader = new FileReader();
         this.reader.onload = (e) => {
-            this.images.push(e.target.result.toString());
+            this.images.push(e.target.result as string);
         }
     }
 
@@ -48,6 +48,7 @@ export class DndComponent implements OnInit {
     public imageUploadHandler(files: FileList) {
         this.reader.readAsDataURL(files.item(0));
         this.files = files;
+        this.getImageFormData();
         // const formData = new FormData();
         // formData.append('image', event.item(0), event.item(0).name);
         // this.imageUploadChange.emit(formData);

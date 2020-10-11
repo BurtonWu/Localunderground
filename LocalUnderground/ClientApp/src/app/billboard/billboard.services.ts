@@ -12,7 +12,7 @@ export class BillboardService {
     constructor(private http: HttpClient, private authService: AuthorizationService) {
     }
 
-    public create(params: BillboardCreateRequestModel): Observable<any> {
+    public createBillboard(params: BillboardCreateRequestModel): Observable<any> {
         return this.http.post(this.baseUrl, params);
     }
 

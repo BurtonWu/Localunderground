@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthLoginComponent } from './auth/auth-login.component';
-import { AuthRegisterComponent } from './auth/auth-register.component';
-import { PanelComponent } from './panel/panel.component';
-import { PanelCreateComponent } from './panel/panel-create.component';
+import { AuthLoginComponent } from '../auth/auth-login.component';
+import { AuthRegisterComponent } from '../auth/auth-register.component';
+import { PanelComponent } from '../panel/panel.component';
+import { PanelCreateComponent } from '../panel/panel-create.component';
 
-import { AuthorizationGuardService } from './app-auth-guard.service';
-import { BillboardComponent } from './billboard/billboard.component';
+import { AuthorizationGuardService } from '../app-config/app-auth-guard.service';
+import { BillboardComponent } from '../billboard/billboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'billboard', canActivate: [AuthorizationGuardService] },

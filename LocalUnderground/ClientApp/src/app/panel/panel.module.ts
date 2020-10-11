@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { AppBaseModule } from '../app-base.module';
+import { AppBaseModule } from '../app-config/app-base.module';
 import { PanelCreateComponent } from '../panel/panel-create.component';
 import { PanelComponent } from '../panel/panel.component';
 import { SharedModule } from '../shared/shared.module';

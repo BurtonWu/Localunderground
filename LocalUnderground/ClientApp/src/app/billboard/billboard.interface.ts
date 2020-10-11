@@ -1,4 +1,5 @@
 export interface BillboardCreateRequestModel {
-    imageUrl: string;
+    title: string
     description: string;
+    imageData: FormData;
 }

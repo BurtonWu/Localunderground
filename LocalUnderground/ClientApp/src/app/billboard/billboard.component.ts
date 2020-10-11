@@ -23,8 +23,8 @@ export class BillboardComponent implements OnInit {
     }
 
         public ngOnInit() {
-            this._billboardService.getCards().subscribe((cards) => {
-                console.log(cards);
-            })
+            // this._billboardService.getCards().subscribe((cards) => {
+            //     console.log(cards);
+            // })
         }
 }
