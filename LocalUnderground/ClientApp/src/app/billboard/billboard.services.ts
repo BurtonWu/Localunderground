@@ -16,7 +16,7 @@ export class BillboardService {
         return this.http.post(this.baseUrl, params);
     }
 
-    public getCards(): Observable<any> {
+    public getBillboards(): Observable<any> {
         return this.http.get(this.baseUrl);
     }
 

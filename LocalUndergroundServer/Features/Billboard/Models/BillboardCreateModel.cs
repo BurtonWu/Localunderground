@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocalUndergroundServer.Data.Interfaces;
+using LocalUndergroundServer.Data.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using static LocalUndergroundServer.Constants.Validation.Post;
 
 namespace LocalUndergroundServer.Features.Billboard.Models
 {
-    public class BillboardCreateRequestModel
+    public class BillboardCreateModel : IMultiByteData
     {
         [Required]
         [MaxLength(200)]
@@ -15,6 +17,7 @@ namespace LocalUndergroundServer.Features.Billboard.Models
 
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
+        public List<ByteDataModel> ByteData { get; set; }
         //public Microsoft.AspNetCore.Http.IFormCollection ImageData { get; set; }
     }
 }

@@ -12,6 +12,9 @@ using LocalUndergroundServer.Features.Billboard.Models;
 using LocalUndergroundServer.Infrastructure;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions;
+using LocalUndergroundServer.Infrastructure.Extensions.Http;
+using LocalUndergroundServer.Infrastructure.Extensions.Startup;
+using LocalUndergroundServer.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,26 +42,27 @@ namespace LocalUndergroundServer.Features.Billboard
 
 
 
-        [Authorize]
-        [HttpGet]
-        [Route(Routes.Billboard.BaseBillboard)]
-        public async Task<ActionResult<List<BillboardServiceModel>>> GetBillboards()
-        {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            var billboards = await _billboardEngine.GetBillboards(userId);
-            return Ok(billboards);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route(Routes.Billboard.BaseBillboard)]
+        //public async Task<ActionResult<List<BillboardModel>>> GetBillboards()
+        //{
+        //    var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+        //    var billboards = await _billboardEngine.GetBillboards(userId);
+        //    return Ok(billboards);
+        //}
 
         [Authorize]
         [HttpPost]
         [Route(Routes.Billboard.BaseBillboard)]
         public async Task<ActionResult> Create()
         {
-            //[FromBody]BillboardCreateRequestModel model
-
+            //will crash if no image is uploaded
             var file = Request.Form.Files[0];
-            //Request.Form["title"][0]
+
+
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            var model = HttpRequestExtensions.PopulatePostBodyModel(Request, new BillboardCreateModel(), FileExtension.IMAGE_EXTENSIONS);
             return Ok();
             //var postId = await _billboardEngine.CreateBillboard(model.Description, model.ImageUrl, userId);
             //return Created("Create", postId);

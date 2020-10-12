@@ -46,9 +46,12 @@ export class BillboardCreateComponent implements OnInit {
         });
     }
 
-    public imageUploadHandler(imageData: FormData) {
-        this.imageData = imageData;
-        console.log(imageData);
+    public imageUploadHandler(files: FileList) {
+        const formData = new FormData();
+        for(let i = 0; i < files.length; i++) {
+            formData.append('imageData' + i, files.item(i), files.item(i).name);
+        }
+        this.imageData = formData;
     }
 }
 

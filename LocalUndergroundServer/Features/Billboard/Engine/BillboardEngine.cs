@@ -32,16 +32,15 @@ namespace LocalUndergroundServer.Features.Billboard.Engine
             return post.Id;
         }
 
-        public async Task<IEnumerable<BillboardServiceModel>> GetBillboards(string userId)
-        {
-            return await _context.BillboardCore
-                .Where(x => x.UserId == userId)
-                .Select(x => new BillboardServiceModel()
-                {
-                    Id = x.Id,
-                    ImageUrl = x.ImageUrl
-                }).ToListAsync();
-        }
+        //public async Task<IEnumerable<BillboardBaseModel>> GetBillboards()
+        //{
+        //    return await _context.BillboardCore
+        //        //.Where(x => x.UserId == userId)
+        //        .Select(x => new BillboardBaseModel()
+        //        {
+        //            Id = x.Id,
+        //        }).ToListAsync();
+        //}
 
         public async Task<BillboardDetailServiceModel> GetBillboardDetails(int id)
         {
@@ -56,16 +55,17 @@ namespace LocalUndergroundServer.Features.Billboard.Engine
             //return model;
 
 
-            return await _context.BillboardCore
-                .Where(x => x.Id == id)
-                .Select(x => new BillboardDetailServiceModel()
-                {
-                    Id = x.Id,
-                    ImageUrl = x.ImageUrl,
-                    Description = x.Description,
-                    UserId = x.UserId,
-                    Username = x.User.UserName
-                }).SingleOrDefaultAsync();
+            //return await _context.BillboardCore
+            //    .Where(x => x.Id == id)
+            //    .Select(x => new BillboardDetailServiceModel()
+            //    {
+            //        Id = x.Id,
+            //        ImageUrl = x.ImageUrl,
+            //        Description = x.Description,
+            //        UserId = x.UserId,
+            //        Username = x.User.UserName
+            //    }).SingleOrDefaultAsync();
+            return null;
 
         }
 

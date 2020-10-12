@@ -7,6 +7,7 @@ using LocalUndergroundServer.Constants;
 using LocalUndergroundServer.Data;
 using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Infrastructure.Extensions;
+using LocalUndergroundServer.Infrastructure.Extensions.Startup;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

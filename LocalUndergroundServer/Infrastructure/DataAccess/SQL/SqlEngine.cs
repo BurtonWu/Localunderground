@@ -1,4 +1,5 @@
 ﻿using LocalUndergroundServer.Infrastructure.Extensions;
+using LocalUndergroundServer.Infrastructure.Extensions.Startup;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;

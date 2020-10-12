@@ -7,6 +7,10 @@ import { PanelCreateComponent } from '../panel/panel-create.component';
 
 import { AuthorizationGuardService } from '../app-config/app-auth-guard.service';
 import { BillboardComponent } from '../billboard/billboard.component';
+import { RoutePath } from '../shared/shared.constants';
+import { BillboardCreateComponent } from '../billboard/billboard-create/billboard-create.component';
+
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'billboard', canActivate: [AuthorizationGuardService] },
@@ -17,11 +21,11 @@ const routes: Routes = [
 
     //     ]
     // }
-    { path: 'login', component: AuthLoginComponent },
-    { path: 'register', component: AuthRegisterComponent },
-    { path: 'billboard/create', component: PanelCreateComponent, canActivate: [AuthorizationGuardService] },
-    { path: 'billboard', component: BillboardComponent, canActivate: [AuthorizationGuardService] },
-    { path: 'panel/create', component: PanelCreateComponent, canActivate: [AuthorizationGuardService] },
+    { path: RoutePath.Login, component: AuthLoginComponent },
+    { path: RoutePath.Register, component: AuthRegisterComponent },
+    { path: RoutePath.Billboard_Create, component: BillboardCreateComponent, canActivate: [AuthorizationGuardService] },
+    { path: RoutePath.Billboard, component: BillboardComponent, canActivate: [AuthorizationGuardService] },
+    { path: RoutePath.Panel_Create, component: PanelCreateComponent, canActivate: [AuthorizationGuardService] },
 ];
 
 @NgModule({
@@ -32,3 +36,4 @@ const routes: Routes = [
 export class AppRoutingModule {
 
 }
+

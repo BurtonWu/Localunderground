@@ -10,7 +10,7 @@ import { HTMLInputEvent } from './shared.interface';
 
 export class DndComponent implements OnInit {
 
-    @Output() imageUploadChange = new EventEmitter<FormData>();
+    @Output() imageUploadChange = new EventEmitter<FileList>();
 
     public submitted: boolean;
 
@@ -25,7 +25,7 @@ export class DndComponent implements OnInit {
         fb: FormBuilder
     ) {
         this.reader = new FileReader();
-        this.reader.onload = (e) => {
+        this.reader.onload = (e: ProgressEvent<FileReader>) => {
             this.images.push(e.target.result as string);
         }
     }
@@ -45,6 +45,7 @@ export class DndComponent implements OnInit {
     //     this.reader.readAsDataURL(evt.target.files.item(0));
     // }
 
+    //not only just files.item(0)
     public imageUploadHandler(files: FileList) {
         this.reader.readAsDataURL(files.item(0));
         this.files = files;
@@ -55,11 +56,11 @@ export class DndComponent implements OnInit {
     }
 
     public getImageFormData() {
-        const formData = new FormData();
-        for(let i = 0; i < this.files.length; i++) {
-            formData.append('image' + i, this.files.item(i), this.files.item(i).name);
-        }
-        this.imageUploadChange.emit(formData);
+        // const formData = new FormData();
+        // for(let i = 0; i < this.files.length; i++) {
+        //     formData.append('image' + i, this.files.item(i), this.files.item(i).name);
+        // }
+        this.imageUploadChange.emit(this.files);
     }
 
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Infrastructure.Extensions
+namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
 {
     public static class IdentityExtensions
     {

@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Features.Billboard.Models
 {
-    public class BillboardServiceModel
+    public class BillboardModel : BillboardBaseModel
     {
-        public int Id { get; set; }
-        public string ImageUrl { get; set; }
     }
 }
