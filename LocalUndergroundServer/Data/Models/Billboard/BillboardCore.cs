@@ -1,6 +1,5 @@
 ﻿using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
-using LocalUndgroundServer.Data.Models.Panel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,13 +12,27 @@ namespace LocalUndergroundServer.Data.Models.Billboard
     public class BillboardCore
     {
         public int Id { get; set; }
-        [MaxLength(MaxDescriptionLength)]
+        
+        [MaxLength(255)]
+        public string Title { get; set; }
+        
+        [MaxLength(255)]
         public string Description { get; set; }
-        [Required]
-        public string ImageUrl { get; set; }
+        
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public decimal Price { get; set; }
+        public DateTime CreatedDate { get; set; }
         [Required]
         public string UserId { get; set; }
+        
         public User User { get; set; }
-        public IEnumerable<PanelCore> Panels { get; set; }
+        
+        public IEnumerable<BillboardImage> PreviewImages { get; set; }
+        //comments
+        //price history
+        //sub categories
+        //imbeded video link
+
     }
 }

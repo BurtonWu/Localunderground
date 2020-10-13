@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalUndergroundServer.Migrations
 {
-    [DbContext(typeof(AuthDbContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20200911041924_Post_Table_Types2")]
     partial class Post_Table_Types2
     {

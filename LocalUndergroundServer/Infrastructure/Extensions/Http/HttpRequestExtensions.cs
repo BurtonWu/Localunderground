@@ -12,13 +12,13 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Http
 {
     public static class HttpRequestExtensions
     {
-        public static IMultiByteData PopulatePostBodyModel(this HttpRequest request, IMultiByteData model, IEnumerable<string> fileExtensions = null)
+        public static List<ByteDataModel> PopulatePostBodyModel(this HttpRequest request, IEnumerable<string> fileExtensions = null)
         {
-            foreach(var formFile in request.Form)
-            {
-                model.GetType().GetProperty(formFile.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance)
-                    .SetValue(model, formFile.Value.FirstOrDefault());
-            }
+            //foreach (var formFile in request.Form)
+            //{
+            //    model.GetType().GetProperty(formFile.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance)
+            //        .SetValue(model, formFile.Value.FirstOrDefault());
+            //}
             var byteDataList = new List<ByteDataModel>();
             if(request.Form.Files.Any() && fileExtensions != null && fileExtensions.Count() > 0)
             {
@@ -45,9 +45,8 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Http
                         }
                     }
                 }
-                model.ByteData = byteDataList;
             }
-            return model;
+            return byteDataList;
         }
     }
 }

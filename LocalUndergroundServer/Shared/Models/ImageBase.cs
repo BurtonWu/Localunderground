@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Shared.Models
 {
-    public class ImageUpload
+    public class ImageBase
     {
-        public IFormFile Image { get; set; }
+        public string Name { get; set; }
+        public string ImageDataBase64 { get; set; }
+
     }
 }

@@ -37,8 +37,11 @@ export class BillboardCreateComponent implements OnInit {
     public create() {
         const params: BillboardCreateRequestModel = {
             title: this.title,
-            description : this.description,
-            imageData: this.imageData
+            description: this.description,
+            categoryId: 1,
+            categoryName: '',
+            price: 1,
+            byteData1: this.imageData
         };
         console.log(params);
         this._billboardService.createBillboard(params).subscribe((response) => {

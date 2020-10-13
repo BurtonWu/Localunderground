@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Features.Billboard.Models
 {
-    public class BillboardDetailServiceModel : BillboardModel
+    public class BillboardDetailServiceModel : BillboardPreviewModel
     {
         public string Description { get; set; }
         public string UserId { get; set; }

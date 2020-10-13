@@ -7,8 +7,10 @@ using LocalUndergroundServer.Constants;
 using LocalUndergroundServer.Data;
 using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
+using LocalUndergroundServer.Features.Billboard.Constants;
 using LocalUndergroundServer.Features.Billboard.Engine;
 using LocalUndergroundServer.Features.Billboard.Models;
+using LocalUndergroundServer.Features.Billboard.Models.Params;
 using LocalUndergroundServer.Infrastructure;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions;
@@ -27,12 +29,12 @@ namespace LocalUndergroundServer.Features.Billboard
     {
         private readonly UserManager<User> _userManager;
         private readonly IBillboardEngine _billboardEngine;
-        private readonly AuthDbContext _context;
+        private readonly DatabaseContext _context;
 
         public BillboardController(
             UserManager<User> userManager,
             IBillboardEngine billboardEngine,
-            AuthDbContext context)
+            DatabaseContext context)
 
         {
             _userManager = userManager;
@@ -40,63 +42,60 @@ namespace LocalUndergroundServer.Features.Billboard
             _context = context;
         }
 
-
-
-        //[Authorize]
-        //[HttpGet]
-        //[Route(Routes.Billboard.BaseBillboard)]
-        //public async Task<ActionResult<List<BillboardModel>>> GetBillboards()
-        //{
-        //    var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-        //    var billboards = await _billboardEngine.GetBillboards(userId);
-        //    return Ok(billboards);
-        //}
+        [Authorize]
+        [HttpGet]
+        [Route(Routes.Billboard.BaseBillboard)]
+        public async Task<ActionResult<List<BillboardPreviewModel>>> GetBillboards([FromQuery]BillboardGetParams model)
+        {
+            //var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            //var billboards = await _billboardEngine.GetBillboards((BillboardSort)model.SortOrder, model.SortDirection, 
+            //    model.CurrentIndex, model.LoadCount, model.FilterText);
+            //return Ok(billboards);
+            return Ok();
+        }
 
         [Authorize]
         [HttpPost]
         [Route(Routes.Billboard.BaseBillboard)]
-        public async Task<ActionResult> Create()
+        public async Task<ActionResult> Create([FromForm]BillboardCreateModel model)
         {
-            //will crash if no image is uploaded
-            var file = Request.Form.Files[0];
-
-
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            var model = HttpRequestExtensions.PopulatePostBodyModel(Request, new BillboardCreateModel(), FileExtension.IMAGE_EXTENSIONS);
+            //put in better place
+            model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
+            //var billboardId = await _billboardEngine.CreateBillboard(userId, model);
+            //return Created("Created", billboardId);
             return Ok();
-            //var postId = await _billboardEngine.CreateBillboard(model.Description, model.ImageUrl, userId);
-            //return Created("Create", postId);
         }
 
-        [Authorize]
-        [HttpGet]
-        [Route(Routes.Billboard.Details)]
-        public async Task<ActionResult<BillboardDetailServiceModel>> GetBillboardDetails([FromQuery]int id)
-        {
-            return await _billboardEngine.GetBillboardDetails(id);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route(Routes.Billboard.Details)]
+        //public async Task<ActionResult<BillboardDetailServiceModel>> GetBillboardDetails([FromQuery]int id)
+        //{
+        //    return await _billboardEngine.GetBillboardDetails(id);
+        //}
 
-        [Authorize]
-        [HttpPut]
-        [Route(Routes.Billboard.BaseBillboard)]
-        public async Task<ActionResult<bool>> UpdateBillboard([FromBody]BillboardUpdateRequestModel model)
-        {
+        //[Authorize]
+        //[HttpPut]
+        //[Route(Routes.Billboard.BaseBillboard)]
+        //public async Task<ActionResult<bool>> UpdateBillboard([FromBody]BillboardUpdateRequestModel model)
+        //{
 
-            var updated = await _billboardEngine.UpdateBillboard(model.Id, model.Description, User.GetClaim(ClaimTypes.NameIdentifier));
-            if (updated) return Ok();
-            else return BadRequest();
-        }
+        //    var updated = await _billboardEngine.UpdateBillboard(model.Id, model.Description, User.GetClaim(ClaimTypes.NameIdentifier));
+        //    if (updated) return Ok();
+        //    else return BadRequest();
+        //}
 
-        [Authorize]
-        [HttpDelete]
-        [Route(Routes.Billboard.BaseBillboard)]
-        public async Task<ActionResult<bool>> DeleteBillboard([FromQuery]int id)
-        {
+        //[Authorize]
+        //[HttpDelete]
+        //[Route(Routes.Billboard.BaseBillboard)]
+        //public async Task<ActionResult<bool>> DeleteBillboard([FromQuery]int id)
+        //{
 
-            var deleted = await _billboardEngine.DeleteBillboard(id, User.GetClaim(ClaimTypes.NameIdentifier));
-            if (deleted) return Ok();
-            else return BadRequest();
-        }
+        //    var deleted = await _billboardEngine.DeleteBillboard(id, User.GetClaim(ClaimTypes.NameIdentifier));
+        //    if (deleted) return Ok();
+        //    else return BadRequest();
+        //}
 
      
     }

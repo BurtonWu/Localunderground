@@ -4,7 +4,6 @@ using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Features.Billboard.Engine;
 using LocalUndergroundServer.Features.Identity.Engine;
-using LocalUndergroundServer.Features.Panel.Engine;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using LocalUndergroundServer.Infrastructure.Filters;
@@ -28,7 +27,7 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
 
         public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
         {
-            return services.AddDbContext<AuthDbContext>(config =>
+            return services.AddDbContext<DatabaseContext>(config =>
             {
                 config.UseSqlServer(connectionString);
             });
@@ -45,7 +44,7 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
                 config.Password.RequireUppercase = false;
                 config.Password.RequiredLength = 1;
             })
-            .AddEntityFrameworkStores<AuthDbContext>(); //to bridge the identity to use the database
+            .AddEntityFrameworkStores<DatabaseContext>(); //to bridge the identity to use the database
             //.AddDefaultTokenProviders(); //default mechanism for token, appears in password reset link, token in url
             return services;
         }
@@ -88,9 +87,8 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
         {
             return services.AddTransient<IIdentityEngine, IdentityEngine>()
                            .AddTransient<ISqlEngine, SqlEngine>()
-                           .AddTransient<IBillboardEngine, BillboardEngine>()
-                           .AddTransient<IPanelEngine, PanelEngine>()
-                           .AddTransient<IPanelStore, PanelStore>();
+                           .AddTransient<IBillboardStore, BillboardStore>()
+                           .AddTransient<IBillboardEngine, BillboardEngine>();
 
 
         }

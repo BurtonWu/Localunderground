@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalUndergroundServer.Migrations
 {
-    [DbContext(typeof(AuthDbContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20200903191358_Inital")]
     partial class Inital
     {

@@ -1,5 +1,8 @@
 export interface BillboardCreateRequestModel {
     title: string
     description: string;
-    imageData: FormData;
+    categoryId: number;
+    categoryName: string;
+    price: number;
+    byteData1: FormData;
 }

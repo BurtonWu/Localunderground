@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalUndergroundServer.Migrations
 {
-    [DbContext(typeof(AuthDbContext))]
+    [DbContext(typeof(DatabaseContext))]
     partial class AuthDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

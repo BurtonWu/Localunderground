@@ -30,7 +30,7 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
         {
             using(var services = app.ApplicationServices.CreateScope())
             {
-                var dbContext = services.ServiceProvider.GetService<AuthDbContext>();
+                var dbContext = services.ServiceProvider.GetService<DatabaseContext>();
                 dbContext.Database.Migrate();
             }
         }
