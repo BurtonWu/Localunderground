@@ -62,7 +62,7 @@ namespace LocalUndergroundServer.Features.Billboard
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             //put in better place
             model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            //var billboardId = await _billboardEngine.CreateBillboard(userId, model);
+            var billboardId = await _billboardEngine.CreateBillboard(userId, model);
             //return Created("Created", billboardId);
             return Ok();
         }

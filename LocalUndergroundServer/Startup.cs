@@ -75,7 +75,7 @@ namespace LocalUndergroundServer
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.ApplyMigrations();
+            //app.ApplyMigrations();
         }
     }
 }

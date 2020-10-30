@@ -38,10 +38,10 @@ namespace LocalUndergroundServer.Features.Billboard.Engine
                 Title = x.Title,
                 CategoryId = x.CategoryId,
                 Price = x.Price,
-                PreviewImages = x.PreviewImages.Select(y => new ImageBase() {
-                    Name = y.Name,
-                    ImageDataBase64 = Convert.ToBase64String(y.ImageData)
-                }).ToList()
+                //PreviewImages = x.PreviewImages.Select(y => new ImageBase() {
+                //    Name = y.Name,
+                //    ImageDataBase64 = Convert.ToBase64String(y.ImageData)
+                //}).ToList()
             }).ToList();
         }
 
@@ -51,7 +51,10 @@ namespace LocalUndergroundServer.Features.Billboard.Engine
             {
                 UserId = userId,
                 Description = model.Description,
-                Title = model.Title
+                Title = model.Title,
+                CategoryId = model.CategoryId,
+                CategoryName = model.CategoryName,
+                Price = model.Price
             };
 
             var billboardId = await _billboardStore.CreateBillboard(createDto);

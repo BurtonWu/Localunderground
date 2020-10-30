@@ -4,14 +4,16 @@ using LocalUndergroundServer.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalUndergroundServer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201029234833_remove_onbuild")]
+    partial class remove_onbuild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

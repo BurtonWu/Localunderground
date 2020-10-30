@@ -60,11 +60,16 @@ namespace LocalUndergroundServer.Features.Billboard.Engine
         {
             var core = new BillboardCore()
             {
+                CategoryId = model.CategoryId,
+                CategoryName = model.CategoryName,
+                Price = model.Price,
+                CreatedDate = DateTime.UtcNow,
                 Description = model.Description,
                 Title = model.Title,
+                UserId = model.UserId
             };
             await _dbContext.BillboardCore.AddAsync(core);
-
+            await _dbContext.SaveChangesAsync();
             return core.Id;
         }
 

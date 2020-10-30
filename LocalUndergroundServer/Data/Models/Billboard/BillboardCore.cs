@@ -23,12 +23,7 @@ namespace LocalUndergroundServer.Data.Models.Billboard
         public string CategoryName { get; set; }
         public decimal Price { get; set; }
         public DateTime CreatedDate { get; set; }
-        [Required]
         public string UserId { get; set; }
-        
-        public User User { get; set; }
-        
-        public IEnumerable<BillboardImage> PreviewImages { get; set; }
         //comments
         //price history
         //sub categories

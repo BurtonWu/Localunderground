@@ -12,6 +12,5 @@ namespace LocalUndergroundServer.Data.Models.Billboard
         public long Size { get; set; }
         public byte[] ImageData { get; set; }
         public int BillboardId { get; set; }
-        public BillboardCore BillboardCore { get; set; }
     }
 }

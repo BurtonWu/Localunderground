@@ -26,17 +26,17 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<BillboardCore>()
-                .HasMany(x => x.PreviewImages)
-                .WithOne(x => x.BillboardCore)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<BillboardCore>()
+            //    .HasMany(x => x.PreviewImages)
+            //    .WithOne(x => x.BillboardCore)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-            builder
-                .Entity<BillboardImage>()
-                .HasOne(x => x.BillboardCore)
-                .WithMany(x => x.PreviewImages)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<BillboardImage>()
+            //    .HasOne(x => x.BillboardCore)
+            //    .WithMany(x => x.PreviewImages)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             //builder
             //    .Entity<PanelImage>()
