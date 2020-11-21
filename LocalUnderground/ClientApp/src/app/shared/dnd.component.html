@@ -1,6 +1,6 @@
-<div>
+<div class="row">
     <input type="file" multiple (change)="imageUploadHandler($event.target.files)" />
     <div *ngFor="let image of images">
-        <img *ngIf="image" [src]="image" />
+        <img class="col-sm-3" *ngIf="image" [src]="image" />
     </div>
 </div>

@@ -15,8 +15,9 @@ export class BillboardCreateComponent implements OnInit {
 
     public billboardForm: FormGroup;
     public imageData: FormData;
-    public title: string = 'a'
-    public description: string = 'b';
+    public title: string = ''
+    public description: string = '';
+    public price: number;
     private _billboardService: BillboardService;
 
     public constructor(
@@ -25,8 +26,9 @@ export class BillboardCreateComponent implements OnInit {
     ) {
         this._billboardService = billboardService;
         this.billboardForm = fb.group({
-            // title: [this.title, [Validators.required, Validators.maxLength(20)]],
+            title: [this.title, [Validators.required, Validators.maxLength(20)]],
             description: [this.description],
+            price: [this.price, [Validators.required]],
             // emblem: [this.emblem],
         });
     }
