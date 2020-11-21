@@ -4,7 +4,6 @@ import { AuthLoginComponent } from '../auth/auth-login.component';
 import { AuthRegisterComponent } from '../auth/auth-register.component';
 import { PanelComponent } from '../panel/panel.component';
 import { PanelCreateComponent } from '../panel/panel-create.component';
-
 import { AuthorizationGuardService } from '../app-config/app-auth-guard.service';
 import { BillboardComponent } from '../billboard/billboard.component';
 import { RoutePath } from '../shared/shared.constants';
