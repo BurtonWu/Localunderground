@@ -1,6 +1,7 @@
 ﻿using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Billboard;
 using LocalUndergroundServer.Data.Models.Identity;
+using LocalUndergroundServer.Data.Models.Storyboard;
 using LocalUndergroundServer.Features.Billboard.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
         {
 
         }
+        public DbSet<StoryboardCore> StoryboardCore { get; set; }
 
         public DbSet<BillboardCore> BillboardCore { get; set; }
         public DbSet<BillboardImage> BillboardImage { get; set; }

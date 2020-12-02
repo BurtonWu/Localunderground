@@ -76,7 +76,6 @@ C:\dev\LocalUnderground\IdentityServer\obj\Debug\netcoreapp3.1\LocalUndergroundS
 C:\dev\LocalUnderground\IdentityServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.genruntimeconfig.cache
 C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\appsettings.json
-C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\LocalUndergroundServer.exe
 C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\LocalUndergroundServer.deps.json
 C:\dev\LocalUnderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\LocalUndergroundServer.runtimeconfig.json
@@ -150,3 +149,4 @@ C:\dev\LocalUnderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\staticweb
 C:\dev\LocalUnderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.dll
 C:\dev\LocalUnderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.pdb
 C:\dev\LocalUnderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.genruntimeconfig.cache
+C:\dev\LocalUnderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\scopedcss\bundle\LocalUndergroundServer.styles.css

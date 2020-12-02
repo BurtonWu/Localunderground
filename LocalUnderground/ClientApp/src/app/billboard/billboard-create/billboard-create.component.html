@@ -16,17 +16,17 @@
               <div class="form-group">
                 <label>Title</label>
                 <textarea class="form-control" formControlName="title" placeholder="Title..."></textarea>
-                <!-- <div *ngIf="submitted && title.errors?.required" class="alert alert-danger" >This field is required</div> -->
+                <div *ngIf="submitted && title.errors?.required" class="alert alert-danger" >This field is required</div>
               </div>
               <div class="form-group">
                 <label>Description</label>
                 <textarea class="form-control" formControlName="description"  placeholder="Description..."></textarea>
-                <!-- <div *ngIf="submitted && description.errors?.required" class="alert alert-danger" >This field is required</div> -->
+                <div *ngIf="submitted && description.errors?.required" class="alert alert-danger" >This field is required</div>
               </div>
               <div class="form-group">
                 <label>Price</label>
                 <input class="form-control" formControlName="price" placeholder="$" />
-                <!-- <div *ngIf="submitted && price.errors?.required" class="alert alert-danger" >This field is required</div> -->
+                <div *ngIf="submitted && price.errors?.required" class="alert alert-danger" >This field is required</div>
               </div>
               <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

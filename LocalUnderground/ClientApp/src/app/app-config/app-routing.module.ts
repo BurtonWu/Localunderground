@@ -8,11 +8,13 @@ import { AuthorizationGuardService } from '../app-config/app-auth-guard.service'
 import { BillboardComponent } from '../billboard/billboard.component';
 import { RoutePath } from '../shared/shared.constants';
 import { BillboardCreateComponent } from '../billboard/billboard-create/billboard-create.component';
+import { StoryBoardComponent } from '../story-board/story-board.component';
 
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'billboard', canActivate: [AuthorizationGuardService] },
+  //redirect to, from nothing in url, '', to localhost:4200/storyboard
+  { path: '', pathMatch: 'full', redirectTo: 'storyboard', canActivate: [AuthorizationGuardService] },
     // { path: 'user', component: AuthLoginComponent, 
     //     children: [
     //         { path: 'register', component: AuthRegisterComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
 
     //     ]
     // }
+    { path: RoutePath.StoryBoard, component: StoryBoardComponent, canActivate: [AuthorizationGuardService] },
+
     { path: RoutePath.Login, component: AuthLoginComponent },
     { path: RoutePath.Register, component: AuthRegisterComponent },
     { path: RoutePath.Billboard_Create, component: BillboardCreateComponent, canActivate: [AuthorizationGuardService] },

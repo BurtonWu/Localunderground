@@ -13,6 +13,11 @@ namespace LocalUndergroundServer.Constants
             public const string Register = "api/user/register";
         }
 
+        public static class Storyboard
+        {
+            public const string BaseStoryboard = "api/storyboard";
+        }
+
         public static class Billboard
         {
             public const string BaseBillboard = "api/billboard";

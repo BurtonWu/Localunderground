@@ -11,6 +11,7 @@ import { TokenInterceptorService } from './app-config/app-token-interceptor.serv
 import { SharedModule } from './shared/shared.module';
 import { AppBaseModule } from './app-config/app-base.module';
 import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interceptor.service';
+import { StoryBoardModule } from './story-board/story-board.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interc
     AppRoutingModule,
     AuthLoginModule,
     BillboardModule,
+    StoryBoardModule
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
 
     // RouterModule.forRoot([

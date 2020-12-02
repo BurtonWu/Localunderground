@@ -15,9 +15,7 @@ export class BillboardCreateComponent implements OnInit {
 
     public billboardForm: FormGroup;
     public imageData: FormData;
-    public title: string = ''
-    public description: string = '';
-    public price: number;
+    public billboardCreateRequestModel: BillboardCreateRequestModel;
     private _billboardService: BillboardService;
 
     public constructor(
@@ -25,10 +23,18 @@ export class BillboardCreateComponent implements OnInit {
         fb: FormBuilder
     ) {
         this._billboardService = billboardService;
+        this.billboardCreateRequestModel = {
+            byteData1: null,
+            categoryId: null,
+            categoryName: null,
+            description: null,
+            price: null,
+            title: null
+        }
         this.billboardForm = fb.group({
-            title: [this.title, [Validators.required, Validators.maxLength(20)]],
-            description: [this.description],
-            price: [this.price, [Validators.required]],
+            title: [this.billboardCreateRequestModel.title, [Validators.required, Validators.maxLength(20)]],
+            description: [this.billboardCreateRequestModel.description],
+            price: [this.billboardCreateRequestModel.price, [Validators.required]],
             // emblem: [this.emblem],
         });
     }
@@ -38,17 +44,23 @@ export class BillboardCreateComponent implements OnInit {
 
     public create() {
         const params: BillboardCreateRequestModel = {
-            title: this.title,
-            description: this.description,
+            title: this.billboardForm.get('title').value,
+            description: this.billboardForm.get('description').value,
             categoryId: 1,
             categoryName: '',
-            price: 1,
+            price: this.billboardForm.get('price').value,
             byteData1: this.imageData
         };
-        console.log(params);
-        this._billboardService.createBillboard(params).subscribe((response) => {
-            console.log(response);
-        });
+        this.billboardCreateRequestModel.title = this.title.value;
+        this.billboardCreateRequestModel.description = this.description.value;
+        this.billboardCreateRequestModel.price = this.price.value;
+
+        console.log(this.billboardForm, this.billboardCreateRequestModel);
+        this.submitted = true;
+        // this._billboardService.createBillboard(params).subscribe((response) => {
+        //     console.log(response);
+        //      this.submitted = false;
+        // });
     }
 
     public imageUploadHandler(files: FileList) {
@@ -58,6 +70,11 @@ export class BillboardCreateComponent implements OnInit {
         }
         this.imageData = formData;
     }
+
+    get title() { return this.billboardForm.get('title'); }
+    get description() { return this.billboardForm.get('description'); }
+    get price() { return this.billboardForm.get('price'); }
+
 }
 
 
