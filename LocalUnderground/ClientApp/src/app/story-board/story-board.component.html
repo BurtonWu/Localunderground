@@ -4,33 +4,6 @@
         <h1>Story Board</h1>
       </div>
     </div>
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form [formGroup]="storyBoardForm" (ngSubmit)="create()">
-                <!-- <div class="form-group">
-                  <label>Image Url</label>
-                  <input type="username" class="form-control" formControlName="title">
-                  <div *ngIf="submitted && imageUrlControl.errors?.required" class="alert alert-danger" >This field is required</div>
-                </div> -->
-                <div class="form-group">
-                  <label>Title</label>
-                  <textarea class="form-control" formControlName="title" placeholder="Title..."></textarea>
-                  <div *ngIf="submitted && title.errors?.required" class="alert alert-danger" >This field is required</div>
-                </div>
-                <div class="form-group">
-                  <label>Synopsis</label>
-                  <textarea class="form-control" formControlName="synopsis"  placeholder="Synopsis..."></textarea>
-                  <div *ngIf="submitted && synopsis.errors?.required" class="alert alert-danger" >This field is required</div>
-                </div>
-                <!-- <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> -->
-                <!-- <dnd (imageUploadChange)="imageUploadHandler($event)"></dnd> -->
-                <button type="submit" class="btn btn-primary">Create</button>
-              </form>
-        </div>
-    </div>
+    <story-board-list></story-board-list>
   </div>
   

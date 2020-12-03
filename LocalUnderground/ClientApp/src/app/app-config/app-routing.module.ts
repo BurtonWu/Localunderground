@@ -2,19 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLoginComponent } from '../auth/auth-login.component';
 import { AuthRegisterComponent } from '../auth/auth-register.component';
-import { PanelComponent } from '../panel/panel.component';
-import { PanelCreateComponent } from '../panel/panel-create.component';
 import { AuthorizationGuardService } from '../app-config/app-auth-guard.service';
-import { BillboardComponent } from '../billboard/billboard.component';
 import { RoutePath } from '../shared/shared.constants';
-import { BillboardCreateComponent } from '../billboard/billboard-create/billboard-create.component';
-import { StoryBoardComponent } from '../story-board/story-board.component';
+import { LayoutComponent } from '../layout/layout.component';
+import { StoryBoardCreateComponent } from '../story-board-create/story-board-create.component';
 
 
 
 const routes: Routes = [
   //redirect to, from nothing in url, '', to localhost:4200/storyboard
-  { path: '', pathMatch: 'full', redirectTo: 'storyboard', canActivate: [AuthorizationGuardService] },
+  { path: '', pathMatch: 'full', redirectTo: RoutePath.Main, canActivate: [AuthorizationGuardService] },
     // { path: 'user', component: AuthLoginComponent, 
     //     children: [
     //         { path: 'register', component: AuthRegisterComponent },
@@ -22,13 +19,14 @@ const routes: Routes = [
 
     //     ]
     // }
-    { path: RoutePath.StoryBoard, component: StoryBoardComponent, canActivate: [AuthorizationGuardService] },
+    { path: RoutePath.Main, component: LayoutComponent, canActivate: [AuthorizationGuardService] },
+    { path: RoutePath.StoryBoardCreate, component: StoryBoardCreateComponent, canActivate: [AuthorizationGuardService] },
 
     { path: RoutePath.Login, component: AuthLoginComponent },
     { path: RoutePath.Register, component: AuthRegisterComponent },
-    { path: RoutePath.Billboard_Create, component: BillboardCreateComponent, canActivate: [AuthorizationGuardService] },
-    { path: RoutePath.Billboard, component: BillboardComponent, canActivate: [AuthorizationGuardService] },
-    { path: RoutePath.Panel_Create, component: PanelCreateComponent, canActivate: [AuthorizationGuardService] },
+    // { path: RoutePath.Billboard_Create, component: BillboardCreateComponent, canActivate: [AuthorizationGuardService] },
+    // { path: RoutePath.Billboard, component: BillboardComponent, canActivate: [AuthorizationGuardService] },
+    // { path: RoutePath.Panel_Create, component: PanelCreateComponent, canActivate: [AuthorizationGuardService] },
 ];
 
 @NgModule({

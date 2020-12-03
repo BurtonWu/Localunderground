@@ -4,6 +4,7 @@ import { AuthorizationService } from './auth.services';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RoutePath } from '../shared/shared.constants';
 
 @Component({
     selector: 'auth-login',
@@ -42,7 +43,7 @@ export class AuthLoginComponent {
         this._authService.login(this.loginForm.value).subscribe((response) => {
             console.log(response);
             this._authService.saveToken(response['token']);
-            this._router.navigate(['billboard']);
+            this._router.navigate([RoutePath.Main]);
         });
     }
 

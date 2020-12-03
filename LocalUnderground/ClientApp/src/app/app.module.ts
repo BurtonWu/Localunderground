@@ -11,7 +11,10 @@ import { TokenInterceptorService } from './app-config/app-token-interceptor.serv
 import { SharedModule } from './shared/shared.module';
 import { AppBaseModule } from './app-config/app-base.module';
 import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interceptor.service';
+import { StoryBoardCreateModule } from './story-board-create/story-board-create.module';
+import { LayoutModule } from './layout/layout.module';
 import { StoryBoardModule } from './story-board/story-board.module';
+import { StoryBoardListModule } from './story-board-list/story-board-list.module';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,13 @@ import { StoryBoardModule } from './story-board/story-board.module';
   imports: [
     AppRoutingModule,
     AuthLoginModule,
-    BillboardModule,
-    StoryBoardModule
+
+    LayoutModule,
+    StoryBoardListModule,
+    StoryBoardCreateModule,
+    StoryBoardModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BillboardModule
 
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },

@@ -6,25 +6,21 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
 import { PanelModule } from '../panel/panel.module';
-import { StoryBoardComponent } from './story-board.component';
-import { StoryBoardService } from './story-board.services';
-import { StoryBoardListComponent } from '../story-board-list/story-board-list.component';
-import { StoryBoardListModule } from '../story-board-list/story-board-list.module';
+import { StoryBoardListComponent } from './story-board-list.component';
 
 
 @NgModule({
   declarations: [
-    StoryBoardComponent,
+    StoryBoardListComponent,
   ],
   imports: [
     AppBaseModule,
-    StoryBoardListModule
+    PanelModule
   ],
   exports: [
-    StoryBoardComponent,
+    StoryBoardListComponent,
   ],
   providers: [
-    StoryBoardService
   ]
 })
-export class StoryBoardModule { }
+export class StoryBoardListModule { }

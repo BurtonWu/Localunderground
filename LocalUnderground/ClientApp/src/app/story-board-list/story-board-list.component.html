@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3">
+        <h1>Story Board List</h1>
+      </div>
+    </div>
+    <ng-template ngFor let-storyBoardCore [ngForOf]="storyBoardCores">
+      <div class="row">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-3">
+             {{storyBoardCore?.title}}
+          </div>
+      </div>
+    </ng-template>
+  </div>
+  

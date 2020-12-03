@@ -5,11 +5,11 @@ import { StoryBoardModel, StoryboardCreateRequestModel } from '../story-board/st
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({
-    selector: 'story-board',
-    templateUrl: './story-board.component.html'
+    selector: 'story-board-create',
+    templateUrl: './story-board-create.component.html'
 })
 
-export class StoryBoardComponent implements OnInit {
+export class StoryBoardCreateComponent implements OnInit {
 
     public submitted: boolean;
 
