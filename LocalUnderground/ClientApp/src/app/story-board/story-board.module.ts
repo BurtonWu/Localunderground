@@ -18,7 +18,6 @@ import { StoryBoardListModule } from '../story-board-list/story-board-list.modul
   ],
   imports: [
     AppBaseModule,
-    StoryBoardListModule
   ],
   exports: [
     StoryBoardComponent,

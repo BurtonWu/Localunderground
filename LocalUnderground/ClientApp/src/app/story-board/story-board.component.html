@@ -1,9 +1,19 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-lg-3">
-        <h1>Story Board</h1>
+        <h2>Story Board</h2>
       </div>
     </div>
-    <story-board-list></story-board-list>
+    <ng-template [ngIf]="model">
+      <!-- <ng-template ngFor let-widget [ngForOf]="model.widgets">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3">
+              {{widget}}
+            </div>
+        </div>
+      </ng-template> -->
+      {{model.title}}
+    </ng-template>
   </div>
   

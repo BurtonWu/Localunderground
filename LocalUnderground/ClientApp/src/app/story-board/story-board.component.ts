@@ -1,18 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { StoryBoardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
+import { StoryBoardModule } from './story-board.module';
 
 @Component({
     selector: 'story-board',
     templateUrl: './story-board.component.html'
 })
 
-export class StoryBoardComponent implements OnInit {
+export class StoryBoardComponent implements OnInit, OnChanges{
+
+    @Input() public model: StoryBoardModel;
 
     public submitted: boolean;
-
     public storyBoardForm: FormGroup;
     public imageData: FormData;
     // public storyBoardCreateModel: StoryBoardModel;
@@ -27,13 +29,18 @@ export class StoryBoardComponent implements OnInit {
         this.storyBoardForm = fb.group({
             title: ['default Title', [Validators.required, Validators.maxLength(20)]],
             synopsis: [''],
+            widgets: [[], [Validators.required]]
         });
     }
 
     public ngOnInit() {
-        this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
-            console.log(storyBoards);
-        });
+
+    }
+
+    public ngOnChanges(changes: SimpleChanges) {
+        if(changes['model'].currentValue) {
+            console.log('model', this.model);
+        }
     }
 
     public create() {
