@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Billboard.Constants
+namespace LocalUndergroundServer.Features.Storyboard.Constants
 {
     public enum StoryboardSort
     {

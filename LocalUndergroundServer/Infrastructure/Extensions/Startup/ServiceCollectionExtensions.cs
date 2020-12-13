@@ -2,7 +2,6 @@
 using LocalUndergroundServer.Data;
 using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
-using LocalUndergroundServer.Features.Billboard.Engine;
 using LocalUndergroundServer.Features.Identity.Engine;
 using LocalUndergroundServer.Features.Storyboard.Engine;
 using LocalUndergroundServer.Infrastructure.DataAccess;
@@ -89,9 +88,7 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
             return services.AddTransient<IIdentityEngine, IdentityEngine>()
                            .AddTransient<ISqlEngine, SqlEngine>()
                            .AddTransient<IStoryboardStore, StoryboardStore>()
-                           .AddTransient<IStoryboardEngine, StoryboardEngine>()
-                           .AddTransient<IBillboardStore, BillboardStore>()
-                           .AddTransient<IBillboardEngine, BillboardEngine>();
+                           .AddTransient<IStoryboardEngine, StoryboardEngine>();
 
 
         }
