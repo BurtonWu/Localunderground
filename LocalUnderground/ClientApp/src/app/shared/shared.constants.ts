@@ -1,7 +1,7 @@
 export class RoutePath {
     public static readonly Main = 'main';
-
-    public static readonly StoryBoardCreate = 'storyboardcreate';
+    public static readonly StoryBoard = 'storyboard';
+    public static readonly StoryBoardCreate = 'storyboard/create';
 
     public static readonly Login = 'login';
     public static readonly Register = 'register';

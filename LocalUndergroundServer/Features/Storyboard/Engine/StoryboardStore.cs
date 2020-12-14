@@ -1,6 +1,4 @@
-﻿using LocalUndergroundServer.Data.DTO.Billboard;
-using LocalUndergroundServer.Data.DTO.Storyboard;
-using LocalUndergroundServer.Data.Models.Billboard;
+﻿using LocalUndergroundServer.Data.DTO.Storyboard;
 using LocalUndergroundServer.Data.Models.Storyboard;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
@@ -42,16 +40,19 @@ namespace LocalUndergroundServer.Features.Storyboard.Engine
 
         public async Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData)
         {
-            var image = new BillboardImage()
-            {
-                BillboardId = billboardId,
-                Name = name,
-                Size = size,
-                ImageData = imageData
-            };
-            await _dbContext.BillboardImage.AddAsync(image);
-            await _dbContext.SaveChangesAsync();
-            return image.Id;
+            //var image = new BillboardImage()
+            //{
+            //    BillboardId = billboardId,
+            //    Name = name,
+            //    Size = size,
+            //    ImageData = imageData
+            //};
+            //await _dbContext.BillboardImage.AddAsync(image);
+            //await _dbContext.SaveChangesAsync();
+            //return image.Id;
+
+
+            return 0;
             //var sqlParameters = _sqlEngine.AddSqlParameter("@Title", title);
             //_sqlEngine.AddSqlParameter("@BillboardId", billboardId);
             //_sqlEngine.AddSqlParameter("@Size", size, sqlParameters);
