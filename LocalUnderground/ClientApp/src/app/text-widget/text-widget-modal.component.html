@@ -1,0 +1,15 @@
+<div class="container-fluid" *ngIf="control">
+  <div class="row">
+    <div class="col-lg-1">
+      Text Widget
+    </div>
+    <div class="col-lg-11">
+      <div class="form-group">
+        <label>Title</label>
+        <textarea class="form-control" [formControl]="control" placeholder="Once upon a time..."></textarea>
+        <div *ngIf="submitted && control.errors?.required" class="alert alert-danger">This field is required</div>
+        <div *ngIf="submitted && control.errors?.minlength" class="alert alert-danger">This field is requires atleast 5 characters</div>
+      </div>
+    </div>
+  </div>
+</div>

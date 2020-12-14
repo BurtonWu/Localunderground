@@ -6,19 +6,18 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
 import { PanelModule } from '../panel/panel.module';
-import { TextWidgetComponent } from './text-widget.component';
+import { TextWidgetModalComponent } from './text-widget-modal.component';
 
 
 @NgModule({
   declarations: [
-    TextWidgetComponent,
+    TextWidgetModalComponent,
   ],
   imports: [
-    AppBaseModule,
-    PanelModule
+    AppBaseModule
   ],
   exports: [
-    TextWidgetComponent,
+    TextWidgetModalComponent,
   ],
   providers: [
   ]

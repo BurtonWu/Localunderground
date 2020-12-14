@@ -21,7 +21,7 @@ namespace LocalUndergroundServer.Features.Identity.Engine
                             new Claim(ClaimTypes.NameIdentifier, userId),
                             new Claim(ClaimTypes.Name, userName),
                         }),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddDays(100),
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             };
             var tokenHandler = new JwtSecurityTokenHandler();

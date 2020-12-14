@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
+import { StoryBoardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({
@@ -54,6 +54,8 @@ export class StoryBoardCreateComponent implements OnInit {
         //      this.submitted = false;
         // });
     }
+
+ 
 
     public imageUploadHandler(files: FileList) {
         const formData = new FormData();

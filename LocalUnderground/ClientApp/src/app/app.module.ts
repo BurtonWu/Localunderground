@@ -15,6 +15,7 @@ import { StoryBoardCreateModule } from './story-board-create/story-board-create.
 import { LayoutModule } from './layout/layout.module';
 import { StoryBoardModule } from './story-board/story-board.module';
 import { StoryBoardListModule } from './story-board-list/story-board-list.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { StoryBoardListModule } from './story-board-list/story-board-list.module
     StoryBoardCreateModule,
     StoryBoardModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BillboardModule
+    BillboardModule,
+    BrowserAnimationsModule
 
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },
