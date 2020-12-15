@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
 import { StoryBoardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
+import { TextWidgetModalComponent } from '../text-widget/text-widget-modal.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'story-board',
@@ -15,23 +17,28 @@ import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-dr
 export class StoryBoardComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryBoardModel;
+    // @ViewChild('textWidgetModal') textWidgetModal :TextWidgetModalComponent;
 
     public submitted: boolean;
     public storyBoardForm: FormGroup;
     public imageData: FormData;
     public textWidgets: TextWidgetModel[] = [];
+    public textWidgetModal: NgbModalRef;
     //test widget
     public textWidgetControls: FormArray = new FormArray([]);
 
     // public storyBoardCreateModel: StoryBoardModel;
     private _storyBoardService: StoryBoardService;
+    private _modalService: NgbModal;
     public dragging: boolean;
 
     public constructor(
         storyBoardService: StoryBoardService,
-        fb: FormBuilder
+        fb: FormBuilder,
+        modalService: NgbModal
     ) {
         this._storyBoardService = storyBoardService;
+        this._modalService = modalService;
 
         this.storyBoardForm = fb.group({
             title: ['default Title', [Validators.required, Validators.maxLength(20)]],
@@ -57,23 +64,28 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
-        console.log(this.textWidgets, event);
+        console.log('drop', event);
         this.textWidgets[event.previousIndex].sort = event.currentIndex;
         this.textWidgets[event.currentIndex].sort = event.previousIndex;
         moveItemInArray(this.textWidgets, event.previousIndex, event.currentIndex);
     }
 
     public handleDragStart(event: CdkDragStart): void {
-        console.log('drag start')
+        console.log('drag start', event)
         this.dragging = true;
     }
 
-    public handleClick(event: MouseEvent): void {
+    public handleClick(textWidget: TextWidgetModel): void {
         if (this.dragging) {
             this.dragging = false;
             return;
         }
-        console.log('clicked');
+        // this.textWidgetModal.open(null);
+        this.textWidgetModal = this._modalService.open(TextWidgetModalComponent);
+        console.log('clicked', event);
+        this.textWidgetModal.componentInstance['model'] = textWidget;
+        console.log(this.textWidgetModal.componentInstance);
+        console.log('active instances', this._modalService.activeInstances);
     }
 
     public createTextWidget() {

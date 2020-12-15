@@ -16,6 +16,7 @@ import { LayoutModule } from './layout/layout.module';
 import { StoryBoardModule } from './story-board/story-board.module';
 import { StoryBoardListModule } from './story-board-list/story-board-list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoryBoardModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BillboardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
 
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },

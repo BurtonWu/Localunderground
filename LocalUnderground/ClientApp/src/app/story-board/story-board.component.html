@@ -16,8 +16,8 @@
       </ng-template> -->
 
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let textWidgetControl of textWidgetControls.controls" (cdkDragStarted)="handleDragStart($event)" (click)="handleClick($event)" cdkDrag>
-          {{textWidgetControl.value}}
+        <div class="example-box" *ngFor="let textWidget of textWidgets" (cdkDragStarted)="handleDragStart($event)" (click)="handleClick(textWidget)" cdkDrag>
+          {{textWidget.body}}
           <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
           </text-widget> -->
 
@@ -32,3 +32,4 @@
   <!-- <ng-template [ngIf]="model">
         </ng-template> -->
 </div>
+<!-- <text-widget-modal #textWidgetModal></text-widget-modal> -->

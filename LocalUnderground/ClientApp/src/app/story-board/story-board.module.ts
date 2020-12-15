@@ -20,8 +20,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   imports: [
     AppBaseModule,
-    DragDropModule 
-    // TextWidgetModule
+    DragDropModule,
+    TextWidgetModule
   ],
   exports: [
     StoryBoardComponent,
