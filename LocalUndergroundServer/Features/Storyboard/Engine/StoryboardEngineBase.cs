@@ -1,19 +1,19 @@
-﻿using LocalUndergroundServer.Data.Models.Storyboard;
-using LocalUndergroundServer.Features.Storyboard.Constants;
+﻿using LocalUndergroundServer.Data.Models.StoryBoard;
+using LocalUndergroundServer.Features.StoryBoard.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Storyboard.Engine
+namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
-    public class StoryboardEngineBase
+    public class StoryBoardEngineBase
     {
-        public static List<StoryboardCore> SortStoryboardCores(StoryboardSort sortOrder, IEnumerable<StoryboardCore> cores, int sortDirection = 1)
+        public static List<StoryBoardCore> SortStoryBoardCores(StoryBoardSort sortOrder, IEnumerable<StoryBoardCore> cores, int sortDirection = 1)
         {
             switch(sortOrder)
             {
-                case StoryboardSort.Title:
+                case StoryBoardSort.Title:
                     if (sortDirection == 1)
                         return cores.OrderByDescending(x => x.Title).ToList();
                     else

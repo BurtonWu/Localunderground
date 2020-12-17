@@ -7,9 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using static LocalUndergroundServer.Constants.Validation.Post;
 
-namespace LocalUndergroundServer.Features.Storyboard.Models
+namespace LocalUndergroundServer.Features.StoryBoard.Params
 {
-    public class StoryboardCreateModel
+    public class StoryBoardCreateParams
     {
         [MaxLength(200)]
         public string Title { get; set; }

@@ -10,7 +10,7 @@ export interface StoryBoardModel {
     cover: FormData;
 }
 
-export interface StoryboardCreateRequestModel {
+export interface StoryBoardCreateRequestModel {
     title: string
     synopsis: string;
 }

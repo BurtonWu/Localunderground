@@ -6,31 +6,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LocalUndergroundServer.Shared.Models;
-using LocalUndergroundServer.Features.Storyboard.Models;
-using LocalUndergroundServer.Data.DTO.Storyboard;
-using LocalUndergroundServer.Features.Storyboard.Constants;
+using LocalUndergroundServer.Features.StoryBoard.Models;
+using LocalUndergroundServer.Data.DTO.StoryBoard;
+using LocalUndergroundServer.Features.StoryBoard.Constants;
 
-namespace LocalUndergroundServer.Features.Storyboard.Engine
+namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
-    public class StoryboardEngine : StoryboardEngineBase, IStoryboardEngine
+    public class StoryBoardEngine : StoryBoardEngineBase, IStoryBoardEngine
     {
         private readonly DatabaseContext _context;
-        private readonly IStoryboardStore _storyboardStore;
+        private readonly IStoryBoardStore _storyboardStore;
 
-        public StoryboardEngine(
+        public StoryBoardEngine(
             DatabaseContext context,
-            IStoryboardStore storyboardStore
+            IStoryBoardStore storyboardStore
             )
         {
             _context = context;
             _storyboardStore = storyboardStore;
         }
 
-        public async Task<List<StoryBoardModel>> GetStoryboards(StoryboardSort sortOrder = StoryboardSort.Title, int sortDirection = 1, 
+        public async Task<List<StoryBoardModel>> GetStoryBoards(StoryBoardSort sortOrder = StoryBoardSort.Title, int sortDirection = 1, 
             int currentIndex = 0, int loadCount = 20, string filterText = null)
         {
-            var storyboards = await _storyboardStore.GetStoryboards(currentIndex, loadCount, filterText);
-            var sortedCores = SortStoryboardCores(sortOrder, storyboards, sortDirection);
+            var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText);
+            var sortedCores = SortStoryBoardCores(sortOrder, storyboards, sortDirection);
             return sortedCores.Select(x => new StoryBoardModel()
             {
                 Id = x.Id,
@@ -43,16 +43,16 @@ namespace LocalUndergroundServer.Features.Storyboard.Engine
             }).ToList();
         }
 
-        public async Task<int> CreateStoryboard(string userId, StoryboardCreateModel model)
+        public async Task<int> CreateStoryBoard(string userId, string title, string synopsis = "")
         {
-            var createDto = new StoryboardCreateDTO()
+            var createDto = new StoryBoardCreateDTO()
             {
                 UserId = userId,
-                Synopsis = model.Synopsis,
-                Title = model.Title,
+                Synopsis = synopsis,
+                Title = title,
             };
 
-            var storyboardId = await _storyboardStore.CreateStoryboard(createDto);
+            var storyboardId = await _storyboardStore.CreateStoryBoard(createDto);
 
             //if(model.ByteData.Count == 1)
             //{
@@ -62,7 +62,34 @@ namespace LocalUndergroundServer.Features.Storyboard.Engine
 
             return storyboardId;
         }
-    
+
+        public async Task<int> UpdateStoryBoard(string userId, StoryBoardModel model)
+        {
+            //update storyboard
+
+            //add or udpate widget
+
+            //add mapping table
+
+
+            var createDto = new StoryBoardCreateDTO()
+            {
+                UserId = userId,
+                Synopsis = model.Synopsis,
+                Title = model.Title,
+            };
+
+            var storyboardId = await _storyboardStore.CreateStoryBoard(createDto);
+
+            //if(model.ByteData.Count == 1)
+            //{
+            //    var byteData = model.ByteData.First();
+            //    await _billboardStore.UploadImage(billboardId, byteData.FileName, byteData.Size, byteData.ByteData);
+            //}
+
+            return storyboardId;
+        }
+
         //public async Task<bool> UpdateBillboard(int id, string description, string userId)
         //{
         //    var billboard = await _context.BillboardCore.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qrikcuCcBLMeyHMOJxcKGEpL6sqGdRzRSEeLHO73jBi5jfa3s1/LraPAc1qCK+bFtohz7nJarlC7p2fT+kFWiA==",
+  "dgSpecHash": "CmuB4daxm00XIorhCEUA1SISWj0K5qRXFY4cDYoYX41Oephs56Lvks1cAottIfKlh47oWxbM5PgzvqmY3GOMIw==",
   "success": true,
-  "projectFilePath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+  "projectFilePath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\that milk tea\\.nuget\\packages\\identitymodel\\4.3.0\\identitymodel.4.3.0.nupkg.sha512",
     "C:\\Users\\that milk tea\\.nuget\\packages\\identityserver4\\4.0.4\\identityserver4.4.0.4.nupkg.sha512",
@@ -138,9 +138,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\that milk tea\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\that milk tea\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,5 +1,6 @@
-﻿using LocalUndergroundServer.Data.DTO.Storyboard;
-using LocalUndergroundServer.Data.Models.Storyboard;
+﻿using LocalUndergroundServer.Data.DTO.StoryBoard;
+using LocalUndergroundServer.Data.Models.StoryBoard;
+using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using Microsoft.EntityFrameworkCore;
@@ -9,14 +10,14 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Storyboard.Engine
+namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
-    public class StoryboardStore : IStoryboardStore
+    public class StoryBoardStore : IStoryBoardStore
     {
         private readonly ISqlEngine _sqlEngine;
         private readonly DatabaseContext _dbContext;
 
-        public StoryboardStore(
+        public StoryBoardStore(
             ISqlEngine sqlEngine,
             DatabaseContext dbContext
             )
@@ -25,53 +26,28 @@ namespace LocalUndergroundServer.Features.Storyboard.Engine
             _dbContext = dbContext;
         }
 
-        public async Task<List<StoryboardCore>> GetStoryboards(int currentIndex, int loadCount = 20, string filterText = null)
+        public async Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null)
         {
-            if(_dbContext.StoryboardCore.Count() == 0)
+            if(_dbContext.StoryBoardCore.Count() == 0)
             {
-                return new List<StoryboardCore>();
+                return new List<StoryBoardCore>();
             }
-            return await _dbContext.StoryboardCore
+            return await _dbContext.StoryBoardCore
                 //.Skip(currentIndex)
                 //.Take(loadCount)
                 .Where(x => x.Title == filterText || string.IsNullOrWhiteSpace(filterText))
                 .ToListAsync();
         }
 
-        public async Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData)
+        public async Task<int> CreateStoryBoard(StoryBoardCreateDTO model)
         {
-            //var image = new BillboardImage()
-            //{
-            //    BillboardId = billboardId,
-            //    Name = name,
-            //    Size = size,
-            //    ImageData = imageData
-            //};
-            //await _dbContext.BillboardImage.AddAsync(image);
-            //await _dbContext.SaveChangesAsync();
-            //return image.Id;
-
-
-            return 0;
-            //var sqlParameters = _sqlEngine.AddSqlParameter("@Title", title);
-            //_sqlEngine.AddSqlParameter("@BillboardId", billboardId);
-            //_sqlEngine.AddSqlParameter("@Size", size, sqlParameters);
-            //_sqlEngine.AddSqlParameter("@ImageData", imageData, sqlParameters);
-            //_sqlEngine.AddSqlParameterOutput("@Id", SqlDbType.Int, sqlParameters);
-
-            //var outputParameters = await _sqlEngine.ExecuteStoredProcedure("spUploadBillboardImage", sqlParameters);
-            //return (int)outputParameters[0].Value;
-        }
-
-        public async Task<int> CreateStoryboard(StoryboardCreateDTO model)
-        {
-            var core = new StoryboardCore()
+            var core = new StoryBoardCore()
             {
                 Synopsis = model.Synopsis,
                 Title = model.Title,
                 UserId = model.UserId
             };
-            await _dbContext.StoryboardCore.AddAsync(core);
+            await _dbContext.StoryBoardCore.AddAsync(core);
             await _dbContext.SaveChangesAsync();
             return core.Id;
         }

@@ -29,7 +29,7 @@ export class LayoutComponent implements OnInit {
         // })
     }
 
-    public navigateToStoryboardCreate() {
+    public navigateToStoryBoardCreate() {
         this._router.navigate([RoutePath.StoryBoardCreate]);
     }
 }

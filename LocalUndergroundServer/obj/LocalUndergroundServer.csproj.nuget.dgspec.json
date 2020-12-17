@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {}
+    "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {}
   },
   "projects": {
-    "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {
+    "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+        "projectUniqueName": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
         "projectName": "LocalUndergroundServer",
-        "projectPath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+        "projectPath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
         "packagesPath": "C:\\Users\\that milk tea\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\obj\\",
+        "outputPath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,16 +88,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.10, 3.1.10]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.10, 3.1.10]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryBoardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryBoardModel, StoryBoardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
@@ -75,7 +75,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         this.dragging = true;
     }
 
-    public handleClick(textWidget: TextWidgetModel): void {
+    public handleClick(textWidget: TextWidgetModel, index: number): void {
         if (this.dragging) {
             this.dragging = false;
             return;
@@ -99,13 +99,17 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     public save() {
         this.submitted = true;
-        // const params: StoryboardCreateRequestModel = {
+        this.textWidgets.forEach((textWidget, i) => {
+            textWidget.sort = i;
+        });
+        console.log(this.textWidgets);
+        // const params: StoryBoardCreateRequestModel = {
         //     title: this.title.value,
         //     synopsis: this.synopsis.value
         // };
         // this.submitted = true;
         // console.log(params);
-        // this._storyBoardService.createStoryboard(params).subscribe((id) => {
+        // this._storyBoardService.createStoryBoard(params).subscribe((id) => {
         //     console.log(id);
         // })
     }

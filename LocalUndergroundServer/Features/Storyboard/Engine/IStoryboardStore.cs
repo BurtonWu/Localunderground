@@ -1,16 +1,17 @@
-﻿using LocalUndergroundServer.Data.DTO.Storyboard;
-using LocalUndergroundServer.Data.Models.Storyboard;
+﻿using LocalUndergroundServer.Data.DTO.StoryBoard;
+using LocalUndergroundServer.Data.Models.StoryBoard;
+using LocalUndergroundServer.Features.StoryBoard.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Storyboard.Engine
+namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
-    public interface IStoryboardStore
+    public interface IStoryBoardStore
     {
-        Task<int> CreateStoryboard(StoryboardCreateDTO model);
-        Task<List<StoryboardCore>> GetStoryboards(int currentIndex, int loadCount = 20, string filterText = null);
+        Task<int> CreateStoryBoard(StoryBoardCreateDTO model);
+        Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null);
         //Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData);
     }
 }

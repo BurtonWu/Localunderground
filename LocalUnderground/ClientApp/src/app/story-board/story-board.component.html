@@ -16,7 +16,8 @@
       </ng-template> -->
 
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let textWidget of textWidgets" (cdkDragStarted)="handleDragStart($event)" (click)="handleClick(textWidget)" cdkDrag>
+        <div class="example-box" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" (click)="handleClick(textWidget)" cdkDrag>
+          {{i}}
           {{textWidget.body}}
           <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
           </text-widget> -->

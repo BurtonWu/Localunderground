@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Data.DTO.Storyboard
+namespace LocalUndergroundServer.Data.DTO.StoryBoard
 {
-    public class StoryboardCreateDTO
+    public class StoryBoardCreateDTO
     {
         public string UserId { get; set; }
         public string Title { get; set; }

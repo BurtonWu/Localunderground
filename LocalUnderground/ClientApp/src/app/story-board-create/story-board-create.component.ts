@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryBoardModel, StoryBoardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({
@@ -31,7 +31,7 @@ export class StoryBoardCreateComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
+        this._storyBoardService.getStoryBoards().subscribe((storyBoards) => {
             console.log(storyBoards);
         });
     }
@@ -40,13 +40,13 @@ export class StoryBoardCreateComponent implements OnInit {
         // this.storyBoardCreateModel.title = this.title.value;
         // this.storyBoardCreateModel.synopsis = this.description.value;
         
-        const params: StoryboardCreateRequestModel = {
+        const params: StoryBoardCreateRequestModel = {
             title: this.title.value,
             synopsis: this.synopsis.value
         };
         this.submitted = true;
         console.log(params);
-        this._storyBoardService.createStoryboard(params).subscribe((id) => {
+        this._storyBoardService.createStoryBoard(params).subscribe((id) => {
             console.log(id);
         })
         // this._billboardService.createBillboard(params).subscribe((response) => {

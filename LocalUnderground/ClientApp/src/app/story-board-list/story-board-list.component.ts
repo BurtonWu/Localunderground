@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardModel, StoryboardCreateRequestModel, StoryBoardCore } from '../story-board/story-board.interface';
+import { StoryBoardModel, StoryBoardCreateRequestModel, StoryBoardCore } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({
@@ -22,7 +22,7 @@ export class StoryBoardListComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
+        this._storyBoardService.getStoryBoards().subscribe((storyBoards) => {
             this.storyBoardCores = storyBoards;
         });
     }

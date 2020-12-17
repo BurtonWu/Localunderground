@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Storyboard.Constants
+namespace LocalUndergroundServer.Features.StoryBoard.Constants
 {
-    public enum StoryboardSort
+    public enum StoryBoardSort
     {
         Title = 1
     }

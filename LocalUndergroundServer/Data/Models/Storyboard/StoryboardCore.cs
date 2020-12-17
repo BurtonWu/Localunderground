@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Data.Models.Storyboard
+namespace LocalUndergroundServer.Data.Models.StoryBoard
 {
-    public class StoryboardCore
+    public class StoryBoardCore
     {
         public int Id { get; set; }
         public string UserId { get; set; }
