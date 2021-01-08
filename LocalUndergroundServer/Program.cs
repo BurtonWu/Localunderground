@@ -21,6 +21,7 @@ namespace LocalUndergroundServer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("https://localhost:44368", "http://localhost:56531");
                 });
     }
 }

@@ -46,12 +46,12 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Authorize]
         [HttpPost]
         [Route(Routes.TextWidget.BaseTextWidget)]
-        public async Task<ActionResult> AddTextWidget([FromBody] TextWidgetAddParams model)
+        public async Task<ActionResult> CreateTextWidget([FromBody] TextWidgetCreateParams model)
         {
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             //put in better place
             //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var id = await _textWidgetStore.AddTextWidget(model.StoryBoardId, model.Sort);
+            var id = await _textWidgetStore.CreateTextWidget(model.StoryBoardId, model.Sort);
             return Created("Created", id);
             //return Ok();
         }

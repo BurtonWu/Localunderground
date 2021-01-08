@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryBoardModel, StoryBoardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestModel, TextWidgetModel, StoryboardUpdateModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
@@ -16,7 +16,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 export class StoryBoardComponent implements OnInit, OnChanges {
 
-    @Input() public model: StoryBoardModel;
+    @Input() public model: StoryboardModel;
     // @ViewChild('textWidgetModal') textWidgetModal :TextWidgetModalComponent;
 
     public submitted: boolean;
@@ -54,8 +54,8 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['model'].currentValue) {
             console.log('model', this.model);
-            if (this.model.textModels) {
-                this.model.textModels.forEach((model) => {
+            if (this.model.textWidgetModels) {
+                this.model.textWidgetModels.forEach((model) => {
                     const textFormControl = new FormControl(model.body);
                     this.textWidgetControls.push(textFormControl);
                 });
@@ -103,15 +103,17 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             textWidget.sort = i;
         });
         console.log(this.textWidgets);
-        // const params: StoryBoardCreateRequestModel = {
-        //     title: this.title.value,
-        //     synopsis: this.synopsis.value
-        // };
-        // this.submitted = true;
-        // console.log(params);
-        // this._storyBoardService.createStoryBoard(params).subscribe((id) => {
-        //     console.log(id);
-        // })
+        const params: StoryboardModel = {
+            Id: this.model.Id,
+            title: this.title.value,
+            synopsis: this.synopsis.value,
+            textWidgetModels: this.textWidgets
+        };
+        this.submitted = true;
+        console.log(params);
+        this._storyBoardService.udpateStoryboard(params).subscribe((id) => {
+            console.log(id);
+        })
     }
 
     public imageUploadHandler(files: FileList) {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Features.TextWidget.Params
 {
-    public class TextWidgetAddParams
+    public class TextWidgetCreateParams
     {
         public int StoryBoardId { get; set; }
         public int Sort { get; set; }

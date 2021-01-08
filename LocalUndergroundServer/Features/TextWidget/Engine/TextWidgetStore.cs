@@ -24,7 +24,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             _dbContext = dbContext;
         }
 
-        public async Task<int?> AddTextWidget(int storyBoardId, int sort, string body = "")
+        public async Task<int?> CreateTextWidget(int storyBoardId, int sort, string body = "")
         {
             var storyBoardCore = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == storyBoardId);
             if (storyBoardCore == null) return null;

@@ -10,7 +10,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
     public interface ITextWidgetStore
     {
-        Task<int?> AddTextWidget(int storyBoardId, int sort, string body = "");
+        Task<int?> CreateTextWidget(int storyBoardId, int sort, string body = "");
         Task<bool> UpdateTextWidget(int textWidgetId, int storyBoardId, int sort, string body = "");
         //Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData);
     }

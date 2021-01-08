@@ -1,18 +1,27 @@
 
-export interface StoryBoardModel {
+export interface StoryboardModel {
+    Id: number;
     title: string;
     synopsis: string;
     //widgets
-    textModels: TextWidgetModel[];
-    imageWidgets: any;
-    soundWidgets: any;
+    textWidgetModels: TextWidgetModel[];
+    // imageWidgets: any;
+    // soundWidgets: any;
 
-    cover: FormData;
+    // cover: FormData;
 }
 
-export interface StoryBoardCreateRequestModel {
+export interface StoryboardCreateRequestModel {
     title: string
     synopsis: string;
+}
+
+export interface StoryboardUpdateModel {
+    Id: number;
+    title: string;
+    synopsis: string;
+
+    textModels: TextWidgetModel[];
 }
 
 export interface StoryBoardCore {
@@ -24,6 +33,5 @@ export interface StoryBoardCore {
 export interface TextWidgetModel {
     id?: number;
     sort?: number;
-    storyBoardId?: number;
     body: string;
 }
