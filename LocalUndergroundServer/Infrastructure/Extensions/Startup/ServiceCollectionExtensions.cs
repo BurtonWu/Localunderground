@@ -4,6 +4,7 @@ using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Features.Identity.Engine;
 using LocalUndergroundServer.Features.StoryBoard.Engine;
+using LocalUndergroundServer.Features.TextWidget.Engine;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using LocalUndergroundServer.Infrastructure.Filters;
@@ -87,6 +88,8 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
         {
             return services.AddTransient<IIdentityEngine, IdentityEngine>()
                            .AddTransient<ISqlEngine, SqlEngine>()
+                            .AddTransient<ITextWidgetStore, TextWidgetStore>()
+                           .AddTransient<ITextWidgetEngine, TextWidgetEngine>()
                            .AddTransient<IStoryBoardStore, StoryBoardStore>()
                            .AddTransient<IStoryBoardEngine, StoryBoardEngine>();
 

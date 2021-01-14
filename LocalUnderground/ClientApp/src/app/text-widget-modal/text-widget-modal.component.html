@@ -24,10 +24,10 @@
 <div class="modal-body">
   <form [formGroup]="formGroup">
     <div class="form-group">
-      <label for="synopsis">Synopsis</label>
+      <label for="body">Body</label>
       <div class="input-group">
-        <textarea class="form-control" formControlName="synopsis" placeholder="Synopsis..."></textarea>
-        <div *ngIf="submitted && synopsis.errors?.required" class="alert alert-danger">At least 1 character is required.
+        <textarea class="form-control" formControlName="body" placeholder="body..."></textarea>
+        <div *ngIf="submitted && bodyControl.errors?.required" class="alert alert-danger">At least 1 character is required.
         </div>
         <!-- <div *ngIf="submitted && synopsis.errors?.minlength" class="alert alert-danger">At least 1 character is required.</div>
         </div> -->

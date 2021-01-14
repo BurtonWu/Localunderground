@@ -23,6 +23,10 @@ export class StoryBoardService {
     public udpateStoryboard(params: StoryboardModel): Observable<any> {
         return this.http.put(this.baseUrl, params);
     }
+
+    public deleteStoryboard(id: number): Observable<any> {
+        return this.http.delete(this.baseUrl, {params: {storyBoardId: id.toString()}});
+    }
     // public saveToken(token) {
     //     localStorage.setItem('token', token);
     // }

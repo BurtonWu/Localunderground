@@ -27,5 +27,12 @@ export class StoryBoardListComponent implements OnInit {
         });
     }
 
+    public delete(id: number) {
+        this._storyBoardService.deleteStoryboard(id).subscribe(() => {
+            this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
+                this.storyBoardCores = storyBoards;
+            });
+        })
+    }
 }
 

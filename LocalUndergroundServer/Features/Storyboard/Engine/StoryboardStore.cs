@@ -52,6 +52,17 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             return core.Id;
         }
 
+        public async Task<bool> DeleteStoryBoard(int id)
+        {
+            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == id);
+            if(core != null)
+            {
+                _dbContext.StoryBoardCore.Remove(core);
+                return (await _dbContext.SaveChangesAsync()) == 1;
+            }
+            return false;
+        }
+
         //public async Task<List<PanelImage>> GetImages()
         //{
         //    //var sqlParameters = _sqlEngine.AddSqlParameter("@Name", panelImage.Name);

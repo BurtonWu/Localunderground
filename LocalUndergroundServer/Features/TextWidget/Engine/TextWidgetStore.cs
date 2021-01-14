@@ -36,7 +36,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
                 Body = body
             };
             await _dbContext.TextWidgetCore.AddAsync(widget);
-
+            await _dbContext.SaveChangesAsync();
             return widget.Id;
         }
 

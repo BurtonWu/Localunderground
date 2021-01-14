@@ -6,20 +6,25 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
 import { PanelModule } from '../panel/panel.module';
-import { TextWidgetModalComponent } from './text-widget-modal.component';
+import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
+import { TextWidgetComponent } from './text-widget.component';
+import { TextWidgetService } from './text-widget.services';
 
 
 @NgModule({
   declarations: [
     TextWidgetModalComponent,
+    TextWidgetComponent
   ],
   imports: [
     AppBaseModule
   ],
   exports: [
     TextWidgetModalComponent,
+    TextWidgetComponent
   ],
   providers: [
+    TextWidgetService
   ]
 })
 export class TextWidgetModule { }

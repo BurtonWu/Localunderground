@@ -1,5 +1,7 @@
 <div class="container-fluid">
-  <form [formGroup]="storyBoardForm" (ngSubmit)="save()">
+  <!-- <form [formGroup]="storyBoardForm" (ngSubmit)="save()"> -->
+  <form [formGroup]="storyBoardForm" >
+
     <div class="row">
       <div class="col-lg-12">
         <h2>Story Board</h2>
@@ -16,9 +18,9 @@
       </ng-template> -->
 
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" (click)="handleClick(textWidget)" cdkDrag>
+        <div class="example-box" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
           {{i}}
-          {{textWidget.body}}
+          <text-widget [model]="textWidget"></text-widget>
           <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
           </text-widget> -->
 
@@ -27,10 +29,7 @@
       <button (click)="createTextWidget()">Add Text Body</button>
 
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <!-- <button type="submit" class="btn btn-primary">Save</button> -->
   </form>
 
-  <!-- <ng-template [ngIf]="model">
-        </ng-template> -->
 </div>
-<!-- <text-widget-modal #textWidgetModal></text-widget-modal> -->

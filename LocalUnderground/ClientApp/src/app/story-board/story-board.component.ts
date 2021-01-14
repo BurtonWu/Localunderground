@@ -5,8 +5,10 @@ import { StoryboardModel, StoryboardCreateRequestModel, TextWidgetModel, Storybo
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
-import { TextWidgetModalComponent } from '../text-widget/text-widget-modal.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
+import { TextWidgetService } from '../text-widget/text-widget.services';
+import { TextWidgetCreateParams } from '../text-widget/text-widget.interface';
 
 @Component({
     selector: 'story-board',
@@ -29,15 +31,19 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     // public storyBoardCreateModel: StoryBoardModel;
     private _storyBoardService: StoryBoardService;
+    private _textWidgetService: TextWidgetService;
+
     private _modalService: NgbModal;
     public dragging: boolean;
 
     public constructor(
         storyBoardService: StoryBoardService,
         fb: FormBuilder,
+        textWidgetService: TextWidgetService,
         modalService: NgbModal
     ) {
         this._storyBoardService = storyBoardService;
+        this._textWidgetService = textWidgetService;
         this._modalService = modalService;
 
         this.storyBoardForm = fb.group({
@@ -81,22 +87,31 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             return;
         }
         // this.textWidgetModal.open(null);
-        this.textWidgetModal = this._modalService.open(TextWidgetModalComponent);
-        console.log('clicked', event);
-        this.textWidgetModal.componentInstance['model'] = textWidget;
-        console.log(this.textWidgetModal.componentInstance);
-        console.log('active instances', this._modalService.activeInstances);
+        // this.textWidgetModal = this._modalService.open(TextWidgetModalComponent);
+        // console.log('clicked', event);
+        // this.textWidgetModal.componentInstance['model'] = textWidget;
+        // console.log(this.textWidgetModal.componentInstance);
+        // console.log('active instances', this._modalService.activeInstances);
     }
 
+    //after create, retrieve using a get
     public createTextWidget() {
         let textWidget: TextWidgetModel = {
             body: Math.random().toString(4),
-            sort: this.textWidgets.length
+            sort: this.textWidgets.length,
+            storyBoardId: this.model.id
         };
-        this.textWidgetControls.push(new FormControl(textWidget.body));
-        this.textWidgets.push(textWidget);
+        let params: TextWidgetCreateParams = {
+            storyBoardId: this.model.id,
+            sort: this.textWidgets.length
+        }
+        this._textWidgetService.createTextWidget(params).subscribe(() => {
+            this.textWidgetControls.push(new FormControl(textWidget.body));
+            this.textWidgets.push(textWidget);
+        });
     }
 
+    //not needed
     public save() {
         this.submitted = true;
         this.textWidgets.forEach((textWidget, i) => {
@@ -104,7 +119,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         });
         console.log(this.textWidgets);
         const params: StoryboardModel = {
-            Id: this.model.Id,
+            id: this.model.id,
             title: this.title.value,
             synopsis: this.synopsis.value,
             textWidgetModels: this.textWidgets

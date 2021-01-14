@@ -1,6 +1,6 @@
 
 export interface StoryboardModel {
-    Id: number;
+    id: number;
     title: string;
     synopsis: string;
     //widgets
@@ -31,6 +31,7 @@ export interface StoryBoardCore {
 }
 
 export interface TextWidgetModel {
+    storyBoardId?: number;
     id?: number;
     sort?: number;
     body: string;

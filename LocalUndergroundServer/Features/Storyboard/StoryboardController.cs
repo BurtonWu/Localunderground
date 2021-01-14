@@ -25,16 +25,20 @@ namespace LocalUndergroundServer.Features.StoryBoard
     {
         private readonly UserManager<User> _userManager;
         private readonly IStoryBoardEngine _storyboardEngine;
+        private readonly IStoryBoardStore _storyBoardStore;
+
         private readonly DatabaseContext _context;
 
         public StoryBoardController(
             UserManager<User> userManager,
             IStoryBoardEngine storyboardEngine,
+            IStoryBoardStore storyBoardStore,
             DatabaseContext context)
 
         {
             _userManager = userManager;
             _storyboardEngine = storyboardEngine;
+            _storyBoardStore = storyBoardStore;
             _context = context;
         }
 
@@ -87,6 +91,15 @@ namespace LocalUndergroundServer.Features.StoryBoard
             var storyboardId = await _storyboardEngine.CreateStoryBoard(userId, model.Title, model.Synopsis);
             return Created("Created", storyboardId);
             //return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        public async Task<ActionResult> Delete([FromQuery] int storyBoardId)
+        {
+            var deleted = await _storyBoardStore.DeleteStoryBoard(storyBoardId);
+            return Ok(deleted);
         }
     }
 }

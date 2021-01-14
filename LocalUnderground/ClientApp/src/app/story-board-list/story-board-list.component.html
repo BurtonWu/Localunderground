@@ -8,6 +8,7 @@
       <div class="row">
           <div class="col-lg-12">
             <story-board [model]="storyBoardCore"></story-board>
+            <button class="btn btn-danger" (click)="delete(storyBoardCore.id)">Delete</button>
           </div>
       </div>
     </ng-template>
