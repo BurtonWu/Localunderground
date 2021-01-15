@@ -3,13 +3,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { AuthorizationService } from "../auth/auth.services";
-import { TextWidgetUpdateParams, TextWidgetCreateParams } from "./text-widget.interface";
+import { TextWidgetUpdateParams, TextWidgetCreateParams, TextWidgetModel } from "./text-widget.interface";
 
 @Injectable()
 export class TextWidgetService {
     private baseUrl = environment.apiUrl + '/api/textwidget';
 
     constructor(private http: HttpClient, private authService: AuthorizationService) {
+    }
+
+    public getWidgets(storyBoardId: number): Observable<TextWidgetModel[]> {
+        return this.http.get<TextWidgetModel[]>(this.baseUrl, {params: {storyBoardId: storyBoardId.toString()}});
     }
 
     public createTextWidget(params: TextWidgetCreateParams): Observable<any> {

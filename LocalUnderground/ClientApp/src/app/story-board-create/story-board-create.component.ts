@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({

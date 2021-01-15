@@ -9,6 +9,7 @@ using LocalUndergroundServer.Shared.Models;
 using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
+using LocalUndergroundServer.Features.TextWidget.Models;
 
 namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
@@ -26,7 +27,21 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             _textWidgetStore = textWidgetStore;
         }
 
-        
+        public async Task<List<TextWidgetModel>> GetTextWidgetModels(int storyBoardId)
+        {
+            var cores = await _textWidgetStore.GetTextWidgetCores(storyBoardId);
+            if (cores.Count > 0)
+            {
+                return cores.Select(x => new TextWidgetModel()
+                {
+                    Id = x.Id,
+                    Body = x.Body,
+                    Sort = x.Sort,
+                    StoryBoardId = storyBoardId
+                }).OrderByDescending(x => x.Sort).ToList();
+            }
+            return new List<TextWidgetModel>();
+        }
     }
 
 }

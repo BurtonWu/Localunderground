@@ -44,6 +44,16 @@ namespace LocalUndergroundServer.Features.TextWidget
         }
 
         [Authorize]
+        [HttpGet]
+        [Route(Routes.TextWidget.BaseTextWidget)]
+        public async Task<ActionResult> GetTextWidgets([FromQuery] int storyBoardId)
+        {
+            var widgets = await _textWidgetEngine.GetTextWidgetModels(storyBoardId);
+            return Ok(widgets);
+        }
+
+
+        [Authorize]
         [HttpPost]
         [Route(Routes.TextWidget.BaseTextWidget)]
         public async Task<ActionResult> CreateTextWidget([FromBody] TextWidgetCreateParams model)

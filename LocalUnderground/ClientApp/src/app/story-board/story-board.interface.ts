@@ -4,7 +4,7 @@ export interface StoryboardModel {
     title: string;
     synopsis: string;
     //widgets
-    textWidgetModels: TextWidgetModel[];
+    // textWidgetModels: TextWidgetModel[];
     // imageWidgets: any;
     // soundWidgets: any;
 
@@ -21,18 +21,11 @@ export interface StoryboardUpdateModel {
     title: string;
     synopsis: string;
 
-    textModels: TextWidgetModel[];
+    // textModels: TextWidgetModel[];
 }
 
 export interface StoryBoardCore {
     id: number;
     title: string;
     synopsis: string;
-}
-
-export interface TextWidgetModel {
-    storyBoardId?: number;
-    id?: number;
-    sort?: number;
-    body: string;
 }

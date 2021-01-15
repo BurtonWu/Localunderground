@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel, StoryBoardCore, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestModel, StoryBoardCore } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetService } from '../text-widget/text-widget.services';
-import { TextWidgetUpdateParams } from '../text-widget/text-widget.interface';
+import { TextWidgetUpdateParams, TextWidgetModel } from '../text-widget/text-widget.interface';
 
 @Component({
     selector: 'text-widget-modal',

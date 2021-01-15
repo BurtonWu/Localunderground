@@ -1,4 +1,6 @@
 ﻿using LocalUndergroundServer.Data.Models.TextWidget;
+using LocalUndergroundServer.Features.TextWidget.DTO;
+using LocalUndergroundServer.Features.TextWidget.Models;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,21 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
         {
             _sqlEngine = sqlEngine;
             _dbContext = dbContext;
+        }
+
+        public async Task<List<TextWidgetCoreDTO>> GetTextWidgetCores(int storyBoardId)
+        {
+            var cores = await _dbContext.TextWidgetCore.Where(x => x.StoryBoardId == storyBoardId).ToListAsync();
+            if(cores.Count > 0)
+            {
+                return cores.Select(x => new TextWidgetCoreDTO()
+                {
+                    Id = x.Id,
+                    Body = x.Body,
+                    Sort = x.Sort
+                }).OrderByDescending(x => x.Sort).ToList();
+            }
+            return new List<TextWidgetCoreDTO>();
         }
 
         public async Task<int?> CreateTextWidget(int storyBoardId, int sort, string body = "")

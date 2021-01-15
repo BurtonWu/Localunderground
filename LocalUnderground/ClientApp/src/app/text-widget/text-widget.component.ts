@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel, TextWidgetModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from './text-widget.services';
-import { TextWidgetUpdateParams } from './text-widget.interface';
+import { TextWidgetUpdateParams, TextWidgetModel } from './text-widget.interface';
 
 @Component({
     selector: 'text-widget',
@@ -47,6 +47,7 @@ export class TextWidgetComponent implements OnInit, OnChanges {
     }
 
     public save() {
+        this.model.body = this.bodyControl.value;
         const params: TextWidgetUpdateParams = {
             id: this.model.id,
             body: this.model.body,

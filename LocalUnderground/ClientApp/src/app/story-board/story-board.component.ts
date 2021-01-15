@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel, TextWidgetModel, StoryboardUpdateModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestModel, StoryboardUpdateModel } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from '../text-widget/text-widget.services';
-import { TextWidgetCreateParams } from '../text-widget/text-widget.interface';
+import { TextWidgetCreateParams, TextWidgetModel } from '../text-widget/text-widget.interface';
 
 @Component({
     selector: 'story-board',
@@ -60,13 +60,21 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['model'].currentValue) {
             console.log('model', this.model);
-            if (this.model.textWidgetModels) {
-                this.model.textWidgetModels.forEach((model) => {
+            this.loadWidgets();
+        }
+    }
+
+    public loadWidgets() {
+        this._textWidgetService.getWidgets(this.model.id).subscribe((textWidgets) => {
+            console.log('text widgets', textWidgets);
+            if (textWidgets && textWidgets.length > 0) {
+                this.textWidgets = textWidgets;
+                this.textWidgets.forEach((model) => {
                     const textFormControl = new FormControl(model.body);
                     this.textWidgetControls.push(textFormControl);
                 });
             }
-        }
+        })
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
@@ -105,7 +113,9 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             storyBoardId: this.model.id,
             sort: this.textWidgets.length
         }
-        this._textWidgetService.createTextWidget(params).subscribe(() => {
+        this._textWidgetService.createTextWidget(params).subscribe((id) => {
+            console.log(id);
+            textWidget.id = id;
             this.textWidgetControls.push(new FormControl(textWidget.body));
             this.textWidgets.push(textWidget);
         });
@@ -121,8 +131,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         const params: StoryboardModel = {
             id: this.model.id,
             title: this.title.value,
-            synopsis: this.synopsis.value,
-            textWidgetModels: this.textWidgets
+            synopsis: this.synopsis.value
         };
         this.submitted = true;
         console.log(params);
