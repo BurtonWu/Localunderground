@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { StoryboardModel, StoryboardCreateRequestModel, StoryBoardCore } from '../story-board/story-board.interface';
@@ -17,6 +17,7 @@ export class TextWidgetModalComponent implements OnInit, OnChanges {
     // @Input() model: TextWidgetModel;
     @Input() body: string;
     @Input() model: TextWidgetModel;
+    @Output() event = new EventEmitter<string>();
 
     public submitted: boolean = false;
     public formGroup: FormGroup;
@@ -67,6 +68,7 @@ export class TextWidgetModalComponent implements OnInit, OnChanges {
             sort: this.model.sort
         }
         this._textWidgetService.udpateTextWidget(params).subscribe(() => {
+            this.event.next(this.model.body);
             this.activeModal.close();
         });
     }

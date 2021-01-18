@@ -6,7 +6,7 @@ import { AuthorizationGuardService } from '../app-config/app-auth-guard.service'
 import { RoutePath } from '../shared/shared.constants';
 import { LayoutComponent } from '../layout/layout.component';
 import { StoryBoardCreateComponent } from '../story-board-create/story-board-create.component';
-import { StoryBoardComponent } from '../story-board/story-board.component';
+import { StoryBoardListComponent } from '../story-board-list/story-board-list.component';
 
 
 
@@ -15,7 +15,7 @@ const routes: Routes = [
   //redirect to, from nothing in url, '', to localhost:4200/storyboard
   { path: '', pathMatch: 'full', redirectTo: RoutePath.Main, canActivate: [AuthorizationGuardService] },
   { path: RoutePath.Main, component: LayoutComponent, canActivate: [AuthorizationGuardService] },
-  { path: RoutePath.StoryBoard, component: StoryBoardComponent},
+  { path: RoutePath.StoryBoard, component: StoryBoardListComponent},
   { path: RoutePath.StoryBoardCreate, component: StoryBoardCreateComponent, canActivate: [AuthorizationGuardService] },
   { path: RoutePath.Login, component: AuthLoginComponent },
   { path: RoutePath.Register, component: AuthRegisterComponent },

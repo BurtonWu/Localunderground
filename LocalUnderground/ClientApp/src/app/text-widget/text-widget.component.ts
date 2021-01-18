@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { StoryboardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
@@ -16,6 +16,8 @@ import { TextWidgetUpdateParams, TextWidgetModel } from './text-widget.interface
 export class TextWidgetComponent implements OnInit, OnChanges {
 
     @Input() public model: TextWidgetModel;
+    // @Output() public modelChange = new EventEmitter<TextWidgetModel>();
+
 
     public submitted: boolean;
     public bodyControl: FormControl;
@@ -55,7 +57,7 @@ export class TextWidgetComponent implements OnInit, OnChanges {
             storyBoardId: this.model.storyBoardId
         };
         this._textWidgetService.udpateTextWidget(params).subscribe(() => {
-
+            // this.modelChange.emit(this.model);
         })
     }
 
@@ -65,6 +67,11 @@ export class TextWidgetComponent implements OnInit, OnChanges {
         this.textWidgetModal.componentInstance['model'] = this.model;
         console.log(this.textWidgetModal.componentInstance);
         console.log('active instances', this._modalService.activeInstances);
+        this.textWidgetModal.componentInstance.event.subscribe(data => {
+            console.log('Child component\'s event was triggered', data);
+            this.model.body = data;
+            this.bodyControl.setValue(data);
+         });        
     }
 
 }
