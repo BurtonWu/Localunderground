@@ -20,6 +20,9 @@ namespace LocalUndergroundServer.Constants
         public static class Widget
         {
             public const string BaseWidget = "api/widget";
+            public const string Sort = "api/widget/sort";
+            public const string Delete = "api/widget/delete";
+
         }
         public static class TextWidget
         {

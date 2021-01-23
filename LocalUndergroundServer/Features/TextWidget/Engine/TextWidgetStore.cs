@@ -36,7 +36,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
                     Id = x.Id,
                     Body = x.Body,
                     Sort = x.Sort
-                }).OrderByDescending(x => x.Sort).ToList();
+                }).OrderBy(x => x.Sort).ToList();
             }
             return new List<TextWidgetCoreDTO>();
         }
@@ -69,6 +69,15 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             return await _dbContext.SaveChangesAsync() == 1;
         }
 
+        public async Task DeleteTextWidget(int storyBoardId, int textWidgetId)
+        {
+            var widget = await _dbContext.TextWidgetCore.SingleOrDefaultAsync(x => x.Id == textWidgetId && x.StoryBoardId == storyBoardId);
+            if (widget != null)
+            {
+                _dbContext.Remove(widget);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
 
         public async Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData)
         {

@@ -9,6 +9,6 @@ namespace LocalUndergroundServer.Features.Widget.Params
 {
     public class WidgetSortParams
     {
-        public IEnumerable<WidgetSortModel> WidgetSorts { get; set; }
+        public IEnumerable<WidgetSortModel> WidgetSortModels { get; set; }
     }
 }

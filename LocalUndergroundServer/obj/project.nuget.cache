@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CmuB4daxm00XIorhCEUA1SISWj0K5qRXFY4cDYoYX41Oephs56Lvks1cAottIfKlh47oWxbM5PgzvqmY3GOMIw==",
+  "dgSpecHash": "g6TlpUkY5UzctUofF5WQ3eOJmO7jKWTdAsyCC4DlmC5FOLS6b1JZCrHZo+cf8lE8L0PrhwC1tZJAF+uJmaCfnA==",
   "success": true,
-  "projectFilePath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+  "projectFilePath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\that milk tea\\.nuget\\packages\\identitymodel\\4.3.0\\identitymodel.4.3.0.nupkg.sha512",
     "C:\\Users\\that milk tea\\.nuget\\packages\\identityserver4\\4.0.4\\identityserver4.4.0.4.nupkg.sha512",

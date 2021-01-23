@@ -7,6 +7,7 @@ using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Features.StoryBoard.Models.Params;
 using LocalUndergroundServer.Features.TextWidget.Engine;
 using LocalUndergroundServer.Features.TextWidget.Params;
+using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.Widget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
@@ -42,14 +43,28 @@ namespace LocalUndergroundServer.Features.TextWidget
 
         [Authorize]
         [HttpPut]
-        [Route(Routes.Widget.BaseWidget)]
+        [Route(Routes.Widget.Sort)]
         public async Task<ActionResult> SortWidgets([FromBody] WidgetSortParams model)
         {
             //var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             //put in better place
             //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var updatedSort = await _widgetEngine.SortWidgets(model.WidgetSorts);
+            var updatedSort = await _widgetEngine.SortWidgets(model.WidgetSortModels);
             return Ok(updatedSort);
+            //return Ok();
+        }
+
+
+        [Authorize]
+        [HttpPut]
+        [Route(Routes.Widget.Delete)]
+        public async Task<ActionResult> DeleteWidget([FromBody] WidgetDeleteParams model)
+        {
+            //var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            //put in better place
+            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
+            await _widgetEngine.DeleteWidget(model.WidgetId, model.StoryBoardId, (WidgetType)model.WidgetType);
+            return Ok();
             //return Ok();
         }
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {}
+    "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {}
   },
   "projects": {
-    "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {
+    "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+        "projectUniqueName": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
         "projectName": "LocalUndergroundServer",
-        "projectPath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
+        "projectPath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\LocalUndergroundServer.csproj",
         "packagesPath": "C:\\Users\\that milk tea\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\Localunderground\\LocalUndergroundServer\\obj\\",
+        "outputPath": "C:\\dev\\LocalUnderground\\LocalUndergroundServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

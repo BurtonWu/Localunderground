@@ -23,6 +23,7 @@ export class TextWidgetService {
     public udpateTextWidget(params: TextWidgetUpdateParams): Observable<any> {
         return this.http.put(this.baseUrl, params);
     }
+
     // public saveToken(token) {
     //     localStorage.setItem('token', token);
     // }

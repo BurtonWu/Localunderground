@@ -19,8 +19,8 @@
 
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
-          {{i}}
-          <text-widget [model]="textWidget"></text-widget>
+          {{textWidget.sort}}
+          <text-widget [model]="textWidget" (isDeleted)="onWidgetDelete($event)"></text-widget>
           <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
           </text-widget> -->
 

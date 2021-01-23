@@ -14,6 +14,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
         Task<int?> CreateTextWidget(int storyBoardId, int sort, string body = "");
         Task<bool> UpdateTextWidget(int textWidgetId, int storyBoardId, int sort, string body = "");
         Task<List<TextWidgetCoreDTO>> GetTextWidgetCores(int storyBoardId);
+        Task DeleteTextWidget(int storyBoardId, int textWidgetId);
         //Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData);
     }
 }

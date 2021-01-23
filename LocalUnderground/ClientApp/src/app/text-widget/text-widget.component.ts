@@ -7,6 +7,9 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from './text-widget.services';
 import { TextWidgetUpdateParams, TextWidgetModel } from './text-widget.interface';
+import { WidgetDeleteParams } from '../widget/widget.interface';
+import { WidgetType } from '../widget/widget.models';
+import { WidgetService } from '../widget/widget.service';
 
 @Component({
     selector: 'text-widget',
@@ -16,6 +19,7 @@ import { TextWidgetUpdateParams, TextWidgetModel } from './text-widget.interface
 export class TextWidgetComponent implements OnInit, OnChanges {
 
     @Input() public model: TextWidgetModel;
+    @Output() public isDeleted = new EventEmitter<number>();
     // @Output() public modelChange = new EventEmitter<TextWidgetModel>();
 
 
@@ -24,16 +28,20 @@ export class TextWidgetComponent implements OnInit, OnChanges {
     public imageData: FormData;
     // public storyBoardCreateModel: StoryBoardModel;
     private _textWidgetService: TextWidgetService;
+    private _widgetService: WidgetService;
+
     public textWidgetModal: NgbModalRef;
     private _modalService: NgbModal;
     private _fb: FormBuilder;
 
     public constructor(
         textWidgetService: TextWidgetService,
+        widgetService: WidgetService,
         modalService: NgbModal,
         fb: FormBuilder
     ) {
         this._textWidgetService = textWidgetService;
+        this._widgetService = widgetService;
         this._modalService = modalService;
         this._fb = fb;
     }
@@ -57,6 +65,18 @@ export class TextWidgetComponent implements OnInit, OnChanges {
             storyBoardId: this.model.storyBoardId
         };
         this._textWidgetService.udpateTextWidget(params).subscribe(() => {
+            // this.modelChange.emit(this.model);
+        })
+    }
+
+    public delete() {
+        const params: WidgetDeleteParams = {
+            storyBoardId: this.model.storyBoardId,
+            widgetId: this.model.id,
+            widgetType: WidgetType.Text
+        };
+        this._widgetService.deleteWidget(params).subscribe(() => {
+            this.isDeleted.emit(this.model.sort);
             // this.modelChange.emit(this.model);
         })
     }

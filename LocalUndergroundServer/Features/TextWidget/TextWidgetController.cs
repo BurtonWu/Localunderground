@@ -71,11 +71,10 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.TextWidget.BaseTextWidget)]
         public async Task<ActionResult> UpdateTextWidget([FromBody] TextWidgetUpdateParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             var isUpdated = await _textWidgetStore.UpdateTextWidget(model.Id, model.StoryBoardId, model.Sort, model.Body);
             return Ok(isUpdated);
         }
 
-
+     
     }
 }

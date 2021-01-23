@@ -24,9 +24,10 @@ export class StoryBoardService {
         return this.http.put(this.baseUrl, params);
     }
 
-    public deleteStoryboard(id: number): Observable<any> {
-        return this.http.delete(this.baseUrl, {params: {storyBoardId: id.toString()}});
+    public deleteStoryboard(params: number): Observable<any> {
+        return this.http.delete(this.baseUrl, { params: { storyBoardId: params.toString() } });
     }
+
     // public saveToken(token) {
     //     localStorage.setItem('token', token);
     // }

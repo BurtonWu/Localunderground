@@ -38,7 +38,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
                     Body = x.Body,
                     Sort = x.Sort,
                     StoryBoardId = storyBoardId
-                }).OrderByDescending(x => x.Sort).ToList();
+                }).OrderBy(x => x.Sort).ToList();
             }
             return new List<TextWidgetModel>();
         }

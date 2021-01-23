@@ -17,24 +17,37 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
     public class WidgetEngine : IWidgetEngine
     {
         private readonly DatabaseContext _context;
-        private readonly IWidgetStore _textWidgetStore;
+        private readonly IWidgetStore _widgetStore;
+        private readonly ITextWidgetStore _textWidgetStore;
+
 
         public WidgetEngine(
             DatabaseContext context,
-            IWidgetStore widgetStore
+            IWidgetStore widgetStore,
+            ITextWidgetStore textWidgetStore
+
             )
         {
             _context = context;
-            _textWidgetStore = widgetStore;
+            _textWidgetStore = textWidgetStore;
+            _widgetStore = widgetStore;
         }
 
         public async Task<bool> SortWidgets(IEnumerable<WidgetSortModel> widgetSorts)
         {
-            var updateCount = await _textWidgetStore.SortWidgets(widgetSorts);
+            var updateCount = await _widgetStore.SortWidgets(widgetSorts);
             return updateCount == widgetSorts.Count();
         }
 
-
+        public async Task DeleteWidget(int widgetId, int storyBoardId, WidgetType widgetType)
+        {
+            switch(widgetType)
+            {
+                case WidgetType.Text:
+                    await _textWidgetStore.DeleteTextWidget(storyBoardId, widgetId);
+                    break;
+            }
+        }
     }
 
 }

@@ -10,8 +10,8 @@ import { StoryBoardComponent } from './story-board.component';
 import { StoryBoardService } from './story-board.services';
 import { StoryBoardListComponent } from '../story-board-list/story-board-list.component';
 import { StoryBoardListModule } from '../story-board-list/story-board-list.module';
-import { TextWidgetModule } from '../text-widget/text-widget.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { WidgetModule } from '../widget/widget.module';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   imports: [
     AppBaseModule,
     DragDropModule,
-    TextWidgetModule
+    WidgetModule
   ],
   exports: [
     StoryBoardComponent,

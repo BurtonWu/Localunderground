@@ -15,3 +15,4 @@ export interface TextWidgetModel {
     sort?: number;
     body: string;
 }
+

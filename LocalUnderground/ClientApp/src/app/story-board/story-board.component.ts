@@ -9,6 +9,10 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from '../text-widget/text-widget.services';
 import { TextWidgetCreateParams, TextWidgetModel } from '../text-widget/text-widget.interface';
+import { WidgetSortModel, WidgetSortParams } from '../widget/widget.interface';
+import { WidgetType } from '../widget/widget.models';
+import { WidgetService } from '../widget/widget.service';
+import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-i18n';
 
 @Component({
     selector: 'story-board',
@@ -32,6 +36,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     // public storyBoardCreateModel: StoryBoardModel;
     private _storyBoardService: StoryBoardService;
     private _textWidgetService: TextWidgetService;
+    private _widgetService: WidgetService;
 
     private _modalService: NgbModal;
     public dragging: boolean;
@@ -40,10 +45,12 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         storyBoardService: StoryBoardService,
         fb: FormBuilder,
         textWidgetService: TextWidgetService,
+        widgetService: WidgetService,
         modalService: NgbModal
     ) {
         this._storyBoardService = storyBoardService;
         this._textWidgetService = textWidgetService;
+        this._widgetService = widgetService;
         this._modalService = modalService;
 
         this.storyBoardForm = fb.group({
@@ -64,6 +71,11 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         }
     }
 
+    public onWidgetDelete(widgetSortOrder: number) {
+        this.textWidgets.splice(widgetSortOrder - 1, 1);
+        this._saveWidgetOrder(true);
+    }
+
     public loadWidgets() {
         this._textWidgetService.getWidgets(this.model.id).subscribe((textWidgets) => {
             console.log('text widgets', textWidgets);
@@ -74,18 +86,24 @@ export class StoryBoardComponent implements OnInit, OnChanges {
                     this.textWidgetControls.push(textFormControl);
                 });
             }
-        })
+        });
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
         console.log('drop', event);
-        this.textWidgets[event.previousIndex].sort = event.currentIndex;
-        this.textWidgets[event.currentIndex].sort = event.previousIndex;
+        // this.textWidgets.forEach(function(widget, i) {
+        //     widget.sort = i + 1;
+        //     this[i].sort = i + 1;
+        //     console.log(this[i], i+1)
+        // }, this.textWidgets);
+   
+        console.log(this.textWidgets);
         moveItemInArray(this.textWidgets, event.previousIndex, event.currentIndex);
+        this._saveWidgetOrder(true);
     }
 
     public handleDragStart(event: CdkDragStart): void {
-        console.log('drag start', event)
+        console.log('drag start', event);
         this.dragging = true;
     }
 
@@ -104,20 +122,22 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     //after create, retrieve using a get
     public createTextWidget() {
-        let textWidget: TextWidgetModel = {
-            body: Math.random().toString(4),
-            sort: this.textWidgets.length,
+        let params: TextWidgetCreateParams = {
+            sort: this.textWidgets.length + 1,
             storyBoardId: this.model.id
         };
-        let params: TextWidgetCreateParams = {
-            storyBoardId: this.model.id,
-            sort: this.textWidgets.length
-        }
+        //maybe return the object that was saved...
         this._textWidgetService.createTextWidget(params).subscribe((id) => {
             console.log(id);
-            textWidget.id = id;
+            let textWidget: TextWidgetModel = {
+                id: id,
+                body: '',
+                sort: this.textWidgets.length + 1,
+                storyBoardId: this.model.id
+            };
             this.textWidgetControls.push(new FormControl(textWidget.body));
             this.textWidgets.push(textWidget);
+            this._saveWidgetOrder();
         });
     }
 
@@ -137,7 +157,30 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         console.log(params);
         this._storyBoardService.udpateStoryboard(params).subscribe((id) => {
             console.log(id);
-        })
+        });
+    }
+
+    private _saveWidgetOrder(assignSortOrder?: boolean) {
+        if(assignSortOrder) {
+            this.textWidgets.forEach((widget, i) => {
+                widget.sort = i + 1;
+                console.log(widget, i+1)
+            });
+        }
+        this.textWidgets.sort(function(a, b) {
+            if(a.sort > b.sort) return 1;
+            else if (a.sort < b.sort) return -1;
+            return 0
+        });
+        const sortModels = this.textWidgets.map((x) => <WidgetSortModel>{
+            id: x.id,
+            sort: x.sort,
+            widgetType: WidgetType.Text
+        });
+        const params: WidgetSortParams = {
+            widgetSortModels: sortModels
+        };
+        this._widgetService.updateWidgetSort(params).subscribe(() => { });
     }
 
     public imageUploadHandler(files: FileList) {

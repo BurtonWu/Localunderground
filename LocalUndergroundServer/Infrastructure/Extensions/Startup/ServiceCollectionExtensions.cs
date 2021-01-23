@@ -90,6 +90,8 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
                            .AddTransient<ISqlEngine, SqlEngine>()
                             .AddTransient<ITextWidgetStore, TextWidgetStore>()
                            .AddTransient<ITextWidgetEngine, TextWidgetEngine>()
+                           .AddTransient<IWidgetEngine, WidgetEngine>()
+                           .AddTransient<IWidgetStore, WidgetStore>()
                            .AddTransient<IStoryBoardStore, StoryBoardStore>()
                            .AddTransient<IStoryBoardEngine, StoryBoardEngine>();
 
