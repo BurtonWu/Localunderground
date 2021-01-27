@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.TextWidget.Params
+namespace LocalUndergroundServer.Features.TextWidget.Models
 {
-    public class TextWidgetUpdateParams : TextWidgetCreateParams
+    public class TextWidgetUpdateParams
     {
         public int Id { get; set; }
+        public int Sort { get; set; }
         public string Body { get; set; }
+        public int StoryBoardId { get; set; }
     }
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { AuthorizationService } from "../auth/auth.services";
-import { StoryboardCreateRequestModel, StoryboardModel } from "./story-board.interface";
+import { StoryboardCreateRequestParams, StoryboardModel, StoryboardUpdateParams } from "./story-board.interface";
 
 @Injectable()
 export class StoryBoardService {
@@ -16,11 +16,11 @@ export class StoryBoardService {
         return this.http.get(this.baseUrl);
     }
 
-    public createStoryboard(params: StoryboardCreateRequestModel): Observable<any> {
+    public createStoryboard(params: StoryboardCreateRequestParams): Observable<any> {
         return this.http.post(this.baseUrl, params);
     }
 
-    public udpateStoryboard(params: StoryboardModel): Observable<any> {
+    public udpateStoryboard(params: StoryboardUpdateParams): Observable<any> {
         return this.http.put(this.baseUrl, params);
     }
 

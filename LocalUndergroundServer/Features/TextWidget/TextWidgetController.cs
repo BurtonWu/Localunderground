@@ -6,6 +6,7 @@ using LocalUndergroundServer.Features.StoryBoard.Engine;
 using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Features.StoryBoard.Models.Params;
 using LocalUndergroundServer.Features.TextWidget.Engine;
+using LocalUndergroundServer.Features.TextWidget.Models;
 using LocalUndergroundServer.Features.TextWidget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
@@ -45,7 +46,7 @@ namespace LocalUndergroundServer.Features.TextWidget
 
         [Authorize]
         [HttpGet]
-        [Route(Routes.TextWidget.BaseTextWidget)]
+        [Route(Routes.TextWidget.Base)]
         public async Task<ActionResult> GetTextWidgets([FromQuery] int storyBoardId)
         {
             var widgets = await _textWidgetEngine.GetTextWidgetModels(storyBoardId);
@@ -55,7 +56,7 @@ namespace LocalUndergroundServer.Features.TextWidget
 
         [Authorize]
         [HttpPost]
-        [Route(Routes.TextWidget.BaseTextWidget)]
+        [Route(Routes.TextWidget.Base)]
         public async Task<ActionResult> CreateTextWidget([FromBody] TextWidgetCreateParams model)
         {
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
@@ -68,13 +69,12 @@ namespace LocalUndergroundServer.Features.TextWidget
 
         [Authorize]
         [HttpPut]
-        [Route(Routes.TextWidget.BaseTextWidget)]
+        [Route(Routes.TextWidget.Base)]
         public async Task<ActionResult> UpdateTextWidget([FromBody] TextWidgetUpdateParams model)
         {
             var isUpdated = await _textWidgetStore.UpdateTextWidget(model.Id, model.StoryBoardId, model.Sort, model.Body);
             return Ok(isUpdated);
         }
-
-     
+        
     }
 }

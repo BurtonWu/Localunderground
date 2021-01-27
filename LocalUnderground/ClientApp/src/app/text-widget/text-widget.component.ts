@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestParams } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';

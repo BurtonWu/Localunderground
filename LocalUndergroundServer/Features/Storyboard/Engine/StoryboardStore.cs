@@ -39,6 +39,19 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                 .ToListAsync();
         }
 
+        public async Task UpdateStoryBoard(int id, string userId, string title, string synopsis)
+        {
+            var storyBoard = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+            if(storyBoard != null)
+            {
+                storyBoard.Title = title;
+                storyBoard.Synopsis = synopsis;
+            }
+            _dbContext.Update(storyBoard);
+            await _dbContext.SaveChangesAsync();
+        }
+
+
         public async Task<int> CreateStoryBoard(StoryBoardCreateDTO model)
         {
             var core = new StoryBoardCore()

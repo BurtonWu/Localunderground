@@ -1,7 +1,4 @@
-﻿using LocalUndergroundServer.Features.Billboard.Constants;
-using LocalUndergroundServer.Features.Billboard.Models;
-using LocalUndergroundServer.Features.StoryBoard.Constants;
-using LocalUndergroundServer.Features.StoryBoard.Models;
+﻿using LocalUndergroundServer.Features.TextWidget.Models;
 using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.Widget.Models;
 using System;

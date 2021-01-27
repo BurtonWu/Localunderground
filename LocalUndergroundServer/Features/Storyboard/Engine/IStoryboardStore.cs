@@ -12,6 +12,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
     {
         Task<int> CreateStoryBoard(StoryBoardCreateDTO model);
         Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null);
+        Task UpdateStoryBoard(int id, string userId, string title, string synopsis);
         Task<bool> DeleteStoryBoard(int id);
         //Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData);
     }

@@ -88,9 +88,8 @@ namespace LocalUndergroundServer.Features.StoryBoard
             var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             //put in better place
             //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var storyboardId = await _storyboardEngine.CreateStoryBoard(userId, model.Title, model.Synopsis);
-            return Created("Created", storyboardId);
-            //return Ok();
+            await _storyBoardStore.UpdateStoryBoard(model.Id, userId, model.Title, model.Synopsis);
+            return Ok();
         }
 
         [Authorize]

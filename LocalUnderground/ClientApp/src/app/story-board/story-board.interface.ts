@@ -11,13 +11,13 @@ export interface StoryboardModel {
     // cover: FormData;
 }
 
-export interface StoryboardCreateRequestModel {
+export interface StoryboardCreateRequestParams {
     title: string
     synopsis: string;
 }
 
-export interface StoryboardUpdateModel {
-    Id: number;
+export interface StoryboardUpdateParams {
+    id: number;
     title: string;
     synopsis: string;
 

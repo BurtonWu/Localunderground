@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestParams } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 
 @Component({
@@ -40,7 +40,7 @@ export class StoryBoardCreateComponent implements OnInit {
         // this.storyBoardCreateModel.title = this.title.value;
         // this.storyBoardCreateModel.synopsis = this.description.value;
         
-        const params: StoryboardCreateRequestModel = {
+        const params: StoryboardCreateRequestParams = {
             title: this.title.value,
             synopsis: this.synopsis.value
         };

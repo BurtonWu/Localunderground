@@ -19,14 +19,16 @@ namespace LocalUndergroundServer.Constants
         }
         public static class Widget
         {
-            public const string BaseWidget = "api/widget";
+            public const string Base = "api/widget";
             public const string Sort = "api/widget/sort";
             public const string Delete = "api/widget/delete";
 
         }
         public static class TextWidget
         {
-            public const string BaseTextWidget = "api/textwidget";
+            public const string Base = "api/textwidget";
+            public const string UpdateMulti = "api/textwidget/multi";
+
         }
     }
 }

@@ -63,33 +63,6 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             return storyboardId;
         }
 
-        public async Task<int> UpdateStoryBoard(string userId, StoryBoardModel model)
-        {
-            //update storyboard
-
-            //add or udpate widget
-
-            //add mapping table
-
-
-            var createDto = new StoryBoardCreateDTO()
-            {
-                UserId = userId,
-                Synopsis = model.Synopsis,
-                Title = model.Title,
-            };
-
-            var storyboardId = await _storyboardStore.CreateStoryBoard(createDto);
-
-            //if(model.ByteData.Count == 1)
-            //{
-            //    var byteData = model.ByteData.First();
-            //    await _billboardStore.UploadImage(billboardId, byteData.FileName, byteData.Size, byteData.ByteData);
-            //}
-
-            return storyboardId;
-        }
-
         //public async Task<bool> UpdateBillboard(int id, string description, string userId)
         //{
         //    var billboard = await _context.BillboardCore.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);

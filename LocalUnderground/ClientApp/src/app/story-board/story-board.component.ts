@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestModel, StoryboardUpdateModel } from '../story-board/story-board.interface';
+import { StoryboardModel, StoryboardCreateRequestParams, StoryboardUpdateParams } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
@@ -13,6 +13,7 @@ import { WidgetSortModel, WidgetSortParams } from '../widget/widget.interface';
 import { WidgetType } from '../widget/widget.models';
 import { WidgetService } from '../widget/widget.service';
 import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-i18n';
+import { TextWidgetComponent } from '../text-widget/text-widget.component';
 
 @Component({
     selector: 'story-board',
@@ -23,7 +24,7 @@ import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicke
 export class StoryBoardComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryboardModel;
-    // @ViewChild('textWidgetModal') textWidgetModal :TextWidgetModalComponent;
+    @ViewChildren(TextWidgetComponent) textWidgetComponents: QueryList<TextWidgetComponent>;
 
     public submitted: boolean;
     public storyBoardForm: FormGroup;
@@ -141,23 +142,21 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         });
     }
 
-    //not needed
-    public save() {
+    public saveAll() {
         this.submitted = true;
-        this.textWidgets.forEach((textWidget, i) => {
-            textWidget.sort = i;
-        });
-        console.log(this.textWidgets);
-        const params: StoryboardModel = {
+        const params: StoryboardUpdateParams = {
             id: this.model.id,
             title: this.title.value,
             synopsis: this.synopsis.value
         };
         this.submitted = true;
-        console.log(params);
         this._storyBoardService.udpateStoryboard(params).subscribe((id) => {
             console.log(id);
         });
+        this.textWidgetComponents.forEach((widget) => {
+            widget.save();
+        });
+
     }
 
     private _saveWidgetOrder(assignSortOrder?: boolean) {
