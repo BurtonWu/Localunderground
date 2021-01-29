@@ -9,6 +9,5 @@ namespace LocalUndergroundServer.Features.ImageWidget.DTO
     {
         public int Id { get; set; }
         public int Sort { get; set; }
-        public string Body { get; set; }
     }
 }

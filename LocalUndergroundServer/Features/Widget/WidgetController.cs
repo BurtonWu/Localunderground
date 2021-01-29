@@ -29,6 +29,7 @@ namespace LocalUndergroundServer.Features.TextWidget
         private readonly UserManager<User> _userManager;
         private readonly IWidgetEngine _widgetEngine;
         private readonly DatabaseContext _context;
+        private readonly string UserId;
 
         public WidgetController(
             UserManager<User> userManager,
@@ -39,6 +40,7 @@ namespace LocalUndergroundServer.Features.TextWidget
             _userManager = userManager;
             _widgetEngine = widgetEngine;
             _context = context;
+            UserId = User.GetClaim(ClaimTypes.NameIdentifier);
         }
 
         [Authorize]
@@ -46,7 +48,7 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.Widget.Sort)]
         public async Task<ActionResult> SortWidgets([FromBody] WidgetSortParams model)
         {
-            var updatedSort = await _widgetEngine.SortWidgets(model.StoryBoardId, model.WidgetSortModels);
+            var updatedSort = await _widgetEngine.SortWidgets(UserId, model.StoryBoardId, model.WidgetSortModels);
             return Ok(updatedSort);
         }
 
@@ -55,8 +57,7 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.Widget.Delete)]
         public async Task<ActionResult> DeleteWidget([FromBody] WidgetDeleteParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            var isDeleted = await _widgetEngine.DeleteWidget(userId, model.WidgetId, model.StoryBoardId, (WidgetType)model.WidgetType);
+            var isDeleted = await _widgetEngine.DeleteWidget(UserId, model.WidgetId, model.StoryBoardId, (WidgetType)model.WidgetType);
             return Ok(isDeleted);
         }
 

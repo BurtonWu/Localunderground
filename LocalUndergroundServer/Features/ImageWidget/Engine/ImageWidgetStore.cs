@@ -31,22 +31,38 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             _dbContext = dbContext;
         }
 
-        public async Task<List<ImageWidgetModel>> GetImageWidgetCores(int storyBoardId)
+        public async Task<List<ImageWidgetCoreDTO>> GetImageWidgetCores(int storyBoardId, int? id = null)
         {
-            return await (from iwc in _dbContext.ImageWidgetCore
-                          join wi in _dbContext.WidgetImages
-                              on iwc.ID equals wi.ImageWidgetID into grp
-                          select new ImageWidgetModel()
-                          {
-                              Id = iwc.ID,
-                              Sort = iwc.Sort,
-                              StoryBoardId = storyBoardId,
-                              ImageData = grp.Select(x => new ImageData()
-                              {
-                                  Base64ImageData = Convert.ToBase64String(x.ImageData),
-                                  Sort = x.Sort
-                              }).ToList()
-                          }).ToListAsync();
+            return await _dbContext.ImageWidgetCore.Where(x => x.StoryBoardID == storyBoardId && (!id.HasValue || x.ID == id.Value))
+                .Select(x => new ImageWidgetCoreDTO()
+                {
+                    Id = x.ID,
+                    Sort = x.Sort
+                }).ToListAsync();
+        }
+
+        public async Task<List<WidgetImageDTO>> GetWidgetImages(int imageWidgetId, int? id = null)
+        {
+            return await _dbContext.WidgetImages.Where(x => x.ImageWidgetID == imageWidgetId && (!id.HasValue || x.ID == id.Value))
+                .Select(x => new WidgetImageDTO()
+                {
+                    Id = x.ID,
+                    Sort = x.Sort,
+                    ImageData = x.ImageData,
+                    ImageWidgetId = imageWidgetId
+                }).ToListAsync();
+        }
+
+        public async Task<List<WidgetImageDTO>> GetWidgetImages(IEnumerable<int> imageWidgetIds)
+        {
+            return await _dbContext.WidgetImages.Where(x => imageWidgetIds.Contains(x.ImageWidgetID))
+                .Select(x => new WidgetImageDTO()
+                {
+                    Id = x.ID,
+                    Sort = x.Sort,
+                    ImageData = x.ImageData,
+                    ImageWidgetId = x.ImageWidgetID
+                }).ToListAsync();
         }
 
 

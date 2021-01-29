@@ -1,0 +1,10 @@
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\bin\Debug\LocalUndergroundDatabase.dacpac
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\bin\Debug\LocalUndergroundDatabase.dll
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\bin\Debug\LocalUndergroundDatabase.pdb
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\LocalUndergroundDatabase.sqlprojAssemblyReference.cache
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\Model.xml
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\refactor.xml
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\postdeploy.sql
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\predeploy.sql
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\LocalUndergroundDatabase.dll
+C:\dev\Localunderground\LocalUndergroundDatabase\LocalUndergroundDatabase\obj\Debug\LocalUndergroundDatabase.pdb

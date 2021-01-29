@@ -27,20 +27,25 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             _imageWidgetStore = imageWidgetStore;
         }
 
-        public async Task<List<ImageWidgetModel>> GetImageWidgetModels(int storyBoardId)
+        public async Task<List<ImageWidgetModel>> GetImageWidgetModels(string userId, int storyBoardId)
         {
-            var cores = await _textWidgetStore.GetImageWidgetCores(storyBoardId);
-            if (cores.Count > 0)
-            {
-                return cores.Select(x => new ImageWidgetModel()
-                {
-                    Id = x.Id,
-                    Body = x.Body,
-                    Sort = x.Sort,
-                    StoryBoardId = storyBoardId
-                }).OrderBy(x => x.Sort).ToList();
-            }
-            return new List<ImageWidgetModel>();
+            var imageWidgetCores = await _imageWidgetStore.GetImageWidgetCores(storyBoardId);
+            var widgetImages = await _imageWidgetStore.GetWidgetImages(imageWidgetCores.Select(x => x.Id));
+
+            return (from iwc in imageWidgetCores
+                    join wi in widgetImages
+                        on iwc.Id equals wi.ImageWidgetId into grp
+                    select new ImageWidgetModel()
+                    {
+                        Id = iwc.Id,
+                        Sort = iwc.Sort,
+                        StoryBoardId = storyBoardId,
+                        ImageData = grp.Select(x => new ImageData()
+                        {
+                            Base64ImageData = Convert.ToBase64String(x.ImageData),
+                            Sort = x.Sort
+                        }).ToList()
+                    }).ToList();
         }
 
       

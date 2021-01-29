@@ -28,8 +28,8 @@ namespace LocalUndergroundServer.Features.ImageWidget
         private readonly UserManager<User> _userManager;
         private readonly IImageWidgetEngine _imageWidgetEngine;
         private readonly IImageWidgetStore _imageWidgetStore;
-
         private readonly DatabaseContext _context;
+
 
         public ImageWidgetController(
             UserManager<User> userManager,
@@ -49,7 +49,8 @@ namespace LocalUndergroundServer.Features.ImageWidget
         [Route(Routes.ImageWidget.Base)]
         public async Task<ActionResult> GetImageWidgets([FromQuery] int storyBoardId)
         {
-            var widgets = await _imageWidgetEngine.GetImageWidgetModels(storyBoardId);
+            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            var widgets = await _imageWidgetEngine.GetImageWidgetModels(userId, storyBoardId);
             return Ok(widgets);
         }
 
@@ -76,15 +77,5 @@ namespace LocalUndergroundServer.Features.ImageWidget
             return Ok(isUpdated);
         }
 
-        [Authorize]
-        [HttpPut]
-        [Route(Routes.ImageWidget.Base)]
-        public async Task<ActionResult> UpdateImageWidget([FromBody] ImageWidgetUpdateParams model)
-        {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            var imageData = HttpExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var isUpdated = await _imageWidgetStore.UpdateImageWidget(userId, model.Id, model.StoryBoardId, model.Sort, imageData);
-            return Ok(isUpdated);
-        }
     }
 }

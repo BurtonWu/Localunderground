@@ -190,6 +190,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             widgetType: WidgetType.Text
         });
         const params: WidgetSortParams = {
+            storyBoardId: this.model.id,
             widgetSortModels: sortModels
         };
         this._widgetService.updateWidgetSort(params).subscribe(() => { });

@@ -1,6 +1,7 @@
 import { WidgetType } from "./widget.models";
 
 export interface WidgetSortParams {
+    storyBoardId: number;
     widgetSortModels: WidgetSortModel[];
 }
 
