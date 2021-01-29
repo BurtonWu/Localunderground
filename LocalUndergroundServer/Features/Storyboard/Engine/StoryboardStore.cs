@@ -1,6 +1,7 @@
 ﻿using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Data.Models.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
+using LocalUndergroundServer.Features.StoryBoard.DTO;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.DataAccess.SQL;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,25 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             _dbContext = dbContext;
         }
 
+        public async Task<bool> StoryBoardExists(int id, string userId)
+        {
+            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id && x.UserID == userId);
+            return core != null;
+        }
+
+        public async Task<StoryBoardDTO> GetStoryBoard(int id, string userId)
+        {
+            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id && x.UserID == userId);
+            if (core == null) return null;
+
+            return new StoryBoardDTO()
+            {
+                Id = core.ID,
+                Synopsis = core.Synopsis,
+                Title = core.Title
+            };
+        }
+
         public async Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null)
         {
             if(_dbContext.StoryBoardCore.Count() == 0)
@@ -41,7 +61,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
 
         public async Task UpdateStoryBoard(int id, string userId, string title, string synopsis)
         {
-            var storyBoard = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+            var storyBoard = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id && x.UserID == userId);
             if(storyBoard != null)
             {
                 storyBoard.Title = title;
@@ -58,16 +78,16 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             {
                 Synopsis = model.Synopsis,
                 Title = model.Title,
-                UserId = model.UserId
+                UserID = model.UserId
             };
             await _dbContext.StoryBoardCore.AddAsync(core);
             await _dbContext.SaveChangesAsync();
-            return core.Id;
+            return core.ID;
         }
 
         public async Task<bool> DeleteStoryBoard(int id)
         {
-            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == id);
+            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id);
             if(core != null)
             {
                 _dbContext.StoryBoardCore.Remove(core);

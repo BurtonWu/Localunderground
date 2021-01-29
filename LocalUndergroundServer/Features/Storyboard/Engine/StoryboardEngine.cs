@@ -33,7 +33,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             var sortedCores = SortStoryBoardCores(sortOrder, storyboards, sortDirection);
             return sortedCores.Select(x => new StoryBoardModel()
             {
-                Id = x.Id,
+                Id = x.ID,
                 Title = x.Title,
                 Synopsis = x.Synopsis
                 //PreviewImages = x.PreviewImages.Select(y => new ImageBase() {

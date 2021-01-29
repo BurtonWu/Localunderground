@@ -28,12 +28,12 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 
         public async Task<List<TextWidgetCoreDTO>> GetTextWidgetCores(int storyBoardId)
         {
-            var cores = await _dbContext.TextWidgetCore.Where(x => x.StoryBoardId == storyBoardId).ToListAsync();
+            var cores = await _dbContext.TextWidgetCore.Where(x => x.StoryBoardID == storyBoardId).ToListAsync();
             if(cores.Count > 0)
             {
                 return cores.Select(x => new TextWidgetCoreDTO()
                 {
-                    Id = x.Id,
+                    Id = x.ID,
                     Body = x.Body,
                     Sort = x.Sort
                 }).OrderBy(x => x.Sort).ToList();
@@ -43,23 +43,23 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 
         public async Task<int?> CreateTextWidget(int storyBoardId, int sort, string body = "")
         {
-            var storyBoardCore = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.Id == storyBoardId);
+            var storyBoardCore = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == storyBoardId);
             if (storyBoardCore == null) return null;
 
             var widget = new TextWidgetCore()
             {
-                StoryBoardId = storyBoardId,
+                StoryBoardID = storyBoardId,
                 Sort = sort,
                 Body = body
             };
             await _dbContext.TextWidgetCore.AddAsync(widget);
             await _dbContext.SaveChangesAsync();
-            return widget.Id;
+            return widget.ID;
         }
 
         public async Task<bool> UpdateTextWidget(int textWidgetId, int storyBoardId, int sort, string body = "")
         {
-            var widget = await _dbContext.TextWidgetCore.SingleOrDefaultAsync(x => x.Id == textWidgetId && x.StoryBoardId == storyBoardId);
+            var widget = await _dbContext.TextWidgetCore.SingleOrDefaultAsync(x => x.ID == textWidgetId && x.StoryBoardID == storyBoardId);
             if (widget == null) return false;
 
             widget.Sort = sort;
@@ -69,14 +69,15 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             return await _dbContext.SaveChangesAsync() == 1;
         }
 
-        public async Task DeleteTextWidget(int storyBoardId, int textWidgetId)
+        public async Task<bool> DeleteTextWidget(string userId, int storyBoardId, int textWidgetId)
         {
-            var widget = await _dbContext.TextWidgetCore.SingleOrDefaultAsync(x => x.Id == textWidgetId && x.StoryBoardId == storyBoardId);
-            if (widget != null)
-            {
-                _dbContext.Remove(widget);
-                await _dbContext.SaveChangesAsync();
-            }
+            var storyBoardCore = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == storyBoardId && x.UserID ==  userId);
+
+            var widget = await _dbContext.TextWidgetCore.SingleOrDefaultAsync(x => x.ID == textWidgetId && x.StoryBoardID == storyBoardId);
+            if (storyBoardCore == null || widget == null) return false;
+
+            _dbContext.Remove(widget);
+            return await _dbContext.SaveChangesAsync() == 1;
         }
 
         public async Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData)

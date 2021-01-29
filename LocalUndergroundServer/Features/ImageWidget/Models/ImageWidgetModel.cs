@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.TextWidget.Models
+namespace LocalUndergroundServer.Features.ImageWidget.Models
 {
-    public class TextWidgetUpdateParams
+    public class ImageWidgetModel
     {
         public int Id { get; set; }
         public int Sort { get; set; }
-        public string Body { get; set; }
+        public List<ImageData> ImageData { get; set; }
         public int StoryBoardId { get; set; }
     }
 }

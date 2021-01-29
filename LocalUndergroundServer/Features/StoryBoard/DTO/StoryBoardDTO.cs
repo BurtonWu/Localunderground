@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Data.Models.StoryBoard
+namespace LocalUndergroundServer.Features.StoryBoard.DTO
 {
-    public class StoryBoardCore
+    public class StoryBoardDTO
     {
-        public int ID { get; set; }
-        public string UserID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+
     }
 }

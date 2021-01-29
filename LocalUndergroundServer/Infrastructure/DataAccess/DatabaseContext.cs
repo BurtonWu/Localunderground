@@ -1,5 +1,6 @@
 ﻿using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
+using LocalUndergroundServer.Data.Models.ImageWidget;
 using LocalUndergroundServer.Data.Models.StoryBoard;
 using LocalUndergroundServer.Data.Models.TextWidget;
 using LocalUndergroundServer.Features.Billboard.Models;
@@ -21,6 +22,9 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
         }
         public DbSet<StoryBoardCore> StoryBoardCore { get; set; }
         public DbSet<TextWidgetCore> TextWidgetCore { get; set; }
+        public DbSet<ImageWidgetCore> ImageWidgetCore { get; set; }
+        public DbSet<WidgetImage> WidgetImages { get; set; }
+
 
 
         //public DbSet<BillboardCore> BillboardCore { get; set; }

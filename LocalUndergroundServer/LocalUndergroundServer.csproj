@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ImageWidget\Constants\" />
     <Folder Include="Features\TextWidget\Constants\" />
-    <Folder Include="Features\Widget\Interfaces\" />
   </ItemGroup>
 
 </Project>

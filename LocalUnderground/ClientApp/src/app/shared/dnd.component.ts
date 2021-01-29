@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, HostListener, Output, EventEmitter } from
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { HTMLInputEvent } from './shared.interface';
+import { FormDataImageKeys } from './shared.models';
 
 @Component({
     selector: 'dnd',
@@ -10,7 +11,7 @@ import { HTMLInputEvent } from './shared.interface';
 
 export class DndComponent implements OnInit {
 
-    @Output() imageUploadChange = new EventEmitter<FileList>();
+    @Output() imageUploadChange = new EventEmitter<FormData>();
 
     public submitted: boolean;
 
@@ -47,21 +48,34 @@ export class DndComponent implements OnInit {
 
     //not only just files.item(0)
     public imageUploadHandler(files: FileList) {
-        this.reader.readAsDataURL(files.item(0));
-        this.files = files;
-        this.getImageFormData();
-        // const formData = new FormData();
-        // formData.append('image', event.item(0), event.item(0).name);
-        // this.imageUploadChange.emit(formData);
+        console.log(files);
+        const validatedFiles = this.validateImageFiles(files);
+        console.log(validatedFiles);
+        this.images = [];
+        validatedFiles.forEach((file) => {
+            this.reader.readAsDataURL(file);
+        });
+        this.generateImageFormData(validatedFiles);
     }
 
-    public getImageFormData() {
-        // const formData = new FormData();
-        // for(let i = 0; i < this.files.length; i++) {
-        //     formData.append('image' + i, this.files.item(i), this.files.item(i).name);
-        // }
-        this.imageUploadChange.emit(this.files);
+    public generateImageFormData(files: File[]) {
+        const formData = new FormData();
+        console.log(files);
+        files.forEach((file, i) => {
+            formData.append(FormDataImageKeys[i], file, file.name);
+        });
+        this.imageUploadChange.emit(formData);
     }
 
+    private validateImageFiles(files: FileList): File[] {
+        const validatedFiles = [];
+        for(let i = 0; i < files.length; i++) {
+            if(files.item(i).type == 'image/jpeg' || files.item(i).type == 'image/png') {
+                validatedFiles.push(files.item(i));
+            }
+        }
+        return validatedFiles;
+    }
+    
 
 }

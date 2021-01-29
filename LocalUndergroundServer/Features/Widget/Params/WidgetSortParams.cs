@@ -9,6 +9,7 @@ namespace LocalUndergroundServer.Features.Widget.Params
 {
     public class WidgetSortParams
     {
+        public int StoryBoardId { get; set; }
         public IEnumerable<WidgetSortModel> WidgetSortModels { get; set; }
     }
 }

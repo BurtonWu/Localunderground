@@ -11,7 +11,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
     public interface IWidgetStore
     {
-        Task<int> SortWidgets(IEnumerable<WidgetSortModel> widgetSorts);
+        Task<int> SortWidgets(int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts);
 
         //Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData);
     }

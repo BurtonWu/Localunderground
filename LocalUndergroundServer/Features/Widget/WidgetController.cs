@@ -46,28 +46,19 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.Widget.Sort)]
         public async Task<ActionResult> SortWidgets([FromBody] WidgetSortParams model)
         {
-            //var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            //put in better place
-            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var updatedSort = await _widgetEngine.SortWidgets(model.WidgetSortModels);
+            var updatedSort = await _widgetEngine.SortWidgets(model.StoryBoardId, model.WidgetSortModels);
             return Ok(updatedSort);
-            //return Ok();
         }
-
 
         [Authorize]
         [HttpPut]
         [Route(Routes.Widget.Delete)]
         public async Task<ActionResult> DeleteWidget([FromBody] WidgetDeleteParams model)
         {
-            //var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            //put in better place
-            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            await _widgetEngine.DeleteWidget(model.WidgetId, model.StoryBoardId, (WidgetType)model.WidgetType);
-            return Ok();
-            //return Ok();
+            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
+            var isDeleted = await _widgetEngine.DeleteWidget(userId, model.WidgetId, model.StoryBoardId, (WidgetType)model.WidgetType);
+            return Ok(isDeleted);
         }
-
 
 
     }

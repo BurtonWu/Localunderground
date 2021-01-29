@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Data.Models.TextWidget
+namespace LocalUndergroundServer.Data.Models.ImageWidget
 {
-    public class TextWidgetCore : IWidget
+    public class ImageWidgetCore : IWidget
     {
         public int ID { get; set; }
         public int StoryBoardID { get; set; }
         public int Sort { get; set; }
-        public string Body { get; set; }
     }
 }

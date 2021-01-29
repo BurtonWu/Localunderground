@@ -3,8 +3,10 @@ export interface TextWidgetCreateParams {
     sort: number;
 }
 
-export interface TextWidgetUpdateParams extends TextWidgetCreateParams {
-    id: number;
+export interface TextWidgetUpdateParams {
+    storyBoardId?: number;
+    id?: number;
+    sort?: number;
     body: string;
 }
 

@@ -13,42 +13,56 @@ using LocalUndergroundServer.Features.Widget.Models;
 using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.TextWidget.Params;
 using LocalUndergroundServer.Features.TextWidget.Models;
+using LocalUndergroundServer.Features.ImageWidget.Engine;
+using LocalUndergroundServer.Features.StoryBoard.Engine;
 
 namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
     public class WidgetEngine : IWidgetEngine
     {
         private readonly DatabaseContext _context;
+        private readonly IStoryBoardStore _storyBoardStore;
         private readonly IWidgetStore _widgetStore;
         private readonly ITextWidgetStore _textWidgetStore;
+        private readonly IImageWidgetStore _imageWidgetStore;
+
 
 
         public WidgetEngine(
             DatabaseContext context,
             IWidgetStore widgetStore,
-            ITextWidgetStore textWidgetStore
-
+            ITextWidgetStore textWidgetStore,
+            IStoryBoardStore storyBoardStore,
+            IImageWidgetStore imageWidgetStore
             )
         {
             _context = context;
             _textWidgetStore = textWidgetStore;
+            _storyBoardStore = storyBoardStore;
+            _imageWidgetStore = imageWidgetStore;
             _widgetStore = widgetStore;
         }
 
 
-        public async Task<bool> SortWidgets(IEnumerable<WidgetSortModel> widgetSorts)
+        public async Task<bool> SortWidgets(string userId, int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
         {
-            var updateCount = await _widgetStore.SortWidgets(widgetSorts);
+            var storyBoardExists = await _storyBoardStore.StoryBoardExists(storyBoardId, userId);
+            if (!storyBoardExists) return false;
+
+            var updateCount = await _widgetStore.SortWidgets(storyBoardId, widgetSorts);
             return updateCount == widgetSorts.Count();
         }
 
-        public async Task DeleteWidget(int widgetId, int storyBoardId, WidgetType widgetType)
+        public async Task<bool> DeleteWidget(string userId, int widgetId, int storyBoardId, WidgetType widgetType)
         {
             switch(widgetType)
             {
                 case WidgetType.Text:
-                    await _textWidgetStore.DeleteTextWidget(storyBoardId, widgetId);
-                    break;
+                    return await _textWidgetStore.DeleteTextWidget(userId, storyBoardId, widgetId);
+                case WidgetType.Image:
+                    return await _imageWidgetStore.DeleteImageWidget(userId, storyBoardId, widgetId);
+                default:
+                    return false;
             }
         }
 

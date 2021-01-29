@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Infrastructure.Extensions.Http
 {
-    public static class HttpRequestExtensions
+    public static class HttpExtensions
     {
         public static List<ByteDataModel> PopulatePostBodyModel(this HttpRequest request, IEnumerable<string> fileExtensions = null)
         {

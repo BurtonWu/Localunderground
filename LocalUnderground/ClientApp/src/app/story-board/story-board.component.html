@@ -20,13 +20,21 @@
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
           {{textWidget.sort}}
-          <text-widget #textWidget [model]="textWidget" (isDeleted)="onWidgetDelete($event)"></text-widget>
+          <text-widget [model]="textWidget" (isDeleted)="onWidgetDelete($event)"></text-widget>
+          <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
+          </text-widget> -->
+
+        </div>
+        <div class="example-box" *ngFor="let imageWidget of imageWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
+          {{imageWidget.sort}}
+          <image-widget [model]="imageWidget" ></image-widget>
           <!-- <text-widget [submitted]="submitted" [control]="textWidgetControl">
           </text-widget> -->
 
         </div>
       </div>
       <button (click)="createTextWidget()">Add Text Body</button>
+      <button (click)="createImageWidget()">Add Image</button>
       <button (click)="saveAll()">Save All</button>
 
     </div>

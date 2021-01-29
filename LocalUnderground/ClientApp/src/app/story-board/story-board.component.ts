@@ -14,6 +14,7 @@ import { WidgetType } from '../widget/widget.models';
 import { WidgetService } from '../widget/widget.service';
 import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-i18n';
 import { TextWidgetComponent } from '../text-widget/text-widget.component';
+import { ImageWidgetModel } from '../image-widget/image-widget.interface';
 
 @Component({
     selector: 'story-board',
@@ -30,6 +31,8 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public storyBoardForm: FormGroup;
     public imageData: FormData;
     public textWidgets: TextWidgetModel[] = [];
+    public imageWidgets: ImageWidgetModel[] = [];
+
     public textWidgetModal: NgbModalRef;
     //test widget
     public textWidgetControls: FormArray = new FormArray([]);
@@ -123,14 +126,14 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     //after create, retrieve using a get
     public createTextWidget() {
-        let params: TextWidgetCreateParams = {
+        const params: TextWidgetCreateParams = {
             sort: this.textWidgets.length + 1,
             storyBoardId: this.model.id
         };
         //maybe return the object that was saved...
         this._textWidgetService.createTextWidget(params).subscribe((id) => {
             console.log(id);
-            let textWidget: TextWidgetModel = {
+            const textWidget: TextWidgetModel = {
                 id: id,
                 body: '',
                 sort: this.textWidgets.length + 1,
@@ -140,6 +143,16 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             this.textWidgets.push(textWidget);
             this._saveWidgetOrder();
         });
+    }
+
+    public createImageWidget() {
+        const imageWidget: ImageWidgetModel = {
+            id: 1,
+            storyBoardId: this.model.id,
+            sort: 1,
+            base64Image: ''
+        };
+        this.imageWidgets.push(imageWidget);
     }
 
     public saveAll() {

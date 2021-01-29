@@ -7,6 +7,7 @@ namespace LocalUndergroundServer.Features.Widget.Constants
 {
     public enum WidgetType
     {
-        Text = 1
+        Text = 1,
+        Image = 2
     }
 }

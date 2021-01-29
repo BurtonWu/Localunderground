@@ -5,16 +5,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { WidgetService } from './widget.service';
 import { TextWidgetModule } from '../text-widget/text-widget.module';
+import { ImageWidgetModule } from '../image-widget/image-widget.module';
 
 
 @NgModule({
   declarations: [
   ],
   imports: [
-    TextWidgetModule
+    TextWidgetModule,
+    ImageWidgetModule
   ],
   exports: [
-    TextWidgetModule
+    TextWidgetModule,
+    ImageWidgetModule
   ],
   providers: [
     WidgetService

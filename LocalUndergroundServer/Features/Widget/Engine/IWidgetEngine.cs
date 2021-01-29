@@ -10,7 +10,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
     public interface IWidgetEngine
     {
-        Task<bool> SortWidgets(IEnumerable<WidgetSortModel> WidgetSorts);
-        Task DeleteWidget(int widgetId, int storyBoardId, WidgetType widgetType);
+        Task<bool> SortWidgets(int storyBoardId, IEnumerable<WidgetSortModel> WidgetSorts);
+        Task<bool> DeleteWidget(string userId, int widgetId, int storyBoardId, WidgetType widgetType);
     }
 }

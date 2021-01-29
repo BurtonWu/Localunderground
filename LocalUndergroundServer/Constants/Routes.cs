@@ -27,8 +27,11 @@ namespace LocalUndergroundServer.Constants
         public static class TextWidget
         {
             public const string Base = "api/textwidget";
-            public const string UpdateMulti = "api/textwidget/multi";
+        }
 
+        public static class ImageWidget
+        {
+            public const string Base = "api/imagewidget";
         }
     }
 }
