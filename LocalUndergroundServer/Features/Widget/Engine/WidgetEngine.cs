@@ -49,7 +49,7 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             var storyBoardExists = await _storyBoardStore.StoryBoardExists(storyBoardId, userId);
             if (!storyBoardExists) return false;
 
-            var updateCount = await _widgetStore.SortWidgets(storyBoardId, widgetSorts);
+            var updateCount = widgetSorts.Count() == 0 ? 0 : await _widgetStore.SortWidgets(storyBoardId, widgetSorts);
             return updateCount == widgetSorts.Count();
         }
 
