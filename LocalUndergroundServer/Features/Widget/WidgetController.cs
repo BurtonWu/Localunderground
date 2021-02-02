@@ -11,6 +11,7 @@ using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.Widget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
+using LocalUndergroundServer.Infrastructure.Request;
 using LocalUndergroundServer.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,25 +25,22 @@ using System.Threading.Tasks;
 namespace LocalUndergroundServer.Features.TextWidget
 {
     [ApiController]
-    public class WidgetController : ControllerBase
+    public class WidgetController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly IWidgetEngine _widgetEngine;
         private readonly DatabaseContext _context;
-        private readonly string UserId;
 
         public WidgetController(
             UserManager<User> userManager,
             IWidgetEngine widgetEngine,
-            DatabaseContext context)
+            DatabaseContext context) : base()
 
         {
             _userManager = userManager;
             _widgetEngine = widgetEngine;
             _context = context;
-            UserId = User.GetClaim(ClaimTypes.NameIdentifier);
         }
-
         [Authorize]
         [HttpPut]
         [Route(Routes.Widget.Sort)]

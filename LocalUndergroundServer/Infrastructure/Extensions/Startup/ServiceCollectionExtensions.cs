@@ -97,8 +97,6 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
                            .AddTransient<IWidgetStore, WidgetStore>()
                            .AddTransient<IStoryBoardStore, StoryBoardStore>()
                            .AddTransient<IStoryBoardEngine, StoryBoardEngine>();
-
-
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)

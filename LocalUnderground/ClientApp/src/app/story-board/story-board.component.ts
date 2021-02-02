@@ -107,7 +107,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     }
 
     public handleDragStart(event: CdkDragStart): void {
-        console.log('drag start', event);
+        console.log('drag start', event.source.element);
         this.dragging = true;
     }
 
@@ -193,7 +193,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             storyBoardId: this.model.id,
             widgetSortModels: sortModels
         };
-        this._widgetService.updateWidgetSort(params).subscribe(() => { });
+        // this._widgetService.updateWidgetSort(params).subscribe(() => { });
     }
 
     public imageUploadHandler(files: FileList) {

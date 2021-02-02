@@ -33,25 +33,11 @@ export class DndComponent implements OnInit {
 
     public ngOnInit() {
     }
-
-    // @HostListener('dragover', ['$event']) onDragOver(evt) {
-    //     // console.log('dragover', evt);
-    // }
-
-    // @HostListener('dragleave', ['$event']) onDragLeave(evt) {
-    //     // console.log('dragleave', evt);
-    // }
-
-    // @HostListener('drop', ['$event']) onDrop(evt: HTMLInputEvent) {
-    //     this.reader.readAsDataURL(evt.target.files.item(0));
-    // }
-
-    //not only just files.item(0)
+    
     public imageUploadHandler(files: FileList) {
         console.log(files);
         const validatedFiles = this.validateImageFiles(files);
         console.log(validatedFiles);
-        this.images = [];
         validatedFiles.forEach((file) => {
             this.reader.readAsDataURL(file);
         });

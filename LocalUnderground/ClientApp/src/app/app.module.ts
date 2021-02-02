@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthLoginModule } from './auth/auth-login.module';
 import { AppRoutingModule } from './app-config/app-routing.module';
-import { BillboardModule } from './billboard/billboard.module';
 import { TokenInterceptorService } from './app-config/app-token-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { AppBaseModule } from './app-config/app-base.module';
@@ -31,7 +30,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StoryBoardCreateModule,
     StoryBoardModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BillboardModule,
     BrowserAnimationsModule,
     NgbModule
 

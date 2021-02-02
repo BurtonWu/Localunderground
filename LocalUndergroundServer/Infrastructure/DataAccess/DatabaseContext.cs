@@ -3,7 +3,6 @@ using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Data.Models.ImageWidget;
 using LocalUndergroundServer.Data.Models.StoryBoard;
 using LocalUndergroundServer.Data.Models.TextWidget;
-using LocalUndergroundServer.Features.Billboard.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -1,6 +1,14 @@
-<div class="row">
-    <input type="file" multiple (change)="imageUploadHandler($event.target.files)" accept="image/*"/>
-    <div *ngFor="let image of images">
-        <img class="col-sm-6" *ngIf="image" [src]="image" />
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-4">
+            <input type="file" multiple (change)="imageUploadHandler($event.target.files)" accept="image/*"/>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let image of images">
+            <div class="col-sm-4">
+                <img style="height: 100px; width: 100px" *ngIf="image" [src]="image" />
+            </div>
+        </div>
     </div>
 </div>

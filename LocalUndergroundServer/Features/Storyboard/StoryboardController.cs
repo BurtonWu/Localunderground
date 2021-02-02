@@ -8,6 +8,7 @@ using LocalUndergroundServer.Features.StoryBoard.Models.Params;
 using LocalUndergroundServer.Features.StoryBoard.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
+using LocalUndergroundServer.Infrastructure.Request;
 using LocalUndergroundServer.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,7 @@ using System.Threading.Tasks;
 namespace LocalUndergroundServer.Features.StoryBoard
 {
     [ApiController]
-    public class StoryBoardController : ControllerBase
+    public class StoryBoardController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly IStoryBoardEngine _storyboardEngine;
@@ -47,7 +48,6 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.BaseStoryBoard)]
         public async Task<ActionResult<List<StoryBoardModel>>> GetStoryBoards([FromQuery] StoryBoardGetParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
             var billboards = await _storyboardEngine.GetStoryBoards((StoryBoardSort)model.SortOrder, model.SortDirection,
                 model.CurrentIndex, model.LoadCount, model.FilterText);
             return Ok(billboards);
@@ -71,10 +71,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.BaseStoryBoard)]
         public async Task<ActionResult> Create([FromBody] StoryBoardCreateParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            //put in better place
-            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var storyboardId = await _storyboardEngine.CreateStoryBoard(userId, model.Title, model.Synopsis);
+            var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.Synopsis);
             return Created("Created", storyboardId);
             //return Ok();
         }
@@ -85,10 +82,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.BaseStoryBoard)]
         public async Task<ActionResult> Update([FromBody] StoryBoardUpdateParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            //put in better place
-            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            await _storyBoardStore.UpdateStoryBoard(model.Id, userId, model.Title, model.Synopsis);
+            await _storyBoardStore.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis);
             return Ok();
         }
 

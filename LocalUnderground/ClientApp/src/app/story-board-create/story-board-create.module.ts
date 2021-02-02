@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
-import { PanelModule } from '../panel/panel.module';
 import { StoryBoardCreateComponent } from './story-board-create.component';
 
 
@@ -14,8 +13,7 @@ import { StoryBoardCreateComponent } from './story-board-create.component';
     StoryBoardCreateComponent,
   ],
   imports: [
-    AppBaseModule,
-    PanelModule
+    AppBaseModule
   ],
   exports: [
     StoryBoardCreateComponent,

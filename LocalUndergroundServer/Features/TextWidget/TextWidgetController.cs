@@ -10,6 +10,7 @@ using LocalUndergroundServer.Features.TextWidget.Models;
 using LocalUndergroundServer.Features.TextWidget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
+using LocalUndergroundServer.Infrastructure.Request;
 using LocalUndergroundServer.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,7 @@ using System.Threading.Tasks;
 namespace LocalUndergroundServer.Features.TextWidget
 {
     [ApiController]
-    public class TextWidgetController : ControllerBase
+    public class TextWidgetController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly ITextWidgetEngine _textWidgetEngine;
@@ -59,12 +60,8 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.TextWidget.Base)]
         public async Task<ActionResult> CreateTextWidget([FromBody] TextWidgetCreateParams model)
         {
-            var userId = User.GetClaim(ClaimTypes.NameIdentifier);
-            //put in better place
-            //model.ByteData = HttpRequestExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
             var id = await _textWidgetStore.CreateTextWidget(model.StoryBoardId, model.Sort);
             return Created("Created", id);
-            //return Ok();
         }
 
         [Authorize]
