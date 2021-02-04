@@ -13,6 +13,9 @@
                         <i style="content: url(../../assets/images/arrows-move.svg)"></i>
                     </div>
                 </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+                </div>
                 <div class="col-sm-3">
                     <img style="height: 100px; width: 100px" *ngIf="model" [src]="model.base64ImageData" />
                 </div>

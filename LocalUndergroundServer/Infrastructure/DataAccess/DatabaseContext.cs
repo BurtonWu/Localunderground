@@ -33,6 +33,10 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //builder.Entity<ImageWidgetCore>()
+            //    .HasMany<WidgetImage>(x => x.)
+            //    .WithOne()
+            //    .OnDelete(DeleteBehavior.Cascade);
             //builder
             //    .Entity<BillboardCore>()
             //    .HasMany(x => x.PreviewImages)

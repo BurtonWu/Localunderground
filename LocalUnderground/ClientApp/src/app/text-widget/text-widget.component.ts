@@ -78,7 +78,7 @@ export class TextWidgetComponent implements OnInit, OnChanges {
         this._widgetService.deleteWidget(params).subscribe(() => {
             this.isDeleted.emit(this.model.sort);
             // this.modelChange.emit(this.model);
-        })
+        });
     }
 
     public openTextWidgetModal() {

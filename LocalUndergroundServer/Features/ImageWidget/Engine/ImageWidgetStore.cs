@@ -132,6 +132,10 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             var widget = await _dbContext.ImageWidgetCore.SingleOrDefaultAsync(x => x.ID == imageWidgetId && x.StoryBoardID == storyBoardId);
             if (widget == null) return false;
 
+            var widgetImages = await _dbContext.WidgetImage.Where(x => x.ImageWidgetID == imageWidgetId).ToListAsync();
+            
+            _dbContext.RemoveRange(widgetImages);
+            await _dbContext.SaveChangesAsync();
             _dbContext.Remove(widget);
             return await _dbContext.SaveChangesAsync() == 1;
         }

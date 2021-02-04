@@ -7,6 +7,9 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageWidgetModel, ImageWidgetCreateParams, ImageWidgetUpdateParams } from './image-widget.interface';
 import { ImageWidgetService } from './image-widget.services';
 import { FormDataImageKeys } from './image-widget.models';
+import { WidgetService } from '../widget/widget.service';
+import { WidgetDeleteParams } from '../widget/widget.interface';
+import { WidgetType } from '../widget/widget.models';
 
 @Component({
     selector: 'image-widget',
@@ -16,28 +19,27 @@ import { FormDataImageKeys } from './image-widget.models';
 export class ImageWidgetComponent implements OnInit, OnChanges {
 
     @Input() public model: ImageWidgetModel;
-    // @Output() public isDeleted = new EventEmitter<number>();
+    @Output() public isDeleted = new EventEmitter<number>();
     // @Output() public modelChange = new EventEmitter<TextWidgetModel>();
 
 
     // public submitted: boolean;
     // public bodyControl: FormControl;
     private _formData: FormData;
-    // // public storyBoardCreateModel: StoryBoardModel;
     private _imageWidgetService: ImageWidgetService;
-    // private _widgetService: WidgetService;
-
+    private _widgetService: WidgetService;
     // public textWidgetModal: NgbModalRef;
     // private _modalService: NgbModal;
     // private _fb: FormBuilder;
 
     public constructor(
         imageWidgetService: ImageWidgetService,
+        widgetService: WidgetService,
         modalService: NgbModal,
         fb: FormBuilder
     ) {
         this._imageWidgetService = imageWidgetService;
-        // this._widgetService = widgetService;
+        this._widgetService = widgetService;
         // this._modalService = modalService;
         // this._fb = fb;
     }
@@ -66,6 +68,17 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
         // return formData;
     }
 
+    public delete() {
+        const params: WidgetDeleteParams = {
+            storyBoardId: this.model.storyBoardId,
+            widgetId: this.model.id,
+            widgetType: WidgetType.Image
+        };
+        this._widgetService.deleteWidget(params).subscribe(() => {
+            this.isDeleted.emit(this.model.sort);
+        })
+    }
+
     public save() {
         if (this.model.id == null) {
             const params: ImageWidgetCreateParams = {
@@ -73,7 +86,9 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
                 storyBoardId: this.model.storyBoardId,
                 imageData: this.model.imageData,
             };
-            this._imageWidgetService.createWidget(params).subscribe(() => { });
+            this._imageWidgetService.createWidget(params).subscribe((widgetId) => { 
+                this.model.id = widgetId;
+            });
         } else {
             const params: ImageWidgetUpdateParams = {
                 id: this.model.id,
