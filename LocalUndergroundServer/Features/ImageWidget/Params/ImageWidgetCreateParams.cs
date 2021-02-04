@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,5 +10,6 @@ namespace LocalUndergroundServer.Features.ImageWidget.Models
     {
         public int Sort { get; set; }
         public int StoryBoardId { get; set; }
+        public IEnumerable<ImageData> ImageData { get; set; }
     }
 }

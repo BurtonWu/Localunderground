@@ -9,7 +9,8 @@ namespace LocalUndergroundServer.Data.Models.ImageWidget
     {
         public int ID { get; set; }
         public int ImageWidgetID { get; set; }
-        public byte[] ImageData { get; set; }
         public int Sort { get; set; }
+        public int Size { get; set; }
+        public byte[] ImageData { get; set; }
     }
 }

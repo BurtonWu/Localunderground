@@ -43,7 +43,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
 
         public async Task<List<WidgetImageDTO>> GetWidgetImages(int imageWidgetId, int? id = null)
         {
-            return await _dbContext.WidgetImages.Where(x => x.ImageWidgetID == imageWidgetId && (!id.HasValue || x.ID == id.Value))
+            return await _dbContext.WidgetImage.Where(x => x.ImageWidgetID == imageWidgetId && (!id.HasValue || x.ID == id.Value))
                 .Select(x => new WidgetImageDTO()
                 {
                     Id = x.ID,
@@ -55,7 +55,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
 
         public async Task<List<WidgetImageDTO>> GetWidgetImages(IEnumerable<int> imageWidgetIds)
         {
-            return await _dbContext.WidgetImages.Where(x => imageWidgetIds.Contains(x.ImageWidgetID))
+            return await _dbContext.WidgetImage.Where(x => imageWidgetIds.Contains(x.ImageWidgetID))
                 .Select(x => new WidgetImageDTO()
                 {
                     Id = x.ID,
@@ -66,7 +66,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
         }
 
 
-        public async Task<int?> CreateImageWidget(string userId, int storyBoardId, int sort, IEnumerable<ByteDataModel> byteDataModels)
+        public async Task<int?> CreateImageWidget(string userId, int storyBoardId, int sort, IEnumerable<ImageData> imageData)
         {
             var storyBoardExists = await _storyBoardStore.StoryBoardExists(storyBoardId, userId);
             if (!storyBoardExists) return null;
@@ -79,15 +79,16 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             await _dbContext.ImageWidgetCore.AddAsync(widget);
             await _dbContext.SaveChangesAsync();
 
-            if (byteDataModels.Any())
+            if (imageData.Any())
             {
-                await AddWidgetImages(widget.ID, byteDataModels);
+                await UpdateWidgetImages(widget.ID, imageData.ToList());
+                await _dbContext.SaveChangesAsync();
             }
             return widget.ID;
         }
 
 
-        public async Task<bool> UpdateImageWidget(string userId, int imageWidgetId, int storyBoardId, int sort, IEnumerable<ByteDataModel> byteDataModels)
+        public async Task<bool> UpdateImageWidget(string userId, int imageWidgetId, int storyBoardId, int sort, IEnumerable<ImageData> imageData)
         {
             var storyBoardExists = await _storyBoardStore.StoryBoardExists(storyBoardId, userId);
             if (!storyBoardExists) return false;
@@ -98,30 +99,29 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             widget.Sort = sort;
             _dbContext.ImageWidgetCore.Update(widget);
 
-            await AddWidgetImages(widget.ID, byteDataModels);
-
-            await _dbContext.SaveChangesAsync();
+            await UpdateWidgetImages(widget.ID, imageData.ToList());
             return await _dbContext.SaveChangesAsync() == 1;
         }
 
-        private async Task AddWidgetImages(int imageWidgetId, IEnumerable<ByteDataModel> byteDataModels)
+        private async Task UpdateWidgetImages(int imageWidgetId, IList<ImageData> imageData)
         {
-            var widgetImagesToDelete = await _dbContext.WidgetImages.Where(x => x.ImageWidgetID == imageWidgetId).ToListAsync();
+            var widgetImagesToDelete = await _dbContext.WidgetImage.Where(x => x.ImageWidgetID == imageWidgetId).ToListAsync();
             if (widgetImagesToDelete.Count > 0)
             {
                 _dbContext.RemoveRange(widgetImagesToDelete);
             }
-            for (var i = 0; i < byteDataModels.Count(); i++)
+            var widgetImages = imageData.Select(x =>
             {
-                var widgetImage = new WidgetImage()
+                var bytes = Convert.FromBase64String(x.Base64ImageData.Split(',')[1]);
+                return new WidgetImage()
                 {
-                    ImageData = byteDataModels.ElementAt(i).ByteData,
+                    ImageData = bytes,
+                    Size = bytes.Length,
                     ImageWidgetID = imageWidgetId,
-                    Sort = i + 1
+                    Sort = x.Sort
                 };
-                await _dbContext.WidgetImages.AddAsync(widgetImage);
-            }
-            await _dbContext.SaveChangesAsync();
+            }).ToList();
+            await _dbContext.WidgetImage.AddRangeAsync(widgetImages);
         }
 
         public async Task<bool> DeleteImageWidget(string userId, int storyBoardId, int imageWidgetId)

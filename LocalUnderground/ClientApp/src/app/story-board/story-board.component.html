@@ -12,7 +12,6 @@
     </div>
     <div class="row">
       <div cdkDropList (cdkDropListDropped)="drop($event)">
-        
         <div class="row" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
           <div class="col-sm-1">
             {{textWidget?.sort}}

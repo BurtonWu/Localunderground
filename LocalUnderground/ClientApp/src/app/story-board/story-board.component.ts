@@ -15,6 +15,8 @@ import { WidgetService } from '../widget/widget.service';
 import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-i18n';
 import { TextWidgetComponent } from '../text-widget/text-widget.component';
 import { ImageWidgetModel } from '../image-widget/image-widget.interface';
+import { ImageWidgetService } from '../image-widget/image-widget.services';
+import { ImageWidgetComponent } from '../image-widget/image-widget.component';
 
 @Component({
     selector: 'story-board',
@@ -26,6 +28,8 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryboardModel;
     @ViewChildren(TextWidgetComponent) textWidgetComponents: QueryList<TextWidgetComponent>;
+    @ViewChildren(ImageWidgetComponent) imageWidgetComponents: QueryList<ImageWidgetComponent>;
+
 
     public submitted: boolean;
     public storyBoardForm: FormGroup;
@@ -40,6 +44,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     // public storyBoardCreateModel: StoryBoardModel;
     private _storyBoardService: StoryBoardService;
     private _textWidgetService: TextWidgetService;
+    private _imageWidgetService: ImageWidgetService;
     private _widgetService: WidgetService;
 
     private _modalService: NgbModal;
@@ -50,10 +55,12 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         fb: FormBuilder,
         textWidgetService: TextWidgetService,
         widgetService: WidgetService,
+        imageWidgetService: ImageWidgetService,
         modalService: NgbModal
     ) {
         this._storyBoardService = storyBoardService;
         this._textWidgetService = textWidgetService;
+        this._imageWidgetService = imageWidgetService;
         this._widgetService = widgetService;
         this._modalService = modalService;
 
@@ -81,16 +88,25 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     }
 
     public loadWidgets() {
-        this._textWidgetService.getWidgets(this.model.id).subscribe((textWidgets) => {
-            console.log('text widgets', textWidgets);
+        let promises: Promise<any>[] = [
+            this._textWidgetService.getWidgets(this.model.id).toPromise(),
+            this._imageWidgetService.getWidgets(this.model.id).toPromise()
+        ];
+        Promise.all(promises).then((results) => {
+            const textWidgets: TextWidgetModel[] = results[0];
             if (textWidgets && textWidgets.length > 0) {
                 this.textWidgets = textWidgets;
-                this.textWidgets.forEach((model) => {
-                    const textFormControl = new FormControl(model.body);
-                    this.textWidgetControls.push(textFormControl);
-                });
+                // this.textWidgets.forEach((model) => {
+                //     const textFormControl = new FormControl(model.body);
+                //     this.textWidgetControls.push(textFormControl);
+                // });
             }
-        });
+            const imageWidgets: ImageWidgetModel[] = results[1];
+            if (imageWidgets && imageWidgets.length > 0) {
+                this.imageWidgets = imageWidgets;
+                console.log(this.imageWidgets);
+            }
+        })
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
@@ -147,11 +163,13 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     public createImageWidget() {
         const imageWidget: ImageWidgetModel = {
-            id: 1,
+            id: null,
             storyBoardId: this.model.id,
-            sort: 1,
-            base64Image: ''
+            sort: this.imageWidgets.length + 1,
+            imageData: []
         };
+
+        
         this.imageWidgets.push(imageWidget);
     }
 
@@ -169,7 +187,9 @@ export class StoryBoardComponent implements OnInit, OnChanges {
         this.textWidgetComponents.forEach((widget) => {
             widget.save();
         });
-
+        this.imageWidgetComponents.forEach((widget) => {
+            widget.save();
+        });
     }
 
     private _saveWidgetOrder(assignSortOrder?: boolean) {

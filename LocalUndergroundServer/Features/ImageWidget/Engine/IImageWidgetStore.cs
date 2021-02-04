@@ -16,8 +16,8 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
         Task<List<WidgetImageDTO>> GetWidgetImages(int imageWidgetId, int? id = null);
         Task<List<WidgetImageDTO>> GetWidgetImages(IEnumerable<int> imageWidgetIds);
         Task<List<ImageWidgetCoreDTO>> GetImageWidgetCores(int storyBoardId, int? id = null);
-        Task<int?> CreateImageWidget(string userId, int storyBoardId, int sort, IEnumerable<ByteDataModel> byteDataModels);
-        Task<bool> UpdateImageWidget(string userId, int imageWidgetId, int storyBoardId, int sort, IEnumerable<ByteDataModel> byteDataModels);
+        Task<int?> CreateImageWidget(string userId, int storyBoardId, int sort, IEnumerable<ImageData> imageData);
+        Task<bool> UpdateImageWidget(string userId, int imageWidgetId, int storyBoardId, int sort, IEnumerable<ImageData> imageData);
         Task<bool> DeleteImageWidget(string userId, int storyBoardId, int imageWidgetId);
     }
 }

@@ -10,5 +10,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Models
         public int Id { get; set; }
         public int Sort { get; set; }
         public int StoryBoardId { get; set; }
+        public IEnumerable<ImageData> ImageData { get; set; }
+
     }
 }

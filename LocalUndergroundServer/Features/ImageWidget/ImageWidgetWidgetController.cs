@@ -48,6 +48,7 @@ namespace LocalUndergroundServer.Features.ImageWidget
         [Authorize]
         [HttpGet]
         [Route(Routes.ImageWidget.Base)]
+        [Produces(typeof(List<ImageWidgetModel>))]
         public async Task<ActionResult> GetImageWidgets([FromQuery] int storyBoardId)
         {
             var widgets = await _imageWidgetEngine.GetImageWidgetModels(UserId, storyBoardId);
@@ -55,13 +56,23 @@ namespace LocalUndergroundServer.Features.ImageWidget
         }
 
 
+        //[Authorize]
+        //[HttpPost]
+        //[Route(Routes.ImageWidget.Base)]
+        //public async Task<ActionResult> CreateImageWidget([FromForm] ImageWidgetCreateParams model)
+        //{
+        //    var imageData = HttpExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
+        //    var id = await _imageWidgetStore.CreateImageWidget(UserId, model.StoryBoardId, model.Sort, imageData);
+        //    return Created("Created", id);
+        //}
+
         [Authorize]
         [HttpPost]
         [Route(Routes.ImageWidget.Base)]
-        public async Task<ActionResult> CreateImageWidget([FromForm] ImageWidgetCreateParams model)
+        public async Task<ActionResult> CreateImageWidget([FromBody] ImageWidgetCreateParams model)
         {
-            var imageData = HttpExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var id = await _imageWidgetStore.CreateImageWidget(UserId, model.StoryBoardId, model.Sort, imageData);
+            //var imageData = HttpExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
+            var id = await _imageWidgetStore.CreateImageWidget(UserId, model.StoryBoardId, model.Sort, model.ImageData);
             return Created("Created", id);
         }
 
@@ -70,8 +81,7 @@ namespace LocalUndergroundServer.Features.ImageWidget
         [Route(Routes.ImageWidget.Base)]
         public async Task<ActionResult> UpdateImageWidget([FromBody] ImageWidgetUpdateParams model)
         {
-            var imageData = HttpExtensions.PopulatePostBodyModel(Request, FileExtension.IMAGE_EXTENSIONS);
-            var isUpdated = await _imageWidgetStore.UpdateImageWidget(UserId, model.Id, model.StoryBoardId, model.Sort, imageData);
+            var isUpdated = await _imageWidgetStore.UpdateImageWidget(UserId, model.Id, model.StoryBoardId, model.Sort, model.ImageData);
             return Ok(isUpdated);
         }
 

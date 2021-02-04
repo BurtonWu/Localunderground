@@ -1,40 +1,44 @@
 import { Component, OnDestroy, OnInit, HostListener, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { HTMLInputEvent } from './shared.interface';
 import { CdkDragStart, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Base64ImageData } from '../image-widget/image-widget.interface';
-import { FormDataImageKeys } from '../image-widget/image-widget.models';
+import { Base64ImageData, ImageWidgetCreateParams } from '../image-widget/image-widget.interface';
+import { FormDataImageKeys } from './image-widget.models';
+import { ImageWidgetService } from './image-widget.services';
 
 @Component({
-    selector: 'dnd',
-    templateUrl: './dnd.component.html'
+    selector: 'image-dnd',
+    templateUrl: './image-dnd.component.html'
 })
 
-export class DndComponent implements OnInit {
+export class ImageDndComponent implements OnInit {
 
-    @Input() public images: Base64ImageData[] = [];
+    @Input() public models: Base64ImageData[] = [];
 
     public submitted: boolean;
     public dragging: boolean;
 
-    public billboardForm: FormGroup;
     public emblem: string;
     public title: string;
     public description: string;
     public reader: FileReader;
     public files: FileList;
+    _imageWidgetService: ImageWidgetService;
     public constructor(
-        fb: FormBuilder
+        fb: FormBuilder,
+        imageWidgetService: ImageWidgetService,
+
     ) {
+        this._imageWidgetService = imageWidgetService;
+
         this.reader = new FileReader();
         this.reader.onload = (e: ProgressEvent<FileReader>) => {
             const imageData: Base64ImageData = {
                 base64ImageData: e.target.result as string,
-                sort: this.images.length + 1,
+                sort: this.models.length + 1,
             };
-            this.images.push(imageData);
-            console.log(this.images);
+            this.models.push(imageData);
+            console.log(this.models);
         }
     }
 
@@ -45,10 +49,10 @@ export class DndComponent implements OnInit {
     }
     
     public save() {
-        const formData = new FormData();
-        this.images.forEach((imageData, i) => {
-            formData.append(FormDataImageKeys[i], imageData.base64ImageData);
-        });
+        // const formData = new FormData();
+        // this.models.forEach((imageData, i) => {
+        //     formData.append(FormDataImageKeys[i], imageData.base64ImageData);
+        // });
     }
 
     public drop(event: CdkDragDrop<Base64ImageData[]>) {
@@ -59,18 +63,18 @@ export class DndComponent implements OnInit {
         //     console.log(this[i], i+1)
         // }, this.textWidgets);
    
-        moveItemInArray(this.images, event.previousIndex, event.currentIndex);
+        moveItemInArray(this.models, event.previousIndex, event.currentIndex);
         this._saveWidgetOrder(true);
     }
 
     private _saveWidgetOrder(assignSortOrder?: boolean) {
         if(assignSortOrder) {
-            this.images.forEach((widget, i) => {
+            this.models.forEach((widget, i) => {
                 widget.sort = i + 1;
                 console.log(widget, i+1)
             });
         }
-        this.images.sort(function(a, b) {
+        this.models.sort(function(a, b) {
             if(a.sort > b.sort) return 1;
             else if (a.sort < b.sort) return -1;
             return 0
@@ -96,13 +100,18 @@ export class DndComponent implements OnInit {
         // this.appendFormData(validatedFiles);
     }
 
-    public appendFormData(files: File[]) {
-        const formData = new FormData();
-        console.log(files);
-        files.forEach((file, i) => {
-            formData.append(FormDataImageKeys[i], file, file.name);
-        });
-    }
+    // public appendFormData(files: File[]) {
+    //     const formData = new FormData();
+    //     files.forEach((file, i) => {
+    //         formData.append(FormDataImageKeys[i], file, file.name);
+    //     });
+    //     const params: ImageWidgetCreateParams = {
+    //         imageData: formData,
+    //         sort: 1,
+    //         storyBoardId: 1
+    //     };
+    //     this._imageWidgetService.createWidget(params).subscribe(() => {});
+    // }
 
     public handleDragStart(event: CdkDragStart): void {
         console.log('drag start', event.source.element);

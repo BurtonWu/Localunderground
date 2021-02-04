@@ -22,7 +22,7 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
         public DbSet<StoryBoardCore> StoryBoardCore { get; set; }
         public DbSet<TextWidgetCore> TextWidgetCore { get; set; }
         public DbSet<ImageWidgetCore> ImageWidgetCore { get; set; }
-        public DbSet<WidgetImage> WidgetImages { get; set; }
+        public DbSet<WidgetImage> WidgetImage { get; set; }
 
 
 

@@ -4,13 +4,9 @@ import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions
 import { StoryboardModel, StoryboardCreateRequestParams } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
-import { WidgetDeleteParams } from '../widget/widget.interface';
-import { WidgetType } from '../widget/widget.models';
-import { WidgetService } from '../widget/widget.service';
 import { ImageWidgetModel, ImageWidgetCreateParams, ImageWidgetUpdateParams } from './image-widget.interface';
-import { FormDataImageKeys } from '../shared/shared.models';
 import { ImageWidgetService } from './image-widget.services';
+import { FormDataImageKeys } from './image-widget.models';
 
 @Component({
     selector: 'image-widget',
@@ -48,7 +44,7 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges) {
         // if (changes['model'].currentValue) {
-        //     this.bodyControl = this._fb.control(this.model.body, [Validators.required, Validators.minLength(1)]);
+        //     this.model.imageData
         // }
     }
 
@@ -60,29 +56,36 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
         this._formData = formData;
     }
 
+    private _getFormData() {
+        // const formData = new FormData();
+        // if(this.model.imageData && this.model.imageData.length > 0) {
+        //     this.model.imageData.forEach((imageData, i) => {
+        //         formData.append(FormDataImageKeys[i], atob(imageData.base64ImageData))
+        //     });
+        // }
+        // return formData;
+    }
+
     public save() {
-        if(this._formData.has(FormDataImageKeys[0])) {
-         
-            if(this.model.id == null) {
-                const params: ImageWidgetCreateParams = {
-                    imageData: this._formData,
-                    sort: this.model.sort,
-                    storyBoardId: this.model.storyBoardId
-                };
-                this._imageWidgetService.createImageWidget(params).subscribe(() => {});
-            } else {
-                const params: ImageWidgetUpdateParams = {
-                    id: this.model.id,
-                    imageData: this._formData,
-                    sort: this.model.sort,
-                    storyBoardId: this.model.storyBoardId
-                };
-                this._imageWidgetService.udpateImageWidget(params).subscribe(() => {});
-            }
+        if (this.model.id == null) {
+            const params: ImageWidgetCreateParams = {
+                sort: this.model.sort,
+                storyBoardId: this.model.storyBoardId,
+                imageData: this.model.imageData,
+            };
+            this._imageWidgetService.createWidget(params).subscribe(() => { });
+        } else {
+            const params: ImageWidgetUpdateParams = {
+                id: this.model.id,
+                imageData: this.model.imageData,
+                sort: this.model.sort,
+                storyBoardId: this.model.storyBoardId
+            };
+            this._imageWidgetService.udpateWidget(params).subscribe(() => { });
         }
     }
 
-    // public delete() {
+    // public delete() {  
     //     const params: WidgetDeleteParams = {
     //         storyBoardId: this.model.storyBoardId,
     //         widgetId: this.model.id,
