@@ -16,11 +16,11 @@ export class TextWidgetService {
         return this.http.get<TextWidgetModel[]>(this.baseUrl, {params: {storyBoardId: storyBoardId.toString()}});
     }
 
-    public createTextWidget(params: TextWidgetCreateParams): Observable<any> {
+    public createWidget(params: TextWidgetCreateParams): Observable<any> {
         return this.http.post(this.baseUrl, params);
     }
 
-    public udpateTextWidget(params: TextWidgetUpdateParams): Observable<any> {
+    public updateWidget(params: TextWidgetUpdateParams): Observable<any> {
         return this.http.put(this.baseUrl, params);
     }
 

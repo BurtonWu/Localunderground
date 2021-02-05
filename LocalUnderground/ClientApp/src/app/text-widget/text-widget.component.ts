@@ -6,10 +6,11 @@ import { StoryBoardService } from '../story-board/story-board.services';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from './text-widget.services';
-import { TextWidgetUpdateParams, TextWidgetModel } from './text-widget.interface';
+import { TextWidgetUpdateParams, TextWidgetModel, TextWidgetCreateParams } from './text-widget.interface';
 import { WidgetDeleteParams } from '../widget/widget.interface';
 import { WidgetType } from '../widget/widget.models';
 import { WidgetService } from '../widget/widget.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'text-widget',
@@ -56,17 +57,25 @@ export class TextWidgetComponent implements OnInit, OnChanges {
 
     }
 
-    public save() {
+    public getSaveObservable() {
         this.model.body = this.bodyControl.value;
-        const params: TextWidgetUpdateParams = {
-            id: this.model.id,
-            body: this.model.body,
-            sort: this.model.sort,
-            storyBoardId: this.model.storyBoardId
-        };
-        this._textWidgetService.udpateTextWidget(params).subscribe(() => {
-            // this.modelChange.emit(this.model);
-        })
+        if (this.model.id == null) {
+            const params: TextWidgetCreateParams = {
+                sort: this.model.sort,
+                storyBoardId: this.model.id
+            };
+            return this._textWidgetService.createWidget(params).pipe(map((id) => {
+                this.model.id = id;
+            }));
+        } else {
+            const params: TextWidgetUpdateParams = {
+                id: this.model.id,
+                body: this.model.body,
+                sort: this.model.sort,
+                storyBoardId: this.model.storyBoardId
+            };
+            return this._textWidgetService.updateWidget(params)
+        }
     }
 
     public delete() {
@@ -91,7 +100,7 @@ export class TextWidgetComponent implements OnInit, OnChanges {
             console.log('Child component\'s event was triggered', data);
             this.model.body = data;
             this.bodyControl.setValue(data);
-         });        
+        });
     }
 
 }

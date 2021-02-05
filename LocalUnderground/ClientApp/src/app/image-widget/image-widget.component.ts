@@ -10,6 +10,7 @@ import { FormDataImageKeys } from './image-widget.models';
 import { WidgetService } from '../widget/widget.service';
 import { WidgetDeleteParams } from '../widget/widget.interface';
 import { WidgetType } from '../widget/widget.models';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'image-widget',
@@ -76,19 +77,19 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
         };
         this._widgetService.deleteWidget(params).subscribe(() => {
             this.isDeleted.emit(this.model.sort);
-        })
+        });
     }
 
-    public save() {
+    public getSaveObservable() {
         if (this.model.id == null) {
             const params: ImageWidgetCreateParams = {
                 sort: this.model.sort,
                 storyBoardId: this.model.storyBoardId,
                 imageData: this.model.imageData,
             };
-            this._imageWidgetService.createWidget(params).subscribe((widgetId) => { 
-                this.model.id = widgetId;
-            });
+            return this._imageWidgetService.createWidget(params).pipe(map((id) => {
+                this.model.id = id;
+            }));
         } else {
             const params: ImageWidgetUpdateParams = {
                 id: this.model.id,
@@ -96,7 +97,7 @@ export class ImageWidgetComponent implements OnInit, OnChanges {
                 sort: this.model.sort,
                 storyBoardId: this.model.storyBoardId
             };
-            this._imageWidgetService.udpateWidget(params).subscribe(() => { });
+            return this._imageWidgetService.udpateWidget(params);
         }
     }
 

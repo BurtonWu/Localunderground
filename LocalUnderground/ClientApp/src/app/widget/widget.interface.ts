@@ -16,3 +16,10 @@ export interface WidgetDeleteParams {
     storyBoardId: number;
     widgetType: WidgetType;
 }
+
+export interface Widget {
+    id?: number;
+    storyBoardId: number;
+    sort: number;
+    widgetType: number;
+}

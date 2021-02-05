@@ -67,7 +67,7 @@ export class TextWidgetModalComponent implements OnInit, OnChanges {
             storyBoardId: this.model.storyBoardId,
             sort: this.model.sort
         }
-        this._textWidgetService.udpateTextWidget(params).subscribe(() => {
+        this._textWidgetService.updateWidget(params).subscribe(() => {
             this.event.next(this.model.body);
             this.activeModal.close();
         });

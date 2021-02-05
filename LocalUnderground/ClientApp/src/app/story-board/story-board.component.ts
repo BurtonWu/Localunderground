@@ -9,7 +9,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
 import { TextWidgetService } from '../text-widget/text-widget.services';
 import { TextWidgetCreateParams, TextWidgetModel } from '../text-widget/text-widget.interface';
-import { WidgetSortModel, WidgetSortParams } from '../widget/widget.interface';
+import { WidgetSortModel, WidgetSortParams, Widget } from '../widget/widget.interface';
 import { WidgetType } from '../widget/widget.models';
 import { WidgetService } from '../widget/widget.service';
 import { NGB_DATEPICKER_18N_FACTORY } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-i18n';
@@ -17,6 +17,7 @@ import { TextWidgetComponent } from '../text-widget/text-widget.component';
 import { ImageWidgetModel } from '../image-widget/image-widget.interface';
 import { ImageWidgetService } from '../image-widget/image-widget.services';
 import { ImageWidgetComponent } from '../image-widget/image-widget.component';
+import { concat, concatMap } from 'rxjs/operators';
 
 @Component({
     selector: 'story-board',
@@ -36,6 +37,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public imageData: FormData;
     public textWidgets: TextWidgetModel[] = [];
     public imageWidgets: ImageWidgetModel[] = [];
+    public widgets: Widget[] = [];
 
     public textWidgetModal: NgbModalRef;
     //test widget
@@ -83,7 +85,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     }
 
     public onWidgetDelete(widgetSortOrder: number) {
-        this.textWidgets.splice(widgetSortOrder - 1, 1);
+        this.widgets.splice(widgetSortOrder - 1, 1);
         this._saveWidgetOrder(true);
     }
 
@@ -96,6 +98,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             const textWidgets: TextWidgetModel[] = results[0];
             if (textWidgets && textWidgets.length > 0) {
                 this.textWidgets = textWidgets;
+                this.widgets = this.widgets.concat(this.textWidgets);
                 // this.textWidgets.forEach((model) => {
                 //     const textFormControl = new FormControl(model.body);
                 //     this.textWidgetControls.push(textFormControl);
@@ -104,8 +107,9 @@ export class StoryBoardComponent implements OnInit, OnChanges {
             const imageWidgets: ImageWidgetModel[] = results[1];
             if (imageWidgets && imageWidgets.length > 0) {
                 this.imageWidgets = imageWidgets;
-                console.log(this.imageWidgets);
+                this.widgets = this.widgets.concat(this.imageWidgets);
             }
+            console.log(this.widgets);
         })
     }
 
@@ -142,78 +146,72 @@ export class StoryBoardComponent implements OnInit, OnChanges {
 
     //after create, retrieve using a get
     public createTextWidget() {
-        const params: TextWidgetCreateParams = {
-            sort: this.textWidgets.length + 1,
-            storyBoardId: this.model.id
+        const textWidget: TextWidgetModel = {
+            body: '',
+            sort: this.widgets.length + 1,
+            storyBoardId: this.model.id,
+            widgetType: WidgetType.Text
         };
-        //maybe return the object that was saved...
-        this._textWidgetService.createTextWidget(params).subscribe((id) => {
-            console.log(id);
-            const textWidget: TextWidgetModel = {
-                id: id,
-                body: '',
-                sort: this.textWidgets.length + 1,
-                storyBoardId: this.model.id
-            };
-            this.textWidgetControls.push(new FormControl(textWidget.body));
-            this.textWidgets.push(textWidget);
-            this._saveWidgetOrder();
-        });
+        this.textWidgetControls.push(new FormControl(textWidget.body));
+        this.widgets.push(textWidget);
     }
 
     public createImageWidget() {
         const imageWidget: ImageWidgetModel = {
             id: null,
             storyBoardId: this.model.id,
-            sort: this.imageWidgets.length + 1,
-            imageData: []
+            sort: this.widgets.length + 1,
+            imageData: [],
+            widgetType: WidgetType.Image
         };
-
-        
-        this.imageWidgets.push(imageWidget);
+        this.widgets.push(imageWidget);
     }
 
     public saveAll() {
         this.submitted = true;
-        const params: StoryboardUpdateParams = {
+        var observables: Observable<any>[] = [];
+
+        const storyBoardParams: StoryboardUpdateParams = {
             id: this.model.id,
             title: this.title.value,
             synopsis: this.synopsis.value
         };
-        this.submitted = true;
-        this._storyBoardService.udpateStoryboard(params).subscribe((id) => {
-            console.log(id);
-        });
-        this.textWidgetComponents.forEach((widget) => {
-            widget.save();
-        });
-        this.imageWidgetComponents.forEach((widget) => {
-            widget.save();
-        });
-    }
+        observables.push(this._storyBoardService.udpateStoryboard(storyBoardParams));
 
-    private _saveWidgetOrder(assignSortOrder?: boolean) {
-        if(assignSortOrder) {
-            this.textWidgets.forEach((widget, i) => {
-                widget.sort = i + 1;
-                console.log(widget, i+1)
-            });
-        }
-        this.textWidgets.sort(function(a, b) {
-            if(a.sort > b.sort) return 1;
-            else if (a.sort < b.sort) return -1;
-            return 0
+        this.textWidgetComponents.forEach((widget) => {
+            observables.push(widget.getSaveObservable());
         });
-        const sortModels = this.textWidgets.map((x) => <WidgetSortModel>{
+
+        this.imageWidgetComponents.forEach((widget) => {
+            observables.push(widget.getSaveObservable());
+        });
+
+        const sortModels = this.widgets.map((x) => <WidgetSortModel>{
             id: x.id,
             sort: x.sort,
-            widgetType: WidgetType.Text
+            widgetType: x.widgetType
         });
         const params: WidgetSortParams = {
             storyBoardId: this.model.id,
             widgetSortModels: sortModels
         };
-        // this._widgetService.updateWidgetSort(params).subscribe(() => { });
+        observables.push(this._widgetService.updateWidgetSort(params));
+        concatMap(concat(observables));
+    }
+
+    private _saveWidgetOrder(assignSortOrder?: boolean) {
+        if(assignSortOrder) {
+            this.widgets.forEach((widget, i) => {
+                widget.sort = i + 1;
+                console.log(widget, i+1)
+            });
+        }
+        this.widgets.sort(function(a, b) {
+            if(a.sort > b.sort) return 1;
+            else if (a.sort < b.sort) return -1;
+            return 0
+        });
+      
     }
 
     public imageUploadHandler(files: FileList) {

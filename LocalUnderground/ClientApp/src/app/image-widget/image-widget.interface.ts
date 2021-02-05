@@ -1,3 +1,5 @@
+import { Widget } from "../widget/widget.interface";
+
 export interface ImageWidgetCreateParams {
     storyBoardId: number;
     sort: number;
@@ -12,10 +14,7 @@ export interface ImageWidgetUpdateParams {
 }
 
 
-export interface ImageWidgetModel {
-    storyBoardId: number;
-    id: number;
-    sort: number;
+export interface ImageWidgetModel extends Widget {
     imageData: Base64ImageData[]
 }
 

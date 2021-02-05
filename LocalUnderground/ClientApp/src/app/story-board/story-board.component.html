@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="row" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
+        <!-- <div class="row" *ngFor="let textWidget of textWidgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
           <div class="col-sm-1">
             {{textWidget?.sort}}
             <div class="example-handle" cdkDragHandle>
@@ -34,9 +34,20 @@
           <div class="col-lg-11">
             <image-widget [model]="imageWidget"></image-widget>
           </div>
+        </div> -->
+
+        <div class="row" *ngFor="let widget of widgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
+          <div class="col-sm-1">
+            {{widget?.sort}}
+            <div class="example-handle" cdkDragHandle>
+              <i style="content: url(../../assets/images/arrows-move.svg)"></i>
+            </div>
+          </div>
+          <div class="col-lg-11" [ngSwitch]="widget.widgetType">
+              <text-widget *ngSwitchCase="1" [model]="widget" (isDeleted)="onWidgetDelete($event)"></text-widget>
+              <image-widget *ngSwitchCase="2" [model]="widget"></image-widget>
+          </div>
         </div>
-
-
       </div>
     </div>
     <div class="row">
