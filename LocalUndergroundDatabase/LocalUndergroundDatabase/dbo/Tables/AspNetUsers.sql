@@ -19,11 +19,11 @@
 
 
 GO
-CREATE NONCLUSTERED INDEX [EmailIndex]
-    ON [dbo].[AspNetUsers]([NormalizedEmail] ASC);
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([NormalizedUserName] ASC) WHERE ([NormalizedUserName] IS NOT NULL);
 
 
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([NormalizedUserName] ASC) WHERE ([NormalizedUserName] IS NOT NULL);
+CREATE NONCLUSTERED INDEX [EmailIndex]
+    ON [dbo].[AspNetUsers]([NormalizedEmail] ASC);
 
