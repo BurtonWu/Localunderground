@@ -10,6 +10,7 @@ using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.ImageWidget.Models;
+using LocalUndergroundServer.Features.Widget.Constants;
 
 namespace LocalUndergroundServer.Features.ImageWidget.Engine
 {
@@ -40,6 +41,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
                         Id = iwc.Id,
                         Sort = iwc.Sort,
                         StoryBoardId = storyBoardId,
+                        WidgetType = WidgetType.Image,
                         ImageData = grp.Select(x => new ImageData()
                         {
                             Base64ImageData = Convert.ToBase64String(x.ImageData),

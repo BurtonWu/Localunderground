@@ -10,6 +10,7 @@ using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.TextWidget.Models;
+using LocalUndergroundServer.Features.Widget.Constants;
 
 namespace LocalUndergroundServer.Features.TextWidget.Engine
 {
@@ -37,7 +38,8 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
                     Id = x.Id,
                     Body = x.Body,
                     Sort = x.Sort,
-                    StoryBoardId = storyBoardId
+                    StoryBoardId = storyBoardId,
+                    WidgetType = WidgetType.Text
                 }).OrderBy(x => x.Sort).ToList();
             }
             return new List<TextWidgetModel>();

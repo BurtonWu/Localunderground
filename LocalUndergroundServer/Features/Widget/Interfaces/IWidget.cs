@@ -9,5 +9,6 @@ namespace LocalUndergroundServer.Features.Widget.Interfaces
     {
         public int StoryBoardID { get; set; }
         public int Sort { get; set; }
+
     }
 }
