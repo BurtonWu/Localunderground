@@ -14,6 +14,12 @@
                   <div *ngIf="submitted && imageUrlControl.errors?.required" class="alert alert-danger" >This field is required</div>
                 </div> -->
         <div class="form-group">
+          <label>Cover Portrait</label>
+          <input type="file" (change)="imageUploadHandler($event.target.files)" accept="image/*" />
+          <img style="height: 100px; width: 100px" *ngIf="coverPortrait" [src]="coverPortrait" />
+        </div>
+
+        <div class="form-group">
           <label>Title</label>
           <textarea class="form-control" formControlName="title" placeholder="Title..."></textarea>
           <div *ngIf="submitted && title.errors?.required" class="alert alert-danger">This field is

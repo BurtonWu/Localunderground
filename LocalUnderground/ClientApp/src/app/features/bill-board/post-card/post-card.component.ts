@@ -37,6 +37,7 @@ export class PostCardComponent implements OnInit, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['model'].currentValue) {
+            console.log(this.model);
         }
     }
 

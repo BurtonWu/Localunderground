@@ -36,11 +36,8 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
             {
                 StoryBoardId = x.ID,
                 Title = x.Title,
-                Synopsis = x.Synopsis
-                //PreviewImages = x.PreviewImages.Select(y => new ImageBase() {
-                //    Name = y.Name,
-                //    ImageDataBase64 = Convert.ToBase64String(y.ImageData)
-                //}).ToList()
+                Synopsis = x.Synopsis,
+                CoverPortrait = x.CoverPortrait == null ? null : Convert.ToBase64String(x.CoverPortrait)
             }).ToList();
         }
 

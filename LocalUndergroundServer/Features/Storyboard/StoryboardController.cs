@@ -71,7 +71,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.BaseStoryBoard)]
         public async Task<ActionResult> Create([FromBody] StoryBoardCreateParams model)
         {
-            var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.Synopsis);
+            var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.Synopsis, model.CoverPortrait);
             return Created("Created", storyboardId);
             //return Ok();
         }

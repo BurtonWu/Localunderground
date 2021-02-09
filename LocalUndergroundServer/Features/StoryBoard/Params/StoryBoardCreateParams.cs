@@ -15,5 +15,6 @@ namespace LocalUndergroundServer.Features.StoryBoard.Params
         public string Title { get; set; }
         [MaxLength(MaxDescriptionLength)]
         public string Synopsis { get; set; }
+        public string CoverPortrait { get; set; }
     }
 }

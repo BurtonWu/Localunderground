@@ -10,5 +10,6 @@ namespace LocalUndergroundServer.Data.DTO.StoryBoard
         public string UserId { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public byte[] CoverPortrait { get; set; }
     }
 }

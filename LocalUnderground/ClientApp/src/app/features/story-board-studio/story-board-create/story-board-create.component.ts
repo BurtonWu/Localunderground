@@ -15,7 +15,8 @@ export class StoryBoardCreateComponent implements OnInit {
 
     public storyBoardForm: FormGroup;
     public imageData: FormData;
-    // public storyBoardCreateModel: StoryBoardModel;
+    public reader: FileReader;
+    public coverPortrait: string;    
     private _storyBoardService: StoryBoardService;
 
     public constructor(
@@ -28,6 +29,11 @@ export class StoryBoardCreateComponent implements OnInit {
             title: ['default Title', [Validators.required, Validators.maxLength(20)]],
             synopsis: [''],
         });
+
+        this.reader = new FileReader();
+        this.reader.onload = (e: ProgressEvent<FileReader>) => {
+            this.coverPortrait = e.target.result as string;
+        };
     }
 
     public ngOnInit() {
@@ -42,7 +48,8 @@ export class StoryBoardCreateComponent implements OnInit {
         
         const params: StoryboardCreateRequestParams = {
             title: this.title.value,
-            synopsis: this.synopsis.value
+            synopsis: this.synopsis.value,
+            coverPortrait: this.coverPortrait
         };
         this.submitted = true;
         console.log(params);
@@ -55,18 +62,27 @@ export class StoryBoardCreateComponent implements OnInit {
         // });
     }
 
- 
-
     public imageUploadHandler(files: FileList) {
-        const formData = new FormData();
-        for(let i = 0; i < files.length; i++) {
-            formData.append('imageData' + i, files.item(i), files.item(i).name);
+        const validatedFiles = this.validateImageFiles(files);
+        if(validatedFiles.length == 1) {
+            this.reader.readAsDataURL(validatedFiles[0]);
+        } else {
+            this.coverPortrait = null;
         }
-        this.imageData = formData;
     }
 
     get title() { return this.storyBoardForm.get('title'); }
     get synopsis() { return this.storyBoardForm.get('synopsis'); }
+
+    private validateImageFiles(files: FileList): File[] {
+        const validatedFiles = [];
+        for (let i = 0; i < files.length; i++) {
+            if (files.item(i).type == 'image/jpeg' || files.item(i).type == 'image/png') {
+                validatedFiles.push(files.item(i));
+            }
+        }
+        return validatedFiles;
+    }
 
 }
 

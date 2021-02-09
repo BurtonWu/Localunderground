@@ -26,13 +26,14 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             _storyboardStore = storyboardStore;
         }
 
-        public async Task<int> CreateStoryBoard(string userId, string title, string synopsis = "")
+        public async Task<int> CreateStoryBoard(string userId, string title, string synopsis = "", string coverPortrait = null)
         {
             var createDto = new StoryBoardCreateDTO()
             {
                 UserId = userId,
                 Synopsis = synopsis,
                 Title = title,
+                CoverPortrait = string.IsNullOrWhiteSpace(coverPortrait) ? null : Convert.FromBase64String(coverPortrait.Split(',')[1])
             };
 
             var storyboardId = await _storyboardStore.CreateStoryBoard(createDto);

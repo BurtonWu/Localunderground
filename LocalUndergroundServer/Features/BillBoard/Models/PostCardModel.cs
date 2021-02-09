@@ -11,5 +11,6 @@ namespace LocalUndergroundServer.Features.BillBoard.Models
         public int StoryBoardId { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public string CoverPortrait { get; set; }
     }
 }

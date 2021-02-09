@@ -1,5 +1,5 @@
-<div class="card">
-  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+<div class="card" style="width: 18rem;">
+  <img *ngIf="model?.coverPortrait" class="card-img-top"  [src]="model.coverPortrait">
   <div class="card-body">
     <h5 class="card-title">{{model?.title}}</h5>
     <p class="card-text">{{model?.synopsis}}</p>

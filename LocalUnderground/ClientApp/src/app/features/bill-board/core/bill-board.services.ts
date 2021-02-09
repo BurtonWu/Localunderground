@@ -4,6 +4,7 @@ import { Subscription, Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { AuthorizationService } from "../../../auth/auth.services";
 import { PostCardModel } from "../post-card/post-card.interface";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class BillBoardService {
@@ -13,7 +14,13 @@ export class BillBoardService {
     }
 
     public getPostCards(): Observable<PostCardModel[]> {
-        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard');
+        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard').pipe(
+            map(models => {
+                models.forEach(model => {
+                    model.coverPortrait = model.coverPortrait != null ? 'data:image/png;base64,' + model.coverPortrait : null;
+                });
+                return models;
+            }));
     }
 
     // public createStoryboard(params: StoryboardCreateRequestParams): Observable<any> {

@@ -78,7 +78,8 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             {
                 Synopsis = model.Synopsis,
                 Title = model.Title,
-                UserID = model.UserId
+                UserID = model.UserId,
+                CoverPortrait = model.CoverPortrait
             };
             await _dbContext.StoryBoardCore.AddAsync(core);
             await _dbContext.SaveChangesAsync();

@@ -14,6 +14,7 @@ export interface StoryBoardModel {
 export interface StoryboardCreateRequestParams {
     title: string
     synopsis: string;
+    coverPortrait: string;
 }
 
 export interface StoryboardUpdateParams {

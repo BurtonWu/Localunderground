@@ -11,5 +11,6 @@ namespace LocalUndergroundServer.Data.Models.StoryBoard
         public string UserID { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public byte[] CoverPortrait { get; set; }
     }
 }
