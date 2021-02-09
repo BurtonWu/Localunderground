@@ -10,12 +10,12 @@ import { TokenInterceptorService } from './app-config/app-token-interceptor.serv
 import { SharedModule } from './shared/shared.module';
 import { AppBaseModule } from './app-config/app-base.module';
 import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interceptor.service';
-import { StoryBoardCreateModule } from './story-board-create/story-board-create.module';
+import { StoryBoardCreateModule } from './features/story-board-studio/story-board-create/story-board-create.module';
 import { LayoutModule } from './layout/layout.module';
-import { StoryBoardModule } from './story-board/story-board.module';
-import { StoryBoardListModule } from './story-board-list/story-board-list.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BillBoardModule } from './features/bill-board/core/bill-board.module';
+import { StoryBoardStudioModule } from './features/story-board-studio/core/story-board-studio.module';
 
 @NgModule({
   declarations: [
@@ -24,11 +24,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     AppRoutingModule,
     AuthLoginModule,
-
+    BillBoardModule,
     LayoutModule,
-    StoryBoardListModule,
-    StoryBoardCreateModule,
-    StoryBoardModule,
+    StoryBoardStudioModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     NgbModule

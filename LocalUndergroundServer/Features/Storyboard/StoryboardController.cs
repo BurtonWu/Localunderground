@@ -43,15 +43,15 @@ namespace LocalUndergroundServer.Features.StoryBoard
             _context = context;
         }
 
-        [Authorize]
-        [HttpGet]
-        [Route(Routes.StoryBoard.BaseStoryBoard)]
-        public async Task<ActionResult<List<StoryBoardModel>>> GetStoryBoards([FromQuery] StoryBoardGetParams model)
-        {
-            var billboards = await _storyboardEngine.GetStoryBoards((StoryBoardSort)model.SortOrder, model.SortDirection,
-                model.CurrentIndex, model.LoadCount, model.FilterText);
-            return Ok(billboards);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route(Routes.StoryBoard.BaseStoryBoard)]
+        //public async Task<ActionResult<List<StoryBoardModel>>> GetStoryBoards([FromQuery] StoryBoardGetParams model)
+        //{
+        //    var billboards = await _storyboardEngine.GetStoryBoards((StoryBoardSort)model.SortOrder, model.SortDirection,
+        //        model.CurrentIndex, model.LoadCount, model.FilterText);
+        //    return Ok(billboards);
+        //}
 
         //[Authorize]
         //[HttpPost]

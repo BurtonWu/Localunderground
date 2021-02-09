@@ -26,23 +26,6 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             _storyboardStore = storyboardStore;
         }
 
-        public async Task<List<StoryBoardModel>> GetStoryBoards(StoryBoardSort sortOrder = StoryBoardSort.Title, int sortDirection = 1, 
-            int currentIndex = 0, int loadCount = 20, string filterText = null)
-        {
-            var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText);
-            var sortedCores = SortStoryBoardCores(sortOrder, storyboards, sortDirection);
-            return sortedCores.Select(x => new StoryBoardModel()
-            {
-                Id = x.ID,
-                Title = x.Title,
-                Synopsis = x.Synopsis
-                //PreviewImages = x.PreviewImages.Select(y => new ImageBase() {
-                //    Name = y.Name,
-                //    ImageDataBase64 = Convert.ToBase64String(y.ImageData)
-                //}).ToList()
-            }).ToList();
-        }
-
         public async Task<int> CreateStoryBoard(string userId, string title, string synopsis = "")
         {
             var createDto = new StoryBoardCreateDTO()

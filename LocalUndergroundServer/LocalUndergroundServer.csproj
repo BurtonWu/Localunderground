@@ -18,9 +18,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\ImageWidget\Constants\" />
-    <Folder Include="Features\TextWidget\Constants\" />
-  </ItemGroup>
-
 </Project>

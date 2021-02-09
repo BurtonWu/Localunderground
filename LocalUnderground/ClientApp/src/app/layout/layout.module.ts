@@ -6,10 +6,8 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutComponent } from './layout.component';
-import { StoryBoardModule } from '../story-board/story-board.module';
-import { StoryBoardListModule } from '../story-board-list/story-board-list.module';
-import { AppNavModule } from '../app-nav/app-nav.module';
-import { BillBoardModule } from '../bill-board/bill-board.module';
+import { AppNavModule } from './app-nav/app-nav.module';
+import { BillBoardModule } from '../features/bill-board/core/bill-board.module';
 
 
 @NgModule({
