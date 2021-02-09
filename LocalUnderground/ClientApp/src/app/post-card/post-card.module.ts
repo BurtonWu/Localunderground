@@ -5,26 +5,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedModule } from '../shared/shared.module';
-import { LayoutComponent } from './layout.component';
-import { StoryBoardModule } from '../story-board/story-board.module';
-import { StoryBoardListModule } from '../story-board-list/story-board-list.module';
-import { AppNavModule } from '../app-nav/app-nav.module';
-import { BillBoardModule } from '../bill-board/bill-board.module';
+import { TextWidgetModalComponent } from '../text-widget-modal/text-widget-modal.component';
+import { PostCardComponent } from './post-card.component';
 
 
 @NgModule({
   declarations: [
-    LayoutComponent,
+    PostCardComponent
   ],
   imports: [
-    AppBaseModule,
-    BillBoardModule,
-    AppNavModule
+    AppBaseModule
   ],
   exports: [
-    LayoutComponent,
+    PostCardComponent
   ],
   providers: [
   ]
 })
-export class LayoutModule { }
+export class PostCardModule { }

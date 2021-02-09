@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryboardModel, StoryboardCreateRequestParams, StoryboardUpdateParams } from '../story-board/story-board.interface';
+import { StoryBoardModel, StoryboardCreateRequestParams, StoryboardUpdateParams } from '../story-board/story-board.interface';
 import { StoryBoardService } from '../story-board/story-board.services';
 import { StoryBoardModule } from './story-board.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
@@ -27,7 +27,7 @@ import { concat, concatMap } from 'rxjs/operators';
 
 export class StoryBoardComponent implements OnInit, OnChanges {
 
-    @Input() public model: StoryboardModel;
+    @Input() public model: StoryBoardModel;
     @ViewChildren(TextWidgetComponent) textWidgetComponents: QueryList<TextWidgetComponent>;
     @ViewChildren(ImageWidgetComponent) imageWidgetComponents: QueryList<ImageWidgetComponent>;
 

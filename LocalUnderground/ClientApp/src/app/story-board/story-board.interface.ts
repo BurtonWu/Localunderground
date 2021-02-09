@@ -1,5 +1,5 @@
 
-export interface StoryboardModel {
+export interface StoryBoardModel {
     id: number;
     title: string;
     synopsis: string;
