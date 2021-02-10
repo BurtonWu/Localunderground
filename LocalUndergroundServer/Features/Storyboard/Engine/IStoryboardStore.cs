@@ -12,7 +12,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
     public interface IStoryBoardStore
     {
         Task<bool> StoryBoardExists(int id, string userId);
-        Task<StoryBoardDTO> GetStoryBoard(int id, string userId);
+        Task<StoryBoardDTO> GetStoryBoard(int id);
         Task<int> CreateStoryBoard(StoryBoardCreateDTO model);
         Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null);
         Task UpdateStoryBoard(int id, string userId, string title, string synopsis);

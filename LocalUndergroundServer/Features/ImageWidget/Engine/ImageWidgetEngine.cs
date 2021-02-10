@@ -28,7 +28,7 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             _imageWidgetStore = imageWidgetStore;
         }
 
-        public async Task<List<ImageWidgetModel>> GetImageWidgetModels(string userId, int storyBoardId)
+        public async Task<List<ImageWidgetModel>> GetImageWidgetModels(int storyBoardId)
         {
             var imageWidgetCores = await _imageWidgetStore.GetImageWidgetCores(storyBoardId);
             var widgetImages = await _imageWidgetStore.GetWidgetImages(imageWidgetCores.Select(x => x.Id));

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardService } from '../story-board/core/story-board.services';
-import { StoryboardCreateRequestParams } from '../story-board/core/story-board.interface';
+import { StoryBoardEditService } from '../story-board-edit/core/story-board-edit.services';
+import { StoryboardCreateRequestParams } from '../story-board-edit/core/story-board-edit.interface';
 
 @Component({
     selector: 'story-board-create',
@@ -17,10 +17,10 @@ export class StoryBoardCreateComponent implements OnInit {
     public imageData: FormData;
     public reader: FileReader;
     public coverPortrait: string;    
-    private _storyBoardService: StoryBoardService;
+    private _storyBoardService: StoryBoardEditService;
 
     public constructor(
-        storyBoardService: StoryBoardService,
+        storyBoardService: StoryBoardEditService,
         fb: FormBuilder
     ) {
         this._storyBoardService = storyBoardService;
@@ -37,9 +37,7 @@ export class StoryBoardCreateComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
-            console.log(storyBoards);
-        });
+        
     }
 
     public create() {

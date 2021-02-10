@@ -10,6 +10,6 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
 {
     public interface IImageWidgetEngine
     {
-        Task<List<ImageWidgetModel>> GetImageWidgetModels(string userId, int storyBoardId);
+        Task<List<ImageWidgetModel>> GetImageWidgetModels(int storyBoardId);
     }
 }

@@ -44,16 +44,6 @@ namespace LocalUndergroundServer.Features.StoryBoard
         }
 
         //[Authorize]
-        //[HttpGet]
-        //[Route(Routes.StoryBoard.BaseStoryBoard)]
-        //public async Task<ActionResult<List<StoryBoardModel>>> GetStoryBoards([FromQuery] StoryBoardGetParams model)
-        //{
-        //    var billboards = await _storyboardEngine.GetStoryBoards((StoryBoardSort)model.SortOrder, model.SortDirection,
-        //        model.CurrentIndex, model.LoadCount, model.FilterText);
-        //    return Ok(billboards);
-        //}
-
-        //[Authorize]
         //[HttpPost]
         //[Route(Routes.StoryBoard.BaseStoryBoard)]
         //public async Task<ActionResult> Create([FromForm] StoryBoardCreateModel model)
@@ -65,6 +55,17 @@ namespace LocalUndergroundServer.Features.StoryBoard
         //    return Created("Created", storyboardId);
         //    //return Ok();
         //}
+
+        [Authorize]
+        [HttpGet]
+        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        [Produces(typeof(StoryBoardModel))]
+        public async Task<ActionResult<StoryBoardModel>> Get([FromQuery] int storyBoardId)
+        {
+            var model = await _storyboardEngine.GetStoryBoardViewModel(storyBoardId);
+            return model;
+        }
+
 
         [Authorize]
         [HttpPost]

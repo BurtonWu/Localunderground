@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../../../../app-config/app-base.module';
-import { StoryBoardComponent } from './story-board.component';
-import { StoryBoardService } from './story-board.services';
+import { StoryBoardEditComponent } from './story-board-edit.component';
+import { StoryBoardEditService } from './story-board-edit.services';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WidgetModule } from '../widget/core/widget.module';
 
 
 @NgModule({
   declarations: [
-    StoryBoardComponent,
+    StoryBoardEditComponent,
   ],
   imports: [
     AppBaseModule,
@@ -20,10 +20,10 @@ import { WidgetModule } from '../widget/core/widget.module';
     WidgetModule
   ],
   exports: [
-    StoryBoardComponent,
+    StoryBoardEditComponent,
   ],
   providers: [
-    StoryBoardService
+    StoryBoardEditService
   ]
 })
-export class StoryBoardModule { }
+export class StoryBoardEditModule { }

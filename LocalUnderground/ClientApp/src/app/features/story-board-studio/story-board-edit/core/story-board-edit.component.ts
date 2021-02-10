@@ -1,29 +1,29 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
-import { StoryBoardModule } from './story-board.module';
+import { StoryBoardEditModule } from './story-board-edit.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { concat, concatMap } from 'rxjs/operators';
-import { StoryBoardModel, StoryboardUpdateParams } from './story-board.interface';
+import { StoryBoardModel, StoryboardUpdateParams } from './story-board-edit.interface';
 import { TextWidgetComponent } from '../widget/text-widget/text-widget.component';
 import { ImageWidgetComponent } from '../widget/image-widget/image-widget.component';
 import { TextWidgetModel } from '../widget/text-widget/text-widget.interface';
 import { ImageWidgetModel } from '../widget/image-widget/image-widget.interface';
 import { Widget, WidgetSortModel, WidgetSortParams } from '../widget/core/widget.interface';
-import { StoryBoardService } from './story-board.services';
+import { StoryBoardEditService } from './story-board-edit.services';
 import { TextWidgetService } from '../widget/text-widget/text-widget.services';
 import { ImageWidgetService } from '../widget/image-widget/image-widget.services';
 import { WidgetService } from '../widget/core/widget.service';
 import { WidgetType } from '../widget/core/widget.models';
 
 @Component({
-    selector: 'story-board',
-    templateUrl: './story-board.component.html',
-    styleUrls: ['./story-board-style.css']
+    selector: 'story-board-edit',
+    templateUrl: './story-board-edit.component.html',
+    styleUrls: ['./story-board-edit-style.css']
 })
 
-export class StoryBoardComponent implements OnInit, OnChanges {
+export class StoryBoardEditComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryBoardModel;
     @ViewChildren(TextWidgetComponent) textWidgetComponents: QueryList<TextWidgetComponent>;
@@ -42,7 +42,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public textWidgetControls: FormArray = new FormArray([]);
 
     // public storyBoardCreateModel: StoryBoardModel;
-    private _storyBoardService: StoryBoardService;
+    private _storyBoardService: StoryBoardEditService;
     private _textWidgetService: TextWidgetService;
     private _imageWidgetService: ImageWidgetService;
     private _widgetService: WidgetService;
@@ -51,7 +51,7 @@ export class StoryBoardComponent implements OnInit, OnChanges {
     public dragging: boolean;
 
     public constructor(
-        storyBoardService: StoryBoardService,
+        storyBoardService: StoryBoardEditService,
         fb: FormBuilder,
         textWidgetService: TextWidgetService,
         widgetService: WidgetService,

@@ -45,6 +45,8 @@ export class PostCardComponent implements OnInit, OnChanges {
 
     }
 
-
+    public loadStoryBoardView() {
+        
+    }
 }
 

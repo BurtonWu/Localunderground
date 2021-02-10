@@ -10,6 +10,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.DTO
         public int Id { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public string CoverPortrait { get; set; }
 
     }
 }

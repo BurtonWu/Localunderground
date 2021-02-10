@@ -3,17 +3,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 import { AuthorizationService } from "../../../../auth/auth.services";
-import { StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams } from "./story-board.interface";
+import { StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams, StoryBoardViewModel } from "./story-board-edit.interface";
 
 @Injectable()
-export class StoryBoardService {
+export class StoryBoardEditService {
     private baseUrl = environment.apiUrl + '/api/storyboard';
 
     constructor(private http: HttpClient, private authService: AuthorizationService) {
     }
 
-    public getStoryboards(): Observable<StoryBoardModel[]> {
-        return this.http.get<StoryBoardModel[]>(this.baseUrl);
+    public getStoryboardViewModel(): Observable<StoryBoardViewModel> {
+        return this.http.get<StoryBoardViewModel>(this.baseUrl);
     }
 
     public createStoryboard(params: StoryboardCreateRequestParams): Observable<any> {

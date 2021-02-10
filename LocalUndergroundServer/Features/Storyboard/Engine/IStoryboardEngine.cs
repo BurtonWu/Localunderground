@@ -9,6 +9,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
     public interface IStoryBoardEngine
     {
+        Task<StoryBoardModel> GetStoryBoardViewModel(int id);
         Task<int> CreateStoryBoard(string userId, string title, string synopsis = "", string coverPortrait = null);
         
         //Task<BillboardDetailServiceModel> GetBillboardDetails(int id);

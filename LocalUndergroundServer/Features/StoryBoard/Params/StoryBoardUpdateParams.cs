@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LocalUndergroundServer.Features.StoryBoard.Params
 {
-    public class StoryBoardUpdateParams : StoryBoardModel
+    public class StoryBoardUpdateParams
     {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Synopsis { get; set; }
     }
 }

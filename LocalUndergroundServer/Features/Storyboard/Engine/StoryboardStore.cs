@@ -33,16 +33,17 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             return core != null;
         }
 
-        public async Task<StoryBoardDTO> GetStoryBoard(int id, string userId)
+        public async Task<StoryBoardDTO> GetStoryBoard(int id)
         {
-            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id && x.UserID == userId);
+            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id);
             if (core == null) return null;
 
             return new StoryBoardDTO()
             {
                 Id = core.ID,
                 Synopsis = core.Synopsis,
-                Title = core.Title
+                Title = core.Title,
+                CoverPortrait = core.CoverPortrait != null ? Convert.ToBase64String(core.CoverPortrait) : null
             };
         }
 

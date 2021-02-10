@@ -9,6 +9,8 @@ using LocalUndergroundServer.Shared.Models;
 using LocalUndergroundServer.Features.StoryBoard.Models;
 using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
+using LocalUndergroundServer.Features.ImageWidget.Engine;
+using LocalUndergroundServer.Features.TextWidget.Engine;
 
 namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
@@ -16,6 +18,9 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
     {
         private readonly DatabaseContext _context;
         private readonly IStoryBoardStore _storyboardStore;
+        private readonly IImageWidgetEngine _imageWidgetEngine;
+        private readonly ITextWidgetEngine _textWidgetEngine;
+
 
         public StoryBoardEngine(
             DatabaseContext context,
@@ -24,6 +29,25 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
         {
             _context = context;
             _storyboardStore = storyboardStore;
+        }
+
+        public async Task<StoryBoardModel> GetStoryBoardViewModel(int id)
+        {
+            var storyBoardCore = await _storyboardStore.GetStoryBoard(id);
+            var textWidgets = await _textWidgetEngine.GetTextWidgetModels(id);
+            var imageWidgets = await _imageWidgetEngine.GetImageWidgetModels(id);
+
+            var model = new StoryBoardModel()
+            {
+                Id = id,
+                ImageWidgetModels = imageWidgets,
+                TextWidgetModels = textWidgets,
+                Synopsis = storyBoardCore.Synopsis,
+                Title = storyBoardCore.Title,
+                CoverPortrait = storyBoardCore.CoverPortrait
+            };
+
+            return model;
         }
 
         public async Task<int> CreateStoryBoard(string userId, string title, string synopsis = "", string coverPortrait = null)

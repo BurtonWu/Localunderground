@@ -51,7 +51,7 @@ namespace LocalUndergroundServer.Features.ImageWidget
         [Produces(typeof(List<ImageWidgetModel>))]
         public async Task<ActionResult> GetImageWidgets([FromQuery] int storyBoardId)
         {
-            var widgets = await _imageWidgetEngine.GetImageWidgetModels(UserId, storyBoardId);
+            var widgets = await _imageWidgetEngine.GetImageWidgetModels(storyBoardId);
             return Ok(widgets);
         }
 

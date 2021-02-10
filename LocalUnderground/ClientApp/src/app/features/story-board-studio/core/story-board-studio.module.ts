@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../../../app-config/app-base.module';
 import { StoryBoardStudioComponent } from './story-board-studio.component';
 import { StoryBoardCardInfoComponent } from '../story-board-card/story-board-card-info.component';
-import { StoryBoardModule } from '../story-board/core/story-board.module';
+import { StoryBoardEditModule } from '../story-board-edit/core/story-board-edit.module';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { StoryBoardModule } from '../story-board/core/story-board.module';
   ],
   imports: [
     AppBaseModule,
-    StoryBoardModule
+    StoryBoardEditModule
   ],
   exports: [
     StoryBoardStudioComponent,
