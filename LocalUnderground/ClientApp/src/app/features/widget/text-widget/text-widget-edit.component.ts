@@ -60,7 +60,8 @@ export class TextWidgetEditComponent implements OnInit, OnChanges {
         if (this.model.id == null) {
             const params: TextWidgetCreateParams = {
                 sort: this.model.sort,
-                storyBoardId: this.model.id
+                storyBoardId: this.model.storyBoardId,
+                body: this.model.body
             };
             return this._textWidgetService.createWidget(params).pipe(map((id) => {
                 this.model.id = id;

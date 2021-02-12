@@ -14,13 +14,7 @@ export class BillBoardService {
     }
 
     public getPostCards(): Observable<PostCardModel[]> {
-        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard').pipe(
-            map(models => {
-                models.forEach(model => {
-                    model.coverPortrait = model.coverPortrait != null ? 'data:image/png;base64,' + model.coverPortrait : null;
-                });
-                return models;
-            }));
+        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard');
     }
 
     

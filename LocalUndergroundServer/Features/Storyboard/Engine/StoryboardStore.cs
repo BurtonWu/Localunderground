@@ -47,16 +47,39 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             };
         }
 
-        public async Task<List<StoryBoardCore>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null)
+        public async Task<List<StoryBoardDTO>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null)
         {
             if(_dbContext.StoryBoardCore.Count() == 0)
-            {
-                return new List<StoryBoardCore>();
-            }
+                return new List<StoryBoardDTO>();
+
             return await _dbContext.StoryBoardCore
                 //.Skip(currentIndex)
                 //.Take(loadCount)
                 .Where(x => x.Title == filterText || string.IsNullOrWhiteSpace(filterText))
+                .Select(x => new StoryBoardDTO()
+                {
+                    Id = x.ID,
+                    Synopsis = x.Synopsis,
+                    Title = x.Title,
+                    CoverPortrait = x.CoverPortrait != null ? Convert.ToBase64String(x.CoverPortrait) : null
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<StoryBoardDTO>> GetStoryBoards(string userId)
+        {
+            if (_dbContext.StoryBoardCore.Count() == 0) 
+                return new List<StoryBoardDTO>();
+
+            return await _dbContext.StoryBoardCore
+                .Where(x => x.UserID == userId)
+                .Select(x => new StoryBoardDTO()
+                {
+                    Id = x.ID,
+                    Synopsis = x.Synopsis,
+                    Title = x.Title,
+                    CoverPortrait = x.CoverPortrait != null ? Convert.ToBase64String(x.CoverPortrait) : null
+                })
                 .ToListAsync();
         }
 

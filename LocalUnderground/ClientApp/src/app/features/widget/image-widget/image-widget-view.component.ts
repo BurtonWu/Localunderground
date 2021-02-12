@@ -9,6 +9,7 @@ import { WidgetDeleteParams } from '../core/widget.interface';
 import { map } from 'rxjs/operators';
 import { WidgetService } from '../core/widget.service';
 import { WidgetType } from '../core/widget.models';
+import { attachDataImagePrefix } from 'src/app/shared/shared.models';
 
 @Component({
     selector: 'image-widget-view',
@@ -44,9 +45,11 @@ export class ImageWidgetViewComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
-        // if (changes['model'].currentValue) {
-        //     this.model.imageData
-        // }
+        if (changes['model'].currentValue) {
+            this.model.imageData.forEach((model) => {
+                model.base64ImageData = attachDataImagePrefix(model.base64ImageData);
+            })
+        }
     }
 
     public ngOnInit() {

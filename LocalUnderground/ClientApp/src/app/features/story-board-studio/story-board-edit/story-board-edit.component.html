@@ -20,8 +20,8 @@
             </div>
           </div>
           <div class="col-lg-11" [ngSwitch]="widget.widgetType">
-              <text-widget *ngSwitchCase="1" [model]="widget" (isDeleted)="onWidgetDelete($event)"></text-widget>
-              <image-widget *ngSwitchCase="2" [model]="widget"></image-widget>
+              <text-widget-edit *ngSwitchCase="1" [model]="widget" (isDeleted)="onWidgetDelete($event)"></text-widget-edit>
+              <image-widget-edit *ngSwitchCase="2" [model]="widget"></image-widget-edit>
           </div>
         </div>
       </div>

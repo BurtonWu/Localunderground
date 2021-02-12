@@ -9,5 +9,6 @@ namespace LocalUndergroundServer.Features.TextWidget.Params
     {
         public int StoryBoardId { get; set; }
         public int Sort { get; set; }
+        public string Body { get; set; }
     }
 }

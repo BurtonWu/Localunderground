@@ -19,7 +19,11 @@ namespace LocalUndergroundServer.Constants
 
         public static class StoryBoard
         {
-            public const string BaseStoryBoard = "api/storyboard";
+            public const string Base = "api/storyboard";
+            public const string View = "api/storyboard/view";
+            public const string Edit = "api/storyboard/edit";
+            public const string StudioCard = "api/storyboard/studiocard";
+
         }
         public static class Widget
         {

@@ -31,39 +31,41 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
 
         public async Task<int> SortWidgets(int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
         {
-            var widgetSortDic = widgetSorts.GroupBy(x => x.WidgetType).ToDictionary(x => x.Key, x => x);
+            //update to use sql proc
+            return 1;
+            //var widgetSortDic = widgetSorts.GroupBy(x => x.WidgetType).ToDictionary(x => x.Key, x => x);
 
-            Func<IWidget, WidgetSortModel, IWidget> replaceSort = (IWidget widget, WidgetSortModel sortModel) =>
-            {
-                widget.Sort = sortModel.Sort;
-                return widget;
-            };
+            //Func<IWidget, WidgetSortModel, IWidget> replaceSort = (IWidget widget, WidgetSortModel sortModel) =>
+            //{
+            //    widget.Sort = sortModel.Sort;
+            //    return widget;
+            //};
 
-            foreach (var widgetSort in widgetSortDic)
-            {
-                List<IWidget> updatedCores = new List<IWidget>();
-                switch (widgetSort.Key)
-                {
-                    case WidgetType.Text:
-                        updatedCores = (from twc in _dbContext.TextWidgetCore
-                                        join ws in widgetSort.Value
-                                            on new { widgetId = twc.ID, storyBoardId = twc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId }
-                                        select replaceSort(twc, ws)).ToList();
+            //foreach (var widgetSort in widgetSortDic)
+            //{
+            //    List<IWidget> updatedCores = new List<IWidget>();
+            //    switch (widgetSort.Key)
+            //    {
+            //        case WidgetType.Text:
+            //            updatedCores = (from twc in _dbContext.TextWidgetCore
+            //                            join ws in widgetSort.Value
+            //                                on new { widgetId = twc.ID, storyBoardId = twc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId } into grp
+            //                            select replaceSort(twc, ws)).ToList();
 
 
-                        _dbContext.UpdateRange(updatedCores);
-                        break;
-                    //TODO: update internal image sort as well
-                    case WidgetType.Image:
-                        updatedCores = (from iwc in _dbContext.ImageWidgetCore
-                                        join ws in widgetSort.Value
-                                            on new { widgetId = iwc.ID, storyBoardId = iwc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId }
-                                        select replaceSort(iwc, ws)).ToList();
-                        _dbContext.UpdateRange(updatedCores);
-                        break;
-                }
-            }
-            return await _dbContext.SaveChangesAsync();
+            //            _dbContext.UpdateRange(updatedCores);
+            //            break;
+            //        //TODO: update internal image sort as well
+            //        case WidgetType.Image:
+            //            updatedCores = (from iwc in _dbContext.ImageWidgetCore
+            //                            join ws in widgetSort.Value
+            //                                on new { widgetId = iwc.ID, storyBoardId = iwc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId } into grp
+            //                            select replaceSort(iwc, ws)).ToList();
+            //            _dbContext.UpdateRange(updatedCores);
+            //            break;
+            //    }
+            //}
+            //return await _dbContext.SaveChangesAsync();
         }
 
 

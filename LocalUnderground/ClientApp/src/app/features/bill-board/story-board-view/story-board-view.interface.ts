@@ -14,6 +14,18 @@ export interface StoryBoardViewModel {
 
 }
 
+export interface StoryBoardEditModel {
+    id: number;
+    title: string;
+    synopsis: string;
+    coverPortrait: string;
+    //widgets
+    textWidgetModels: TextWidgetModel[];
+    imageWidgetModels: ImageWidgetModel[];
+    // soundWidgets: any;
+
+}
+
 export interface StoryboardCreateRequestParams {
     title: string
     synopsis: string;

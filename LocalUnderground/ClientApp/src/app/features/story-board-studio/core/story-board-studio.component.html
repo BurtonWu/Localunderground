@@ -3,16 +3,17 @@
 
     <div class="row">
       <div class="col-4">
-        <div class="list-group" id="list-tab" role="tablist" *ngFor="let storyBoardCore of storyBoardCores">
-          <a class="list-group-item list-group-item-action active" id="core" data-toggle="list" href="#core" role="tab" aria-controls="core">Home</a>
+        <div class="list-group" *ngFor="let model of models; let i = index">
+          <a class="list-group-item list-group-item-action" [class.active]="model.selected" (click)="activateModel(i)">{{model.title}}</a>
         </div>
       </div>
       <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="core" role="tabpanel" aria-labelledby="list-home-list">...</div>
-          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+          <div class="tab-pane fade show active">
+            <div *ngIf="selectedModel">
+              <story-board-card-info [model]="selectedModel"></story-board-card-info>
+            </div>
+          </div>
         </div>
       </div>
     </div>

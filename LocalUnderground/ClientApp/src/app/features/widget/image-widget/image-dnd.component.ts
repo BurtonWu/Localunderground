@@ -5,6 +5,7 @@ import { CdkDragStart, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-dr
 import { Base64ImageData, ImageWidgetCreateParams } from './image-widget.interface';
 import { FormDataImageKeys } from './image-widget.models';
 import { ImageWidgetService } from './image-widget.services';
+import { attachDataImagePrefix } from 'src/app/shared/shared.models';
 
 @Component({
     selector: 'image-dnd',
@@ -46,7 +47,14 @@ export class ImageDndComponent implements OnInit {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
+        if(changes['models'] && changes['models'].currentValue) {
+            this.models.forEach((model) => {
+                model.base64ImageData = attachDataImagePrefix(model.base64ImageData);
+            })
+        }
     }
+
+    
 
     public delete(index: number) {
         this.models.splice(index, 1);

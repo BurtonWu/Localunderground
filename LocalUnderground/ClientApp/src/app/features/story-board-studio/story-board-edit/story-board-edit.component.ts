@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, ViewChild, QueryList, ViewChildren } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, from, Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, FormArray, } from '@angular/forms';
 import { StoryBoardEditModule } from './story-board-edit.module';
 import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { concat, concatMap } from 'rxjs/operators';
+import { concat, concatAll, concatMap } from 'rxjs/operators';
 import { StoryBoardModel, StoryboardUpdateParams } from './story-board-edit.interface';
 import { StoryBoardEditService } from './story-board-edit.services';
 import { ImageWidgetEditComponent } from '../../widget/image-widget/image-widget-edit.component';
@@ -16,6 +16,7 @@ import { TextWidgetService } from '../../widget/text-widget/text-widget.services
 import { ImageWidgetService } from '../../widget/image-widget/image-widget.services';
 import { WidgetService } from '../../widget/core/widget.service';
 import { WidgetType } from '../../widget/core/widget.models';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'story-board-edit',
@@ -36,7 +37,8 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
     public textWidgets: TextWidgetModel[] = [];
     public imageWidgets: ImageWidgetModel[] = [];
     public widgets: Widget[] = [];
-
+    public storyBoardId: number;
+    
     public textWidgetModal: NgbModalRef;
     //test widget
     public textWidgetControls: FormArray = new FormArray([]);
@@ -46,6 +48,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
     private _textWidgetService: TextWidgetService;
     private _imageWidgetService: ImageWidgetService;
     private _widgetService: WidgetService;
+    private _route: ActivatedRoute;
 
     private _modalService: NgbModal;
     public dragging: boolean;
@@ -56,6 +59,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
         textWidgetService: TextWidgetService,
         widgetService: WidgetService,
         imageWidgetService: ImageWidgetService,
+        route: ActivatedRoute,
         modalService: NgbModal
     ) {
         this._storyBoardService = storyBoardService;
@@ -63,6 +67,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
         this._imageWidgetService = imageWidgetService;
         this._widgetService = widgetService;
         this._modalService = modalService;
+        this._route = route;
 
         this.storyBoardForm = fb.group({
             title: ['default Title', [Validators.required, Validators.maxLength(20)]],
@@ -72,14 +77,12 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
     }
 
     public ngOnInit() {
-
+        const storyBoardIdVal = this._route.snapshot.queryParamMap.get('Id');
+        this.storyBoardId = parseInt(storyBoardIdVal);
+        this._init();
     }
 
     public ngOnChanges(changes: SimpleChanges) {
-        if (changes['model'].currentValue) {
-            console.log('model', this.model);
-            this.loadWidgets();
-        }
     }
 
     public onWidgetDelete(widgetSortOrder: number) {
@@ -87,28 +90,14 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
         this._saveWidgetOrder(true);
     }
 
-    public loadWidgets() {
-        let promises: Promise<any>[] = [
-            this._textWidgetService.getWidgets(this.model.id).toPromise(),
-            this._imageWidgetService.getWidgets(this.model.id).toPromise()
-        ];
-        Promise.all(promises).then((results) => {
-            const textWidgets: TextWidgetModel[] = results[0];
-            if (textWidgets && textWidgets.length > 0) {
-                this.textWidgets = textWidgets;
-                this.widgets = this.widgets.concat(this.textWidgets);
-                // this.textWidgets.forEach((model) => {
-                //     const textFormControl = new FormControl(model.body);
-                //     this.textWidgetControls.push(textFormControl);
-                // });
-            }
-            const imageWidgets: ImageWidgetModel[] = results[1];
-            if (imageWidgets && imageWidgets.length > 0) {
-                this.imageWidgets = imageWidgets;
-                this.widgets = this.widgets.concat(this.imageWidgets);
-            }
+    private _init() {
+        this._storyBoardService.getStoryboardEditModel(this.storyBoardId).subscribe((model) => {
+            this.model = model;
+            console.log(model)
+            this.widgets = this.widgets.concat(model.textWidgetModels);
+            this.widgets = this.widgets.concat(model.imageWidgetModels);
             console.log(this.widgets);
-        })
+        });
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
@@ -194,7 +183,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
             widgetSortModels: sortModels
         };
         observables.push(this._widgetService.updateWidgetSort(params));
-        concatMap(concat(observables));
+        forkJoin(observables).subscribe();
     }
 
     private _saveWidgetOrder(assignSortOrder?: boolean) {

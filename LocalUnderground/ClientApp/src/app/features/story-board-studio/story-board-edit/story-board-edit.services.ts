@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { AuthorizationService } from "../../../auth/auth.services";
-import { StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams } from "./story-board-edit.interface";
-import { StoryBoardViewModel } from "../../bill-board/story-board-view/story-board-view.interface";
+import { StoryBoardCore, StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams } from "./story-board-edit.interface";
+import { StoryBoardEditModel, StoryBoardViewModel } from "../../bill-board/story-board-view/story-board-view.interface";
+import { StoryBoardStudioCardModel } from "../core/story-board-studio.interface";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class StoryBoardEditService {
@@ -13,8 +15,18 @@ export class StoryBoardEditService {
     constructor(private http: HttpClient, private authService: AuthorizationService) {
     }
 
-    public getStoryboardViewModel(): Observable<StoryBoardViewModel> {
-        return this.http.get<StoryBoardViewModel>(this.baseUrl);
+    public getStoryBoardStudioCards(): Observable<StoryBoardStudioCardModel[]> {
+        return this.http.get<StoryBoardStudioCardModel[]>(this.baseUrl + '/studiocard')
+        .pipe(
+            map(model => {
+                model.forEach(m => m.selected = false);
+                return model;
+            })
+        );
+    }
+
+    public getStoryboardEditModel(storyBoardId: number): Observable<StoryBoardEditModel> {
+        return this.http.get<StoryBoardEditModel>(this.baseUrl + '/edit', {params: {storyBoardId: storyBoardId.toString()}});
     }
 
     public createStoryboard(params: StoryboardCreateRequestParams): Observable<any> {

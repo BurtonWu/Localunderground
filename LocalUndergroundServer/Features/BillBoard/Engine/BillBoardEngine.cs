@@ -31,27 +31,27 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
             int currentIndex = 0, int loadCount = 20, string filterText = null)
         {
             var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText);
-            var sortedCores = SortStoryBoardCores(sortOrder, storyboards, sortDirection);
-            return sortedCores.Select(x => new PostCardModel()
+            var postCards = storyboards.Select(x => new PostCardModel()
             {
-                StoryBoardId = x.ID,
+                StoryBoardId = x.Id,
                 Title = x.Title,
                 Synopsis = x.Synopsis,
-                CoverPortrait = x.CoverPortrait == null ? null : Convert.ToBase64String(x.CoverPortrait)
+                CoverPortrait = x.CoverPortrait
             }).ToList();
+            return SortPostCardModels(sortOrder, postCards, sortDirection);
         }
 
-        private List<StoryBoardCore> SortStoryBoardCores(StoryBoardSort sortOrder, IEnumerable<StoryBoardCore> cores, int sortDirection = 1)
+        private List<PostCardModel> SortPostCardModels(StoryBoardSort sortOrder, IEnumerable<PostCardModel> models, int sortDirection = 1)
         {
             switch (sortOrder)
             {
                 case StoryBoardSort.Title:
                     if (sortDirection == 1)
-                        return cores.OrderByDescending(x => x.Title).ToList();
+                        return models.OrderByDescending(x => x.Title).ToList();
                     else
-                        return cores.OrderBy(x => x.Title).ToList();
+                        return models.OrderBy(x => x.Title).ToList();
                 default:
-                    return cores.ToList();
+                    return models.ToList();
             }
         }
 

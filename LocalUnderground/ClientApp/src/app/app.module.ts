@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BillBoardModule } from './features/bill-board/core/bill-board.module';
 import { StoryBoardStudioModule } from './features/story-board-studio/core/story-board-studio.module';
 import { StoryBoardViewModule } from './features/bill-board/story-board-view/story-board-view.module';
+import { StoryBoardEditModule } from './features/story-board-studio/story-board-edit/story-board-edit.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +32,8 @@ import { StoryBoardViewModule } from './features/bill-board/story-board-view/sto
     StoryBoardViewModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
-    NgbModule
-
+    NgbModule,
+    StoryBoardEditModule
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },
     //   { path: 'counter', component: CounterComponent },

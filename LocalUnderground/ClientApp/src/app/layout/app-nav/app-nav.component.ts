@@ -40,6 +40,10 @@ export class AppNavComponent implements OnInit {
     }
 
     public navigateToStoryBoardCreate() {
-        this._router.navigate([RoutePath.Studio_Create]);
+        this._router.navigate([RoutePath.Studio_StoryBoard_Create]);
+    }
+
+    public navigateToStoryBoardStudio() {
+        this._router.navigate([RoutePath.Studio]);
     }
 }

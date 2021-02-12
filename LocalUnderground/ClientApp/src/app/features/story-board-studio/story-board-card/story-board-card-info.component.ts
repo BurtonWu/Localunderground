@@ -4,6 +4,9 @@ import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { PostCardModel } from '../../bill-board/post-card/post-card.interface';
+import { StoryBoardStudioCardModel } from '../core/story-board-studio.interface';
+import { Router } from '@angular/router';
+import { RoutePath } from 'src/app/shared/shared.constants';
 
 @Component({
     selector: 'story-board-card-info',
@@ -12,7 +15,7 @@ import { PostCardModel } from '../../bill-board/post-card/post-card.interface';
 
 export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
 
-    @Input() public model: PostCardModel;
+    @Input() public model: StoryBoardStudioCardModel;
     @Output() public isDeleted = new EventEmitter<number>();
     // @Output() public modelChange = new EventEmitter<PostCardModel>();
 
@@ -21,17 +24,19 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
     public bodyControl: FormControl;
     public imageData: FormData;
     // public storyBoardCreateModel: StoryBoardModel;
-
+    private _router: Router;
     public postCardModal: NgbModalRef;
     private _modalService: NgbModal;
     private _fb: FormBuilder;
 
     public constructor(
         modalService: NgbModal,
-        fb: FormBuilder
+        fb: FormBuilder,
+        router: Router
     ) {
         this._modalService = modalService;
         this._fb = fb;
+        this._router = router;
     }
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -43,6 +48,10 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
 
     }
 
+    public navigateStoryBoardEdit() {
+        this._router.navigate([RoutePath.Studio_StoryBoard_Edit], {queryParams: {Id: this.model.id}});
+        
+    }
 
 }
 

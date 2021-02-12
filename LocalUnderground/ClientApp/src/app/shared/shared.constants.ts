@@ -1,7 +1,8 @@
 export class RoutePath {
     public static readonly Main = 'main';
     public static readonly Studio = 'studio';
-    public static readonly Studio_Create = 'studio/create';
+    public static readonly Studio_StoryBoard_Create = 'studio/storyboard/create';
+    public static readonly Studio_StoryBoard_Edit = 'studio/storyboard/edit';
 
     public static readonly StoryBoard_View = "storyboard/view"
     public static readonly Login = 'login';

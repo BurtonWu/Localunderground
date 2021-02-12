@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Extensions;
 using LocalUndergroundServer.Constants;
 using LocalUndergroundServer.Data.Models.Identity;
+using LocalUndergroundServer.Features.Storyboard.Models;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.StoryBoard.Engine;
 using LocalUndergroundServer.Features.StoryBoard.Models;
@@ -27,7 +28,6 @@ namespace LocalUndergroundServer.Features.StoryBoard
         private readonly UserManager<User> _userManager;
         private readonly IStoryBoardEngine _storyboardEngine;
         private readonly IStoryBoardStore _storyBoardStore;
-
         private readonly DatabaseContext _context;
 
         public StoryBoardController(
@@ -35,7 +35,6 @@ namespace LocalUndergroundServer.Features.StoryBoard
             IStoryBoardEngine storyboardEngine,
             IStoryBoardStore storyBoardStore,
             DatabaseContext context)
-
         {
             _userManager = userManager;
             _storyboardEngine = storyboardEngine;
@@ -56,20 +55,44 @@ namespace LocalUndergroundServer.Features.StoryBoard
         //    //return Ok();
         //}
 
+
+
+
         [Authorize]
         [HttpGet]
-        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        [Route(Routes.StoryBoard.StudioCard)]
+        [Produces(typeof(List<StoryBoardStudioCardModel>))]
+        public async Task<ActionResult<List<StoryBoardStudioCardModel>>> GetStudioCards()
+        {
+            return await _storyboardEngine.GetStoryBoardStudioCards(UserId);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route(Routes.StoryBoard.Edit)]
         [Produces(typeof(StoryBoardModel))]
-        public async Task<ActionResult<StoryBoardModel>> Get([FromQuery] int storyBoardId)
+        public async Task<ActionResult<StoryBoardModel>> GetEditModel([FromQuery] int storyBoardId)
+        {
+            var model = await _storyboardEngine.GetStoryBoardEditModel(storyBoardId);
+            return model;
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(Routes.StoryBoard.View)]
+        [Produces(typeof(StoryBoardModel))]
+        public async Task<ActionResult<StoryBoardModel>> GetViewModel([FromQuery] int storyBoardId)
         {
             var model = await _storyboardEngine.GetStoryBoardViewModel(storyBoardId);
             return model;
         }
 
 
+
         [Authorize]
         [HttpPost]
-        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Create([FromBody] StoryBoardCreateParams model)
         {
             var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.Synopsis, model.CoverPortrait);
@@ -80,7 +103,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
 
         [Authorize]
         [HttpPut]
-        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Update([FromBody] StoryBoardUpdateParams model)
         {
             await _storyBoardStore.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis);
@@ -89,7 +112,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
 
         [Authorize]
         [HttpDelete]
-        [Route(Routes.StoryBoard.BaseStoryBoard)]
+        [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Delete([FromQuery] int storyBoardId)
         {
             var deleted = await _storyBoardStore.DeleteStoryBoard(storyBoardId);

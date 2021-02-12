@@ -36,7 +36,7 @@ export class ImageWidgetService {
         return this.http.get<ImageWidgetModel[]>(this.baseUrl, {params: {storyBoardId: storyBoardId.toString()}}).pipe(
             map(models => {
                 models.forEach(model => {
-                    model.imageData.forEach((imageData) => {
+                    model.imageData.forEach(imageData => {
                         imageData.base64ImageData = 'data:image/png;base64,' + imageData.base64ImageData;
                     });
                 });

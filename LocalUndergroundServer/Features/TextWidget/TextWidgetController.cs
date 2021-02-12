@@ -60,7 +60,7 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.TextWidget.Base)]
         public async Task<ActionResult> CreateTextWidget([FromBody] TextWidgetCreateParams model)
         {
-            var id = await _textWidgetStore.CreateTextWidget(model.StoryBoardId, model.Sort);
+            var id = await _textWidgetStore.CreateTextWidget(model.StoryBoardId, model.Sort, model.Body);
             return Created("Created", id);
         }
 

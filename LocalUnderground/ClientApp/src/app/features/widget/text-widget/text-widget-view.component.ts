@@ -55,27 +55,6 @@ export class TextWidgetViewComponent implements OnInit, OnChanges {
 
     }
 
-    public getSaveObservable() {
-        this.model.body = this.bodyControl.value;
-        if (this.model.id == null) {
-            const params: TextWidgetCreateParams = {
-                sort: this.model.sort,
-                storyBoardId: this.model.id
-            };
-            return this._textWidgetService.createWidget(params).pipe(map((id) => {
-                this.model.id = id;
-            }));
-        } else {
-            const params: TextWidgetUpdateParams = {
-                id: this.model.id,
-                body: this.model.body,
-                sort: this.model.sort,
-                storyBoardId: this.model.storyBoardId
-            };
-            return this._textWidgetService.updateWidget(params)
-        }
-    }
-
     public delete() {
         const params: WidgetDeleteParams = {
             storyBoardId: this.model.storyBoardId,

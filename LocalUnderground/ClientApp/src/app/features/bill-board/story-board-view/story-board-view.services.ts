@@ -13,6 +13,6 @@ export class StoryBoardViewService {
     }
 
     public getStoryboardViewModel(storyBoardId: number): Observable<StoryBoardViewModel> {
-        return this.http.get<StoryBoardViewModel>(this.baseUrl, {params: {storyBoardId: storyBoardId.toString()}});
+        return this.http.get<StoryBoardViewModel>(this.baseUrl + '/view', {params: {storyBoardId: storyBoardId.toString()}});
     }
 }

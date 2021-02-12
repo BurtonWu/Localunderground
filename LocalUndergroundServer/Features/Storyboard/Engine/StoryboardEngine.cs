@@ -11,6 +11,7 @@ using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.ImageWidget.Engine;
 using LocalUndergroundServer.Features.TextWidget.Engine;
+using LocalUndergroundServer.Features.Storyboard.Models;
 
 namespace LocalUndergroundServer.Features.StoryBoard.Engine
 {
@@ -35,7 +36,38 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             _imageWidgetEngine = imageWidgetEngine;
         }
 
+        public async Task<List<StoryBoardStudioCardModel>> GetStoryBoardStudioCards(string userId)
+        {
+            var cores = await _storyboardStore.GetStoryBoards(userId);
+            return cores.Select(x => new StoryBoardStudioCardModel()
+            {
+                Id = x.Id,
+                CoverPortrait = x.CoverPortrait,
+                Synopsis = x.Synopsis,
+                Title = x.Title
+            }).ToList();
+        }
+
         public async Task<StoryBoardModel> GetStoryBoardViewModel(int id)
+        {
+            var storyBoardCore = await _storyboardStore.GetStoryBoard(id);
+            var textWidgets = await _textWidgetEngine.GetTextWidgetModels(id);
+            var imageWidgets = await _imageWidgetEngine.GetImageWidgetModels(id);
+
+            var model = new StoryBoardModel()
+            {
+                Id = id,
+                ImageWidgetModels = imageWidgets,
+                TextWidgetModels = textWidgets,
+                Synopsis = storyBoardCore.Synopsis,
+                Title = storyBoardCore.Title,
+                CoverPortrait = storyBoardCore.CoverPortrait
+            };
+
+            return model;
+        }
+
+        public async Task<StoryBoardModel> GetStoryBoardEditModel(int id)
         {
             var storyBoardCore = await _storyboardStore.GetStoryBoard(id);
             var textWidgets = await _textWidgetEngine.GetTextWidgetModels(id);

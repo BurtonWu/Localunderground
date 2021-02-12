@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit, Input, SimpleChanges, OnChanges, Output, 
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PostCardService } from './post-card.services';
 import { map } from 'rxjs/operators';
 import { PostCardModel } from './post-card.interface';
 import { Router } from '@angular/router';
-import { RoutePath } from 'src/app/shared/shared.constants';
+import { RoutePath } from '../../../shared/shared.constants';
+import { attachDataImagePrefix } from '../../../shared/shared.models';
 
 @Component({
     selector: 'post-card',
@@ -43,6 +43,7 @@ export class PostCardComponent implements OnInit, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['model'].currentValue) {
+            this.model.coverPortrait = attachDataImagePrefix(this.model.coverPortrait);
             console.log(this.model);
         }
     }
@@ -52,7 +53,7 @@ export class PostCardComponent implements OnInit, OnChanges {
     }
 
     public loadStoryBoardView() {
-        this._router.navigate([RoutePath.StoryBoard_View], {queryParams: {Id: this.model.storyBoardId}});
+        this._router.navigate([RoutePath.StoryBoard_View], { queryParams: { Id: this.model.storyBoardId } });
     }
 }
 
