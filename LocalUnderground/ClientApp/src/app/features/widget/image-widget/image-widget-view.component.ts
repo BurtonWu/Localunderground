@@ -11,11 +11,11 @@ import { WidgetService } from '../core/widget.service';
 import { WidgetType } from '../core/widget.models';
 
 @Component({
-    selector: 'image-widget',
-    templateUrl: './image-widget.component.html'
+    selector: 'image-widget-view',
+    templateUrl: './image-widget-view.component.html'
 })
 
-export class ImageWidgetComponent implements OnInit, OnChanges {
+export class ImageWidgetViewComponent implements OnInit, OnChanges {
 
     @Input() public model: ImageWidgetModel;
     @Output() public isDeleted = new EventEmitter<number>();

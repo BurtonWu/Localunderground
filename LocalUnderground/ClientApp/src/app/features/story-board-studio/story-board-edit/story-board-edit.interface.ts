@@ -1,5 +1,3 @@
-import { TextWidgetModel } from "../widget/text-widget/text-widget.interface";
-import { ImageWidgetModel } from "../widget/image-widget/image-widget.interface";
 
 export interface StoryBoardModel {
     id: number;
@@ -11,19 +9,6 @@ export interface StoryBoardModel {
     // soundWidgets: any;
 
     // cover: FormData;
-}
-
-
-export interface StoryBoardViewModel {
-    id: number;
-    title: string;
-    synopsis: string;
-    coverPortrait: string;
-    //widgets
-    textWidgetModels: TextWidgetModel[];
-    imageWidgets: ImageWidgetModel[];
-    // soundWidgets: any;
-
 }
 
 export interface StoryboardCreateRequestParams {

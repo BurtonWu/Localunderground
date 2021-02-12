@@ -11,11 +11,11 @@ import { WidgetService } from '../core/widget.service';
 import { WidgetType } from '../core/widget.models';
 
 @Component({
-    selector: 'text-widget',
-    templateUrl: './text-widget.component.html'
+    selector: 'text-widget-view',
+    templateUrl: './text-widget-view.component.html'
 })
 
-export class TextWidgetComponent implements OnInit, OnChanges {
+export class TextWidgetViewComponent implements OnInit, OnChanges {
 
     @Input() public model: TextWidgetModel;
     @Output() public isDeleted = new EventEmitter<number>();

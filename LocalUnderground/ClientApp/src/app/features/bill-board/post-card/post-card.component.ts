@@ -5,6 +5,8 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostCardService } from './post-card.services';
 import { map } from 'rxjs/operators';
 import { PostCardModel } from './post-card.interface';
+import { Router } from '@angular/router';
+import { RoutePath } from 'src/app/shared/shared.constants';
 
 @Component({
     selector: 'post-card',
@@ -21,6 +23,8 @@ export class PostCardComponent implements OnInit, OnChanges {
     public submitted: boolean;
     public bodyControl: FormControl;
     public imageData: FormData;
+    private _router: Router;
+
     // public storyBoardCreateModel: StoryBoardModel;
 
     public postCardModal: NgbModalRef;
@@ -29,8 +33,10 @@ export class PostCardComponent implements OnInit, OnChanges {
 
     public constructor(
         modalService: NgbModal,
-        fb: FormBuilder
+        fb: FormBuilder,
+        router: Router
     ) {
+        this._router = router;
         this._modalService = modalService;
         this._fb = fb;
     }
@@ -46,7 +52,7 @@ export class PostCardComponent implements OnInit, OnChanges {
     }
 
     public loadStoryBoardView() {
-        
+        this._router.navigate([RoutePath.StoryBoard_View], {queryParams: {Id: this.model.storyBoardId}});
     }
 }
 

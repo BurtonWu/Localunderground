@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2>{{model?.title}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>{{model?.synopsis}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="row" *ngFor="let widget of widgets; let i = index;">
+          <div class="col-lg-3" [ngSwitch]="widget.widgetType">
+              <text-widget-view *ngSwitchCase="1" [model]="widget"></text-widget-view>
+              <image-widget-view *ngSwitchCase="2" [model]="widget"></image-widget-view>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

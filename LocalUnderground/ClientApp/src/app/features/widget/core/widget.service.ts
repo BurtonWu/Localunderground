@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { WidgetSortParams, WidgetDeleteParams } from "./widget.interface";
 import { environment } from "src/environments/environment";
-import { AuthorizationService } from "../../../../../auth/auth.services";
+import { AuthorizationService } from "../../../auth/auth.services";
 
 @Injectable()
 export class WidgetService {

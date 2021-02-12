@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
-import { environment } from "../../../../../environments/environment";
-import { AuthorizationService } from "../../../../auth/auth.services";
-import { StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams, StoryBoardViewModel } from "./story-board-edit.interface";
+import { environment } from "../../../../environments/environment";
+import { AuthorizationService } from "../../../auth/auth.services";
+import { StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams } from "./story-board-edit.interface";
+import { StoryBoardViewModel } from "../../bill-board/story-board-view/story-board-view.interface";
 
 @Injectable()
 export class StoryBoardEditService {

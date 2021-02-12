@@ -3,16 +3,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ImageWidgetComponent } from './image-widget.component';
+import { ImageWidgetEditComponent } from './image-widget-edit.component';
 import { ImageWidgetService } from './image-widget.services';
 import { ImageDndComponent } from './image-dnd.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { AppBaseModule } from '../../../../../app-config/app-base.module';
+import { AppBaseModule } from '../../../app-config/app-base.module';
+import { ImageWidgetViewComponent } from './image-widget-view.component';
 
 
 @NgModule({
   declarations: [
-    ImageWidgetComponent,
+    ImageWidgetViewComponent,
+    ImageWidgetEditComponent,
     ImageDndComponent
   ],
   imports: [
@@ -20,7 +22,8 @@ import { AppBaseModule } from '../../../../../app-config/app-base.module';
     DragDropModule
   ],
   exports: [
-    ImageWidgetComponent,
+    ImageWidgetViewComponent,
+    ImageWidgetEditComponent,
     ImageDndComponent
   ],
   providers: [

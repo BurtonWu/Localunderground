@@ -24,11 +24,15 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
 
         public StoryBoardEngine(
             DatabaseContext context,
-            IStoryBoardStore storyboardStore
+            IStoryBoardStore storyboardStore,
+            ITextWidgetEngine textWidgetEngine,
+            IImageWidgetEngine imageWidgetEngine
             )
         {
             _context = context;
             _storyboardStore = storyboardStore;
+            _textWidgetEngine = textWidgetEngine;
+            _imageWidgetEngine = imageWidgetEngine;
         }
 
         public async Task<StoryBoardModel> GetStoryBoardViewModel(int id)

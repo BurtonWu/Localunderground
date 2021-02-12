@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardEditService } from '../story-board-edit/core/story-board-edit.services';
-import { StoryboardCreateRequestParams } from '../story-board-edit/core/story-board-edit.interface';
+import { StoryBoardEditService } from '../story-board-edit/story-board-edit.services';
+import { StoryboardCreateRequestParams } from '../story-board-edit/story-board-edit.interface';
 
 @Component({
     selector: 'story-board-create',

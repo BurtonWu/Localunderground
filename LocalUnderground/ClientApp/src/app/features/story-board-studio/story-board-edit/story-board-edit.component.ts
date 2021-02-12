@@ -6,16 +6,16 @@ import { CdkDragDrop, moveItemInArray, CdkDragStart } from '@angular/cdk/drag-dr
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { concat, concatMap } from 'rxjs/operators';
 import { StoryBoardModel, StoryboardUpdateParams } from './story-board-edit.interface';
-import { TextWidgetComponent } from '../widget/text-widget/text-widget.component';
-import { ImageWidgetComponent } from '../widget/image-widget/image-widget.component';
-import { TextWidgetModel } from '../widget/text-widget/text-widget.interface';
-import { ImageWidgetModel } from '../widget/image-widget/image-widget.interface';
-import { Widget, WidgetSortModel, WidgetSortParams } from '../widget/core/widget.interface';
 import { StoryBoardEditService } from './story-board-edit.services';
-import { TextWidgetService } from '../widget/text-widget/text-widget.services';
-import { ImageWidgetService } from '../widget/image-widget/image-widget.services';
-import { WidgetService } from '../widget/core/widget.service';
-import { WidgetType } from '../widget/core/widget.models';
+import { ImageWidgetEditComponent } from '../../widget/image-widget/image-widget-edit.component';
+import { TextWidgetEditComponent } from '../../widget/text-widget/text-widget-edit.component';
+import { TextWidgetModel } from '../../widget/text-widget/text-widget.interface';
+import { ImageWidgetModel } from '../../widget/image-widget/image-widget.interface';
+import { Widget, WidgetSortModel, WidgetSortParams } from '../../widget/core/widget.interface';
+import { TextWidgetService } from '../../widget/text-widget/text-widget.services';
+import { ImageWidgetService } from '../../widget/image-widget/image-widget.services';
+import { WidgetService } from '../../widget/core/widget.service';
+import { WidgetType } from '../../widget/core/widget.models';
 
 @Component({
     selector: 'story-board-edit',
@@ -26,8 +26,8 @@ import { WidgetType } from '../widget/core/widget.models';
 export class StoryBoardEditComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryBoardModel;
-    @ViewChildren(TextWidgetComponent) textWidgetComponents: QueryList<TextWidgetComponent>;
-    @ViewChildren(ImageWidgetComponent) imageWidgetComponents: QueryList<ImageWidgetComponent>;
+    @ViewChildren(TextWidgetEditComponent) textWidgetComponents: QueryList<TextWidgetEditComponent>;
+    @ViewChildren(ImageWidgetEditComponent) imageWidgetComponents: QueryList<ImageWidgetEditComponent>;
 
 
     public submitted: boolean;

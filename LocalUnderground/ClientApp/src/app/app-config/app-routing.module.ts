@@ -6,6 +6,7 @@ import { AuthorizationGuardService } from '../app-config/app-auth-guard.service'
 import { RoutePath } from '../shared/shared.constants';
 import { LayoutComponent } from '../layout/layout.component';
 import { StoryBoardCreateComponent } from '../features/story-board-studio/story-board-create/story-board-create.component';
+import { StoryBoardViewComponent } from '../features/bill-board/story-board-view/story-board-view.component';
 
 
 
@@ -18,7 +19,9 @@ const routes: Routes = [
   { path: RoutePath.Studio_Create, component: StoryBoardCreateComponent, canActivate: [AuthorizationGuardService] },
   { path: RoutePath.Login, component: AuthLoginComponent },
   { path: RoutePath.Register, component: AuthRegisterComponent },
+  { path: RoutePath.StoryBoard_View, component: StoryBoardViewComponent },
 
+  
   //Unauthorized
   // { path: '', pathMatch: 'full', redirectTo: RoutePath.Main },
   // { path: RoutePath.Main, component: LayoutComponent},

@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BillBoardModule } from './features/bill-board/core/bill-board.module';
 import { StoryBoardStudioModule } from './features/story-board-studio/core/story-board-studio.module';
+import { StoryBoardViewModule } from './features/bill-board/story-board-view/story-board-view.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { StoryBoardStudioModule } from './features/story-board-studio/core/story
     BillBoardModule,
     LayoutModule,
     StoryBoardStudioModule,
+    StoryBoardViewModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     NgbModule
