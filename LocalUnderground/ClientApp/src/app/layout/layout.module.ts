@@ -16,7 +16,6 @@ import { BillBoardModule } from '../features/bill-board/core/bill-board.module';
   ],
   imports: [
     AppBaseModule,
-    BillBoardModule,
     AppNavModule
   ],
   exports: [

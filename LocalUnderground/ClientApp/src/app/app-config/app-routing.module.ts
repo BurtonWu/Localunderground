@@ -9,6 +9,7 @@ import { StoryBoardCreateComponent } from '../features/story-board-studio/story-
 import { StoryBoardViewComponent } from '../features/bill-board/story-board-view/story-board-view.component';
 import { StoryBoardStudioComponent } from '../features/story-board-studio/core/story-board-studio.component';
 import { StoryBoardEditComponent } from '../features/story-board-studio/story-board-edit/story-board-edit.component';
+import { BillBoardComponent } from '../features/bill-board/core/bill-board.component';
 
 
 
@@ -16,7 +17,7 @@ const routes: Routes = [
   //Authorized
   //redirect to, from nothing in url, '', to localhost:4200/storyboard
   { path: '', pathMatch: 'full', redirectTo: RoutePath.Main, canActivate: [AuthorizationGuardService] },
-  { path: RoutePath.Main, component: LayoutComponent, canActivate: [AuthorizationGuardService] },
+  { path: RoutePath.Main, component: BillBoardComponent, canActivate: [AuthorizationGuardService] },
   { path: RoutePath.Studio_StoryBoard_Create, component: StoryBoardCreateComponent, canActivate: [AuthorizationGuardService] },
   { path: RoutePath.Login, component: AuthLoginComponent },
   { path: RoutePath.Register, component: AuthRegisterComponent },

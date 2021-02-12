@@ -3,6 +3,7 @@ import { AppBaseModule } from '../../../app-config/app-base.module';
 import { BillBoardComponent } from './bill-board.component';
 import { BillBoardService } from './bill-board.services';
 import { PostCardModule } from '../post-card/post-card.module';
+import { LayoutModule } from 'src/app/layout/layout.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { PostCardModule } from '../post-card/post-card.module';
   ],
   imports: [
     AppBaseModule,
+    LayoutModule,
     PostCardModule
   ],
   exports: [

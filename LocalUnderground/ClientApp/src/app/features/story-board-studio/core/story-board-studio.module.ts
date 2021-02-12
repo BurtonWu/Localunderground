@@ -7,6 +7,7 @@ import { AppBaseModule } from '../../../app-config/app-base.module';
 import { StoryBoardStudioComponent } from './story-board-studio.component';
 import { StoryBoardCardInfoComponent } from '../story-board-card/story-board-card-info.component';
 import { StoryBoardEditModule } from '../story-board-edit/story-board-edit.module';
+import { LayoutModule } from 'src/app/layout/layout.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { StoryBoardEditModule } from '../story-board-edit/story-board-edit.modul
   ],
   imports: [
     AppBaseModule,
-    StoryBoardEditModule
+    StoryBoardEditModule,
+    LayoutModule
   ],
   exports: [
     StoryBoardStudioComponent,
