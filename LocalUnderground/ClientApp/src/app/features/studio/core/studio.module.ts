@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../../../app-config/app-base.module';
-import { StoryBoardStudioComponent } from './story-board-studio.component';
+import { StudioComponent } from './studio.component';
 import { StoryBoardCardInfoComponent } from '../story-board-card/story-board-card-info.component';
 import { StoryBoardEditModule } from '../story-board-edit/story-board-edit.module';
 import { LayoutModule } from 'src/app/layout/layout.module';
@@ -12,7 +12,7 @@ import { LayoutModule } from 'src/app/layout/layout.module';
 
 @NgModule({
   declarations: [
-    StoryBoardStudioComponent,
+    StudioComponent,
     StoryBoardCardInfoComponent
   ],
   imports: [
@@ -21,10 +21,10 @@ import { LayoutModule } from 'src/app/layout/layout.module';
     LayoutModule
   ],
   exports: [
-    StoryBoardStudioComponent,
+    StudioComponent,
     StoryBoardCardInfoComponent
   ],
   providers: [
   ]
 })
-export class StoryBoardStudioModule { }
+export class StudioModule { }

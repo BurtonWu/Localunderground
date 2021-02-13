@@ -10,13 +10,12 @@ import { TokenInterceptorService } from './app-config/app-token-interceptor.serv
 import { SharedModule } from './shared/shared.module';
 import { AppBaseModule } from './app-config/app-base.module';
 import { HttpHeaderInterceptorService } from './app-config/app-httpheader-interceptor.service';
-import { StoryBoardCreateModule } from './features/story-board-studio/story-board-create/story-board-create.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BillBoardModule } from './features/bill-board/core/bill-board.module';
-import { StoryBoardStudioModule } from './features/story-board-studio/core/story-board-studio.module';
 import { StoryBoardViewModule } from './features/bill-board/story-board-view/story-board-view.module';
-import { StoryBoardEditModule } from './features/story-board-studio/story-board-edit/story-board-edit.module';
+import { StudioModule } from './features/studio/core/studio.module';
+import { StoryBoardCreateModule } from './features/studio/story-board-create/story-board-create.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +25,13 @@ import { StoryBoardEditModule } from './features/story-board-studio/story-board-
     AppRoutingModule,
     AuthLoginModule,
     BillBoardModule,
-    StoryBoardStudioModule,
+    StudioModule,
     StoryBoardViewModule,
+    StoryBoardCreateModule,
     // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     NgbModule,
-    StoryBoardEditModule
+    StoryBoardViewModule
     // RouterModule.forRoot([
     //   { path: '', component: HomeComponent, pathMatch: 'full' },
     //   { path: 'counter', component: CounterComponent },

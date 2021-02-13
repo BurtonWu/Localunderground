@@ -4,26 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../../../app-config/app-base.module';
-import { StoryBoardEditComponent } from './story-board-edit.component';
-import { StoryBoardEditService } from './story-board-edit.services';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { WidgetModule } from '../../widget/core/widget.module';
+import { SharedModule } from '../../../shared/shared.module';
+import { StoryBoardCreateComponent } from './story-board-create.component';
+import { LayoutModule } from 'src/app/layout/layout.module';
 
 
 @NgModule({
   declarations: [
-    StoryBoardEditComponent,
+    StoryBoardCreateComponent,
   ],
   imports: [
     AppBaseModule,
-    DragDropModule,
-    WidgetModule
+    LayoutModule
   ],
   exports: [
-    StoryBoardEditComponent,
+    StoryBoardCreateComponent,
   ],
   providers: [
-    StoryBoardEditService
   ]
 })
-export class StoryBoardEditModule { }
+export class StoryBoardCreateModule { }

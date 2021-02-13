@@ -43,7 +43,7 @@ export class AuthLoginComponent {
         this._authService.login(this.loginForm.value).subscribe((response) => {
             console.log(response);
             this._authService.saveToken(response['token']);
-            this._router.navigate([RoutePath.Main]);
+            this._router.navigate([RoutePath.BillBoard]);
         });
     }
 

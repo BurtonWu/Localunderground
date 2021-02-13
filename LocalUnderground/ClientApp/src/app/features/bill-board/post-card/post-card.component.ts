@@ -4,7 +4,7 @@ import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { PostCardModel } from './post-card.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoutePath } from '../../../shared/shared.constants';
 import { attachDataImagePrefix } from '../../../shared/shared.models';
 
@@ -24,7 +24,7 @@ export class PostCardComponent implements OnInit, OnChanges {
     public bodyControl: FormControl;
     public imageData: FormData;
     private _router: Router;
-
+    private _activatedRoute: ActivatedRoute;
     // public storyBoardCreateModel: StoryBoardModel;
 
     public postCardModal: NgbModalRef;
@@ -34,9 +34,11 @@ export class PostCardComponent implements OnInit, OnChanges {
     public constructor(
         modalService: NgbModal,
         fb: FormBuilder,
+        activatedRoute: ActivatedRoute,
         router: Router
     ) {
         this._router = router;
+        this._activatedRoute = activatedRoute;
         this._modalService = modalService;
         this._fb = fb;
     }
@@ -53,7 +55,8 @@ export class PostCardComponent implements OnInit, OnChanges {
     }
 
     public loadStoryBoardView() {
-        this._router.navigate([RoutePath.StoryBoard_View], { queryParams: { Id: this.model.storyBoardId } });
+        this._router.navigate([RoutePath.StoryBoard_View], { relativeTo: this._activatedRoute, queryParams: { Id: this.model.storyBoardId } });
+
     }
 }
 

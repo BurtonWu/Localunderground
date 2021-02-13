@@ -13,7 +13,7 @@ export class StoryBoardCreateComponent implements OnInit {
 
     public submitted: boolean;
 
-    public storyBoardForm: FormGroup;
+    public storyBoardForm: FormGroup = new FormGroup({});
     public imageData: FormData;
     public reader: FileReader;
     public coverPortrait: string;    

@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { StoryBoardCore } from '../story-board-edit/story-board-edit.interface';
 import { StoryBoardEditService } from '../story-board-edit/story-board-edit.services';
-import { StoryBoardStudioCardModel } from './story-board-studio.interface';
+import { StoryBoardStudioCardModel } from './studio.interface';
 
 @Component({
-    selector: 'story-board-studio',
-    templateUrl: './story-board-studio.component.html'
+    selector: 'studio',
+    templateUrl: './studio.component.html'
 })
 
-export class StoryBoardStudioComponent implements OnInit {
+export class StudioComponent implements OnInit {
 
     public models: StoryBoardStudioCardModel[] = [];
     public selectedModel:StoryBoardStudioCardModel;

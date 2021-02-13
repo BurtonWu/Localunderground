@@ -4,9 +4,9 @@ import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { PostCardModel } from '../../bill-board/post-card/post-card.interface';
-import { StoryBoardStudioCardModel } from '../core/story-board-studio.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoutePath } from 'src/app/shared/shared.constants';
+import { StoryBoardStudioCardModel } from '../core/studio.interface';
 
 @Component({
     selector: 'story-board-card-info',
@@ -25,6 +25,7 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
     public imageData: FormData;
     // public storyBoardCreateModel: StoryBoardModel;
     private _router: Router;
+    private _activatedRoute: ActivatedRoute;
     public postCardModal: NgbModalRef;
     private _modalService: NgbModal;
     private _fb: FormBuilder;
@@ -32,11 +33,13 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
     public constructor(
         modalService: NgbModal,
         fb: FormBuilder,
-        router: Router
+        router: Router,
+        activatedRoute: ActivatedRoute
     ) {
         this._modalService = modalService;
         this._fb = fb;
         this._router = router;
+        this._activatedRoute = activatedRoute;
     }
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -49,8 +52,8 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
     }
 
     public navigateStoryBoardEdit() {
-        this._router.navigate([RoutePath.Studio_StoryBoard_Edit], {queryParams: {Id: this.model.id}});
-        
+        this._router.navigate(['edit'], { relativeTo: this._activatedRoute, queryParams: { Id: this.model.id } });
+
     }
 
 }

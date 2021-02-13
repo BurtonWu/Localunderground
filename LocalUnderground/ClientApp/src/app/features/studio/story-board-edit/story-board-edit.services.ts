@@ -5,8 +5,8 @@ import { environment } from "../../../../environments/environment";
 import { AuthorizationService } from "../../../auth/auth.services";
 import { StoryBoardCore, StoryboardCreateRequestParams, StoryBoardModel, StoryboardUpdateParams } from "./story-board-edit.interface";
 import { StoryBoardEditModel, StoryBoardViewModel } from "../../bill-board/story-board-view/story-board-view.interface";
-import { StoryBoardStudioCardModel } from "../core/story-board-studio.interface";
 import { map } from "rxjs/operators";
+import { StoryBoardStudioCardModel } from "../core/studio.interface";
 
 @Injectable()
 export class StoryBoardEditService {
