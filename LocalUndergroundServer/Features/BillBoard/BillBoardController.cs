@@ -39,7 +39,7 @@ namespace LocalUndergroundServer.Features.BillBoard
             _context = context;
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         [Produces(typeof(List<PostCardModel>))]
         [Route(Routes.BillBoard.PostCard)]

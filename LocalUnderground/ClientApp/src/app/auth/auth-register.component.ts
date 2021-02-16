@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RegisterUserModel } from './auth-login.interface';
 import { AuthorizationService } from './auth.services';
 import { FormGroup, FormBuilder, Validators, AbstractControlOptions } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RoutePath } from '../shared/shared.constants';
 
 @Component({
     selector: 'auth-register',
@@ -16,10 +18,14 @@ export class AuthRegisterComponent {
     public email: string;
     public submitted: boolean;
     private authService: AuthorizationService;
+    private _router: Router;
 
     public constructor(
+        router: Router,
+        _router: Router,
         authService: AuthorizationService,
         fb: FormBuilder) {
+        this._router = router;
         this.authService = authService;
         this.registerForm = fb.group({
             username: [this.username, Validators.required],
@@ -32,7 +38,11 @@ export class AuthRegisterComponent {
         this.submitted = true;
         console.log(this.registerForm);
         // const loginCredentails: RegisterUserModel = this.registerForm.value;
-        this.authService.register(this.registerForm.value).subscribe((response) => { console.log(response);});
+        this.authService.register(this.registerForm.value).subscribe(
+            (response) => {
+                this._router.navigate([RoutePath.Login]);
+            },
+            (error) => { });
     }
 
     public get usernameControl() {

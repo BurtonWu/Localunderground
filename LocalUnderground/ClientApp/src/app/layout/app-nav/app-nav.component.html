@@ -28,9 +28,14 @@
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li> -->
         </ul>
-        <div class="nav-item active">
+        <div class="nav-item active" *ngIf="isLoggedIn">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="navigateToStoryBoardStudio()">Manage Stories</button>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="navigateToStoryBoardCreate()">Create Story</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="logout()">Logout</button>
+        </div>
+        <div class="nav-item active" *ngIf="!isLoggedIn">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="navigateToLogin()">Login</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="navigateToRegister()">Register</button>
         </div>
     </div>
 </nav>

@@ -32,4 +32,8 @@ export class AuthorizationService {
         return this.getToken() != null;
     }
 
+    public logout() {
+        localStorage.removeItem('token');
+    }
+
 }
