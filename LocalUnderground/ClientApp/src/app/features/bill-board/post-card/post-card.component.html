@@ -1,11 +1,11 @@
-<div class="card" style="width: 18rem;" >
-  <img *ngIf="model?.coverPortrait" class="card-img-top"  [src]="model.coverPortrait">
+<div class="card" style="width: 18rem;">
+  <img *ngIf="model?.coverPortrait" class="card-img-top" [src]="model.coverPortrait">
   <div class="card-body">
     <h5 class="card-title">{{model?.title}}</h5>
-    <p class="card-text">{{model?.synopsis}}</p>
+    <p class="card-text">{{model?.synopsis | strTruncate:[20]}}</p>
   </div>
   <div class="card-footer">
-    <small class="text-muted">{{model?.storyBoardId}}</small>
-    <a class="btn btn-primary stretched-link" (click)="loadStoryBoardView()">View</a>
+    <small class="text-muted">Last Modified: {{model?.lastModifiedDate | date:'short'}}</small>
+    <a class="stretched-link" (click)="loadStoryBoardView()"></a>
   </div>
 </div>

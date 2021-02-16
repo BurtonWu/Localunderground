@@ -74,7 +74,9 @@ namespace LocalUndergroundServer.Features.ImageWidget.Engine
             var widget = new ImageWidgetCore()
             {
                 StoryBoardID = storyBoardId,
-                Sort = sort
+                Sort = sort,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow
             };
             await _dbContext.ImageWidgetCore.AddAsync(widget);
             await _dbContext.SaveChangesAsync();

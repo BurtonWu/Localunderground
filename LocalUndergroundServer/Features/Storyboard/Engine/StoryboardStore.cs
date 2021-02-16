@@ -61,7 +61,9 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                     Id = x.ID,
                     Synopsis = x.Synopsis,
                     Title = x.Title,
-                    CoverPortrait = x.CoverPortrait != null ? Convert.ToBase64String(x.CoverPortrait) : null
+                    CoverPortrait = x.CoverPortrait != null ? Convert.ToBase64String(x.CoverPortrait) : null,
+                    CreatedOn = x.CreatedOn,
+                    LastModifiedOn = x.ModifiedOn
                 })
                 .ToListAsync();
         }
@@ -103,7 +105,9 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                 Synopsis = model.Synopsis,
                 Title = model.Title,
                 UserID = model.UserId,
-                CoverPortrait = model.CoverPortrait
+                CoverPortrait = model.CoverPortrait,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             };
             await _dbContext.StoryBoardCore.AddAsync(core);
             await _dbContext.SaveChangesAsync();

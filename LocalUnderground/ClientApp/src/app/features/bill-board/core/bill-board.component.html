@@ -1,5 +1,7 @@
 <layout>
-  <div class="card-columns" *ngFor="let model of postCards">
-    <post-card [model]="model"></post-card>
+  <div class="card-deck">
+    <div *ngFor="let model of postCards">
+      <post-card [model]="model"></post-card>
+    </div>
   </div>
 </layout>

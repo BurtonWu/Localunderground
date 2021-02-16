@@ -50,7 +50,9 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             {
                 StoryBoardID = storyBoardId,
                 Sort = sort,
-                Body = body
+                Body = body,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow
             };
             await _dbContext.TextWidgetCore.AddAsync(widget);
             await _dbContext.SaveChangesAsync();

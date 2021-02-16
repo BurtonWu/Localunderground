@@ -4,4 +4,6 @@ export interface PostCardModel {
     title: string;
     synopsis: string;
     coverPortrait?: string;
+    createdDate: Date;
+    lastModifiedDate: Date;
 }

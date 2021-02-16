@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
 import { StoryBoardEditService } from '../story-board-edit/story-board-edit.services';
 import { StoryboardCreateRequestParams } from '../story-board-edit/story-board-edit.interface';
+import { Router } from '@angular/router';
+import { RoutePath } from 'src/app/shared/shared.constants';
 
 @Component({
     selector: 'story-board-create',
@@ -18,15 +20,16 @@ export class StoryBoardCreateComponent implements OnInit {
     public reader: FileReader;
     public coverPortrait: string;    
     private _storyBoardService: StoryBoardEditService;
-
+    private _router: Router;
     public constructor(
         storyBoardService: StoryBoardEditService,
-        fb: FormBuilder
+        fb: FormBuilder,
+        router: Router
     ) {
         this._storyBoardService = storyBoardService;
-    
+        this._router = router;
         this.storyBoardForm = fb.group({
-            title: ['default Title', [Validators.required, Validators.maxLength(20)]],
+            title: ['', [Validators.required, Validators.maxLength(20)]],
             synopsis: [''],
         });
 
@@ -52,7 +55,7 @@ export class StoryBoardCreateComponent implements OnInit {
         this.submitted = true;
         console.log(params);
         this._storyBoardService.createStoryboard(params).subscribe((id) => {
-            console.log(id);
+            this._router.navigate([RoutePath.Studio_StoryBoard_Edit], { queryParams: { Id: id } });
         })
         // this._billboardService.createBillboard(params).subscribe((response) => {
         //     console.log(response);

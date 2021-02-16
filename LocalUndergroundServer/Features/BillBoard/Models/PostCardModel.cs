@@ -12,5 +12,7 @@ namespace LocalUndergroundServer.Features.BillBoard.Models
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public string CoverPortrait { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

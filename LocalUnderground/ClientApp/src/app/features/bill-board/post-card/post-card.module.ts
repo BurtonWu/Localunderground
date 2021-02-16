@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../../../app-config/app-base.module';
 import { PostCardComponent } from './post-card.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { PostCardComponent } from './post-card.component';
     PostCardComponent
   ],
   imports: [
-    AppBaseModule
+    AppBaseModule,
+    SharedModule
   ],
   exports: [
     PostCardComponent

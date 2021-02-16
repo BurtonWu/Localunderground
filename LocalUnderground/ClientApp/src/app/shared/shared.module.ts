@@ -6,15 +6,18 @@ import { RouterModule } from '@angular/router';
 import { AppBaseModule } from '../app-config/app-base.module';
 import { SharedService } from './shared.services';
 import { CommonModule } from '@angular/common';
+import { StringTruncatePipe } from './pipes/string-truncate.pipe';
 
 
 @NgModule({
   declarations: [
+    StringTruncatePipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
+    StringTruncatePipe
   ],
   providers: [
     

@@ -36,7 +36,9 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
                 StoryBoardId = x.Id,
                 Title = x.Title,
                 Synopsis = x.Synopsis,
-                CoverPortrait = x.CoverPortrait
+                CoverPortrait = x.CoverPortrait,
+                CreatedDate = x.CreatedOn,
+                LastModifiedDate = x.LastModifiedOn
             }).ToList();
             return SortPostCardModels(sortOrder, postCards, sortDirection);
         }

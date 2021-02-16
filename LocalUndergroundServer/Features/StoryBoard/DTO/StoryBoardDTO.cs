@@ -11,6 +11,8 @@ namespace LocalUndergroundServer.Features.StoryBoard.DTO
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public string CoverPortrait { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime LastModifiedOn { get; set; }
 
     }
 }

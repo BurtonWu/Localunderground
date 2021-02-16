@@ -12,5 +12,7 @@ namespace LocalUndergroundServer.Data.Models.ImageWidget
         public int ID { get; set; }
         public int StoryBoardID { get; set; }
         public int Sort { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 }
