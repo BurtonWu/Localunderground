@@ -11,8 +11,8 @@
   </div>
   <div class="row">
     <div>
-      <div class="row" *ngFor="let widget of widgets; let i = index;">
-        <div class="col-lg-3" [ngSwitch]="widget.widgetType">
+      <div class="card-deck" *ngFor="let widget of widgets; let i = index;">
+        <div [ngSwitch]="widget.widgetType">
           <text-widget-view *ngSwitchCase="1" [model]="widget"></text-widget-view>
           <image-widget-view *ngSwitchCase="2" [model]="widget"></image-widget-view>
         </div>
