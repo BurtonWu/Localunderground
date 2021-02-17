@@ -1,8 +1,8 @@
-<div class="card" style="width: 18rem;">
+<div class="card">
   <img *ngIf="model?.coverPortrait" class="card-img-top" [src]="model.coverPortrait">
   <div class="card-body">
     <h5 class="card-title">{{model?.title}}</h5>
-    <p class="card-text">{{model?.synopsis | strTruncate:[20]}}</p>
+    <p class="card-text">{{model?.synopsis | strTruncate:[50]}}</p>
   </div>
   <div class="card-footer">
     <small class="text-muted">Last Modified: {{model?.lastModifiedDate | date:'short'}}</small>

@@ -10,7 +10,8 @@ import { attachDataImagePrefix } from '../../../shared/shared.models';
 
 @Component({
     selector: 'post-card',
-    templateUrl: './post-card.component.html'
+    templateUrl: './post-card.component.html',
+    styleUrls: ['./post-card.css']
 })
 
 export class PostCardComponent implements OnInit, OnChanges {
