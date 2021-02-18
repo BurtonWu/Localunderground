@@ -10,6 +10,7 @@ using LocalUndergroundServer.Features.TextWidget.Params;
 using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.Widget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
+using LocalUndergroundServer.Infrastructure.Exceptions;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
 using LocalUndergroundServer.Infrastructure.Request;
 using LocalUndergroundServer.Shared.Constants;
@@ -46,8 +47,16 @@ namespace LocalUndergroundServer.Features.TextWidget
         [Route(Routes.Widget.Sort)]
         public async Task<ActionResult> SortWidgets([FromBody] WidgetSortParams model)
         {
-            var updatedSort = await _widgetEngine.SortWidgets(UserId, model.StoryBoardId, model.WidgetSortModels);
-            return Ok(updatedSort);
+            try
+            {
+                await _widgetEngine.SortWidgets(UserId, model.StoryBoardId, model.WidgetSortModels);
+                return Ok();
+            }
+            catch(ApplicationException ex)
+            {
+                ModelState.AddModelError("error", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         [Authorize]

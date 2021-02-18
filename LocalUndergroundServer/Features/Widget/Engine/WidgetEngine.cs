@@ -44,13 +44,19 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
         }
 
 
-        public async Task<bool> SortWidgets(string userId, int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
+        public async Task SortWidgets(string userId, int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
         {
             var storyBoardExists = await _storyBoardStore.StoryBoardExists(storyBoardId, userId);
-            if (!storyBoardExists) return false;
+            if (!storyBoardExists) throw new ApplicationException("Invalid story board.");
 
-            var updateCount = widgetSorts.Count() == 0 ? 0 : await _widgetStore.SortWidgets(storyBoardId, widgetSorts);
-            return updateCount == widgetSorts.Count();
+            try
+            {
+                await _widgetStore.SortWidgets(storyBoardId, widgetSorts);
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Unable to save widget sort.");
+            }
         }
 
         public async Task<bool> DeleteWidget(string userId, int widgetId, int storyBoardId, WidgetType widgetType)

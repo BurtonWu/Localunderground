@@ -26,6 +26,13 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess.SQL
             return sqlParameters;
         }
 
+        public List<SqlParameter> AddSqlParameter(string parameter, DataTable dataTable, List<SqlParameter> sqlParameters)
+        {
+            if (sqlParameters == null) sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(GetParameter(parameter, dataTable));
+            return sqlParameters;
+        }
+
         public List<SqlParameter> AddSqlParameterOutput(string parameter, SqlDbType type, List<SqlParameter> sqlParameters)
         {
             if (sqlParameters == null) sqlParameters = new List<SqlParameter>();

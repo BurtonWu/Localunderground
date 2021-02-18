@@ -29,71 +29,26 @@ namespace LocalUndergroundServer.Features.TextWidget.Engine
             _dbContext = dbContext;
         }
 
-        public async Task<int> SortWidgets(int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
+        public async Task SortWidgets(int storyBoardId, IEnumerable<WidgetSortModel> widgetSorts)
         {
-            //update to use sql proc
-            return 1;
-            //var widgetSortDic = widgetSorts.GroupBy(x => x.WidgetType).ToDictionary(x => x.Key, x => x);
+            var sqlParameters = _sqlEngine.AddSqlParameter("@StoryBoardID", storyBoardId);
+            if(widgetSorts.Any())
+            {
+                var dataTable = new DataTable("TVP_WidgetSort");
+                dataTable.Columns.Add("ID", typeof(int));
+                dataTable.Columns.Add("Sort", typeof(int));
+                dataTable.Columns.Add("WidgetType", typeof(int));
 
-            //Func<IWidget, WidgetSortModel, IWidget> replaceSort = (IWidget widget, WidgetSortModel sortModel) =>
-            //{
-            //    widget.Sort = sortModel.Sort;
-            //    return widget;
-            //};
+                foreach (var sort in widgetSorts)
+                {
+                    dataTable.Rows.Add(sort.Id, sort.Sort, sort.WidgetType);
+                }
+                _sqlEngine.AddSqlParameter("@WidgetSorts", dataTable, sqlParameters);
+            }
 
-            //foreach (var widgetSort in widgetSortDic)
-            //{
-            //    List<IWidget> updatedCores = new List<IWidget>();
-            //    switch (widgetSort.Key)
-            //    {
-            //        case WidgetType.Text:
-            //            updatedCores = (from twc in _dbContext.TextWidgetCore
-            //                            join ws in widgetSort.Value
-            //                                on new { widgetId = twc.ID, storyBoardId = twc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId } into grp
-            //                            select replaceSort(twc, ws)).ToList();
-
-
-            //            _dbContext.UpdateRange(updatedCores);
-            //            break;
-            //        //TODO: update internal image sort as well
-            //        case WidgetType.Image:
-            //            updatedCores = (from iwc in _dbContext.ImageWidgetCore
-            //                            join ws in widgetSort.Value
-            //                                on new { widgetId = iwc.ID, storyBoardId = iwc.StoryBoardID } equals new { widgetId = ws.Id, storyBoardId = storyBoardId } into grp
-            //                            select replaceSort(iwc, ws)).ToList();
-            //            _dbContext.UpdateRange(updatedCores);
-            //            break;
-            //    }
-            //}
-            //return await _dbContext.SaveChangesAsync();
+            await _sqlEngine.ExecuteStoredProcedure("spUpdateWidgetSort", sqlParameters);
         }
 
-
-
-        public async Task<int> UploadImage(int billboardId, string name, long size, byte[] imageData)
-        {
-            //var image = new BillboardImage()
-            //{
-            //    BillboardId = billboardId,
-            //    Name = name,
-            //    Size = size,
-            //    ImageData = imageData
-            //};
-            //await _dbContext.BillboardImage.AddAsync(image);
-            //await _dbContext.SaveChangesAsync();
-            //return image.Id;
-
-
-            return 0;
-            //var sqlParameters = _sqlEngine.AddSqlParameter("@Title", title);
-            //_sqlEngine.AddSqlParameter("@BillboardId", billboardId);
-            //_sqlEngine.AddSqlParameter("@Size", size, sqlParameters);
-            //_sqlEngine.AddSqlParameter("@ImageData", imageData, sqlParameters);
-            //_sqlEngine.AddSqlParameterOutput("@Id", SqlDbType.Int, sqlParameters);
-
-            //var outputParameters = await _sqlEngine.ExecuteStoredProcedure("spUploadBillboardImage", sqlParameters);
-            //return (int)outputParameters[0].Value;
-        }
 
         //public async Task<List<PanelImage>> GetImages()
         //{

@@ -150,3 +150,6 @@ C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUnde
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.dll
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.pdb
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.genruntimeconfig.cache
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

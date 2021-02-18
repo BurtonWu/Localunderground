@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using LocalUndergroundServer.Infrastructure.Exceptions;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -40,6 +41,14 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
         {
             SqlParameter parameterObject = new SqlParameter(parameter, value != null ? value : DBNull.Value);
             parameterObject.Direction = ParameterDirection.Input;
+            return parameterObject;
+        }
+
+        protected SqlParameter GetParameter(string parameter, DataTable dataTable)
+        {
+            SqlParameter parameterObject = new SqlParameter(parameter, SqlDbType.Structured);
+            parameterObject.Direction = ParameterDirection.Input;
+            parameterObject.Value = dataTable;
             return parameterObject;
         }
 
@@ -91,10 +100,12 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
                     returnValue = await cmd.ExecuteNonQueryAsync();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                //LogException("Failed to ExecuteNonQuery for " + procedureName, ex, parameters);
-                throw;
+                throw new AppException(ex.Message, ex.InnerException)
+                {
+                    SqlErrorNumber = ex.Number
+                };
             }
 
             return returnValue;

@@ -38,7 +38,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
     public imageWidgets: ImageWidgetModel[] = [];
     public widgets: Widget[] = [];
     public storyBoardId: number;
-    
+
     public textWidgetModal: NgbModalRef;
     //test widget
     public textWidgetControls: FormArray = new FormArray([]);
@@ -93,7 +93,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
     private _init() {
         this._storyBoardService.getStoryboardEditModel(this.storyBoardId).subscribe((model) => {
             this.model = model;
-            console.log(model)
+            console.log(model);
             this.widgets = this.widgets.concat(model.textWidgetModels);
             this.widgets = this.widgets.concat(model.imageWidgetModels);
             console.log(this.widgets);
@@ -107,7 +107,7 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
         //     this[i].sort = i + 1;
         //     console.log(this[i], i+1)
         // }, this.textWidgets);
-   
+
         console.log(this.textWidgets);
         moveItemInArray(this.textWidgets, event.previousIndex, event.currentIndex);
         this._saveWidgetOrder(true);
@@ -182,23 +182,27 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
             storyBoardId: this.model.id,
             widgetSortModels: sortModels
         };
-        observables.push(this._widgetService.updateWidgetSort(params));
-        forkJoin(observables).subscribe();
+        observables.push();
+        forkJoin(observables).subscribe(() => {
+            this._widgetService.updateWidgetSort(params).subscribe(() => { }, (error) => {
+                console.log(error);
+            });
+        }, (error) => { console.log(error); });
     }
 
     private _saveWidgetOrder(assignSortOrder?: boolean) {
-        if(assignSortOrder) {
+        if (assignSortOrder) {
             this.widgets.forEach((widget, i) => {
                 widget.sort = i + 1;
-                console.log(widget, i+1)
+                console.log(widget, i + 1);
             });
         }
-        this.widgets.sort(function(a, b) {
-            if(a.sort > b.sort) return 1;
+        this.widgets.sort(function (a, b) {
+            if (a.sort > b.sort) return 1;
             else if (a.sort < b.sort) return -1;
-            return 0
+            return 0;
         });
-      
+
     }
 
     public imageUploadHandler(files: FileList) {
