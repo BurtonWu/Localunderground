@@ -10,7 +10,6 @@ using LocalUndergroundServer.Features.TextWidget.Params;
 using LocalUndergroundServer.Features.Widget.Constants;
 using LocalUndergroundServer.Features.Widget.Params;
 using LocalUndergroundServer.Infrastructure.DataAccess;
-using LocalUndergroundServer.Infrastructure.Exceptions;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
 using LocalUndergroundServer.Infrastructure.Request;
 using LocalUndergroundServer.Shared.Constants;

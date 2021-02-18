@@ -96,20 +96,17 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
             console.log(model);
             this.widgets = this.widgets.concat(model.textWidgetModels);
             this.widgets = this.widgets.concat(model.imageWidgetModels);
+            this.widgets.sort(function (a, b) {
+                if (a.sort > b.sort) return 1;
+                else if (a.sort < b.sort) return -1;
+                return 0;
+            });
             console.log(this.widgets);
         });
     }
 
     public drop(event: CdkDragDrop<TextWidgetModel[]>) {
-        console.log('drop', event);
-        // this.textWidgets.forEach(function(widget, i) {
-        //     widget.sort = i + 1;
-        //     this[i].sort = i + 1;
-        //     console.log(this[i], i+1)
-        // }, this.textWidgets);
-
-        console.log(this.textWidgets);
-        moveItemInArray(this.textWidgets, event.previousIndex, event.currentIndex);
+        moveItemInArray(this.widgets, event.previousIndex, event.currentIndex);
         this._saveWidgetOrder(true);
     }
 
@@ -203,14 +200,6 @@ export class StoryBoardEditComponent implements OnInit, OnChanges {
             return 0;
         });
 
-    }
-
-    public imageUploadHandler(files: FileList) {
-        const formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('imageData' + i, files.item(i), files.item(i).name);
-        }
-        this.imageData = formData;
     }
 
     get title() { return this.storyBoardForm.get('title'); }

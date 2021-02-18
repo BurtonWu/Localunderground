@@ -1,5 +1,4 @@
-﻿using LocalUndergroundServer.Infrastructure.Exceptions;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -102,10 +101,7 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
             }
             catch (SqlException ex)
             {
-                throw new AppException(ex.Message, ex.InnerException)
-                {
-                    SqlErrorNumber = ex.Number
-                };
+                throw ex;
             }
 
             return returnValue;
