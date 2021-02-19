@@ -28,9 +28,9 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
         }
 
         public async Task<List<PostCardModel>> GetPostCards(StoryBoardSort sortOrder = StoryBoardSort.Title, int sortDirection = 1, 
-            int currentIndex = 0, int loadCount = 20, string filterText = null)
+            int currentIndex = 0, int loadCount = 20, string filterText = null, int? categoryId = null)
         {
-            var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText);
+            var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText, categoryId);
             var postCards = storyboards.Select(x => new PostCardModel()
             {
                 StoryBoardId = x.Id,

@@ -1,7 +1,18 @@
 <layout>
-  <div class="card-deck">
-    <div *ngFor="let model of postCards">
-      <post-card [model]="model"></post-card>
+  <div class="row">
+    <div class="col-2">
+      <div class="list-group" *ngFor="let category of categories; let i = index">
+        <button class="list-group-item list-group-item-action list-group-item-primary" (click)="categoryFilter(i)">
+          {{category.categoryName}}
+        </button>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="card-deck">
+        <div *ngFor="let model of postCards">
+          <post-card [model]="model"></post-card>
+        </div>
+      </div>
     </div>
   </div>
 </layout>

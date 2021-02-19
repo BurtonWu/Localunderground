@@ -11,5 +11,6 @@ namespace LocalUndergroundServer.Features.StoryBoard.Params
         public int Id { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
+        public int CategoryId { get; set; }
     }
 }

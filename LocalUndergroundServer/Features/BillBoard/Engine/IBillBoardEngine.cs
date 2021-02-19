@@ -10,7 +10,7 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
     public interface IBillBoardEngine
     {
         public Task<List<PostCardModel>> GetPostCards(StoryBoardSort sortOrder = StoryBoardSort.Title, int sortDirection = 1,
-                 int currentIndex = 0, int loadCount = 20, string filterText = null);
+                 int currentIndex = 0, int loadCount = 20, string filterText = null, int? categoryId = null);
 
     }
 }

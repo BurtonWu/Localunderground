@@ -3,6 +3,7 @@ using LocalUndergroundServer.Data;
 using LocalUndergroundServer.Data.Models;
 using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Features.BillBoard.Engine;
+using LocalUndergroundServer.Features.Classification.Engine;
 using LocalUndergroundServer.Features.Identity.Engine;
 using LocalUndergroundServer.Features.ImageWidget.Engine;
 using LocalUndergroundServer.Features.StoryBoard.Engine;
@@ -98,7 +99,8 @@ namespace LocalUndergroundServer.Infrastructure.Extensions.Startup
                            .AddTransient<IWidgetStore, WidgetStore>()
                            .AddTransient<IBillBoardEngine, BillBoardEngine>()
                            .AddTransient<IStoryBoardStore, StoryBoardStore>()
-                           .AddTransient<IStoryBoardEngine, StoryBoardEngine>();
+                           .AddTransient<IStoryBoardEngine, StoryBoardEngine>()
+                           .AddTransient<IClassificationStore, ClassificationStore>();
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)

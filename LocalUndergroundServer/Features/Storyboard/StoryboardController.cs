@@ -95,7 +95,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Create([FromBody] StoryBoardCreateParams model)
         {
-            var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.Synopsis, model.CoverPortrait);
+            var storyboardId = await _storyboardEngine.CreateStoryBoard(UserId, model.Title, model.CategoryId, model.Synopsis, model.CoverPortrait);
             return Created("Created", storyboardId);
             //return Ok();
         }
@@ -106,8 +106,16 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Update([FromBody] StoryBoardUpdateParams model)
         {
-            await _storyBoardStore.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis);
-            return Ok();
+            try
+            {
+                await _storyboardEngine.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis, model.CategoryId);
+                return Ok();
+            }
+            catch (ApplicationException ex)
+            {
+                ModelState.AddModelError("error", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         [Authorize]

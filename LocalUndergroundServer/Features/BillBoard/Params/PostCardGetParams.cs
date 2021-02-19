@@ -7,6 +7,7 @@ namespace LocalUndergroundServer.Features.BillBoard.Params
 {
     public class PostCardGetParams
     {
+        public int CategoryId { get; set; }
         public int SortOrder { get; set; }
         public int SortDirection { get; set; }
         public int CurrentIndex { get; set; }

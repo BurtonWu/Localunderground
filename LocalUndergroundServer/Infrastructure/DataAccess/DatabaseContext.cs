@@ -1,4 +1,5 @@
 ﻿using LocalUndergroundServer.Data.Models;
+using LocalUndergroundServer.Data.Models.Classification;
 using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Data.Models.ImageWidget;
 using LocalUndergroundServer.Data.Models.StoryBoard;
@@ -23,6 +24,7 @@ namespace LocalUndergroundServer.Infrastructure.DataAccess
         public DbSet<TextWidgetCore> TextWidgetCore { get; set; }
         public DbSet<ImageWidgetCore> ImageWidgetCore { get; set; }
         public DbSet<WidgetImage> WidgetImage { get; set; }
+        public DbSet<Category> Category { get; set; }
 
 
 

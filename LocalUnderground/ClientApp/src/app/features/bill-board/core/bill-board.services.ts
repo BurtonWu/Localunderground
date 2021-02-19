@@ -1,23 +1,22 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Subscription, Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
 import { AuthorizationService } from "../../../auth/auth.services";
-import { PostCardModel } from "../post-card/post-card.interface";
+import { PostCardGetParams, PostCardModel } from "../post-card/post-card.interface";
 import { map } from "rxjs/operators";
+import { AppHttpService } from "src/app/app-config/app-http-client";
 
 @Injectable()
 export class BillBoardService {
     private baseUrl = environment.apiUrl + '/api/billboard';
 
-    constructor(private http: HttpClient, private authService: AuthorizationService) {
+    constructor(private http: AppHttpService, private authService: AuthorizationService) {
     }
 
-    public getPostCards(): Observable<PostCardModel[]> {
-        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard');
+    public getPostCards(params?: PostCardGetParams): Observable<PostCardModel[]> {
+        return this.http.get<PostCardModel[]>(this.baseUrl + '/postcard', this.http.getHttpOptions(params));
     }
-
-    
 
     // public createStoryboard(params: StoryboardCreateRequestParams): Observable<any> {
     //     return this.http.post(this.baseUrl, params);

@@ -46,7 +46,7 @@ namespace LocalUndergroundServer.Features.BillBoard
         public async Task<ActionResult<List<PostCardModel>>> GetPostCards([FromQuery] PostCardGetParams model)
         {
             return await _billBoardEngine.GetPostCards((StoryBoardSort)model.SortOrder, model.SortDirection,
-                model.CurrentIndex, model.LoadCount, model.FilterText);
+                model.CurrentIndex, model.LoadCount, model.FilterText, model.CategoryId);
         }
 
     }

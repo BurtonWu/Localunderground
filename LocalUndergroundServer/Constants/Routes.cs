@@ -16,6 +16,10 @@ namespace LocalUndergroundServer.Constants
         {
             public const string PostCard = "api/billboard/postcard";
         }
+        public static class Classification
+        {
+            public const string Base = "api/classification";
+        }
 
         public static class StoryBoard
         {

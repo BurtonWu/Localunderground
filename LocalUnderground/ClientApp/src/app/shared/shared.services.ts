@@ -4,12 +4,17 @@ import { Subscription, Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { AuthorizationService } from "../auth/auth.services";
 import { map, catchError } from 'rxjs/operators';
+import { Category } from "./shared.interface";
 
 @Injectable()
 export class SharedService {
-    private baseUrl = environment.apiUrl + '/api/panel';
+    private baseUrl = environment.apiUrl + '/api/classification';
 
     constructor(private http: HttpClient, private authService: AuthorizationService) {
+    }
+
+    public GetCategories(): Observable<Category[]> {
+        return this.http.get<Category[]>(this.baseUrl);
     }
 
     // public uploadImage(params: FormData): Observable<any> {

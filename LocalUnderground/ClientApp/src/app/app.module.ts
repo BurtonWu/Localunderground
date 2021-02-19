@@ -16,6 +16,7 @@ import { BillBoardModule } from './features/bill-board/core/bill-board.module';
 import { StoryBoardViewModule } from './features/bill-board/story-board-view/story-board-view.module';
 import { StudioModule } from './features/studio/core/studio.module';
 import { StoryBoardCreateModule } from './features/studio/story-board-create/story-board-create.module';
+import { AppHttpService } from './app-config/app-http-client';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { StoryBoardCreateModule } from './features/studio/story-board-create/sto
 
   ],
   providers: [
+    AppHttpService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

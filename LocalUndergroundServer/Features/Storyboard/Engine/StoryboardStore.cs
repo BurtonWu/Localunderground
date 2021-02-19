@@ -43,19 +43,22 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                 Id = core.ID,
                 Synopsis = core.Synopsis,
                 Title = core.Title,
+                CategoryId = core.CategoryId,
+                CreatedOn = core.CreatedOn,
+                LastModifiedOn = core.ModifiedOn,
                 CoverPortrait = core.CoverPortrait != null ? Convert.ToBase64String(core.CoverPortrait) : null
             };
         }
 
-        public async Task<List<StoryBoardDTO>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null)
+        public async Task<List<StoryBoardDTO>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null, int? categoryId = null)
         {
-            if(_dbContext.StoryBoardCore.Count() == 0)
+            if (_dbContext.StoryBoardCore.Count() == 0)
                 return new List<StoryBoardDTO>();
 
             return await _dbContext.StoryBoardCore
                 //.Skip(currentIndex)
                 //.Take(loadCount)
-                .Where(x => x.Title == filterText || string.IsNullOrWhiteSpace(filterText))
+                .Where(x => (string.IsNullOrWhiteSpace(filterText) || x.Title == filterText) && (!categoryId.HasValue || x.CategoryId == categoryId.Value))
                 .Select(x => new StoryBoardDTO()
                 {
                     Id = x.ID,
@@ -70,7 +73,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
 
         public async Task<List<StoryBoardDTO>> GetStoryBoards(string userId)
         {
-            if (_dbContext.StoryBoardCore.Count() == 0) 
+            if (_dbContext.StoryBoardCore.Count() == 0)
                 return new List<StoryBoardDTO>();
 
             return await _dbContext.StoryBoardCore
@@ -85,13 +88,14 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                 .ToListAsync();
         }
 
-        public async Task UpdateStoryBoard(int id, string userId, string title, string synopsis)
+        public async Task UpdateStoryBoard(int id, string userId, string title, string synopsis, int categoryId)
         {
             var storyBoard = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id && x.UserID == userId);
-            if(storyBoard != null)
+            if (storyBoard != null)
             {
                 storyBoard.Title = title;
                 storyBoard.Synopsis = synopsis;
+                storyBoard.CategoryId = categoryId;
             }
             _dbContext.Update(storyBoard);
             await _dbContext.SaveChangesAsync();
@@ -107,7 +111,8 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
                 UserID = model.UserId,
                 CoverPortrait = model.CoverPortrait,
                 CreatedOn = DateTime.Now,
-                ModifiedOn = DateTime.Now
+                ModifiedOn = DateTime.Now,
+                CategoryId = model.CategoryId
             };
             await _dbContext.StoryBoardCore.AddAsync(core);
             await _dbContext.SaveChangesAsync();
@@ -117,13 +122,14 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
         public async Task<bool> DeleteStoryBoard(int id)
         {
             var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id);
-            if(core != null)
+            if (core != null)
             {
                 _dbContext.StoryBoardCore.Remove(core);
                 return (await _dbContext.SaveChangesAsync()) == 1;
             }
             return false;
         }
+
 
         //public async Task<List<PanelImage>> GetImages()
         //{

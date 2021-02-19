@@ -12,6 +12,7 @@ namespace LocalUndergroundServer.Data.Models.StoryBoard
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public byte[] CoverPortrait { get; set; }
+        public int CategoryId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
     }

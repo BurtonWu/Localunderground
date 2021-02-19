@@ -4,6 +4,7 @@ import { BillBoardComponent } from './bill-board.component';
 import { BillBoardService } from './bill-board.services';
 import { PostCardModule } from '../post-card/post-card.module';
 import { LayoutModule } from 'src/app/layout/layout.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LayoutModule } from 'src/app/layout/layout.module';
   imports: [
     AppBaseModule,
     LayoutModule,
-    PostCardModule
+    PostCardModule,
+    SharedModule
   ],
   exports: [
     BillBoardComponent

@@ -7,3 +7,12 @@ export interface PostCardModel {
     createdDate: Date;
     lastModifiedDate: Date;
 }
+
+export interface PostCardGetParams {
+    categoryId?: number;
+    sortOrder?: number;
+    sortDirection?: number;
+    currentIndex?: number;
+    loadCount?: number;
+    filterText?: string;
+}

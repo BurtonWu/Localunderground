@@ -13,6 +13,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Models
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public string CoverPortrait { get; set; }
+        public int CategoryId { get; set; }
         public List<TextWidgetModel> TextWidgetModels { get; set; }
         public List<ImageWidgetModel> ImageWidgetModels { get; set; }
     }

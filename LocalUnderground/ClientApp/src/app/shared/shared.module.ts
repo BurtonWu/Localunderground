@@ -20,7 +20,7 @@ import { StringTruncatePipe } from './pipes/string-truncate.pipe';
     StringTruncatePipe
   ],
   providers: [
-    
+    SharedService
   ]
 })
 export class SharedModule { }
