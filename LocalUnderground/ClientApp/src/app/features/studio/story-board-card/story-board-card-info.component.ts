@@ -17,7 +17,7 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
 
     @Input() public model: StoryBoardStudioCardModel;
     @Output() public isDeleted = new EventEmitter<number>();
-    // @Output() public modelChange = new EventEmitter<PostCardModel>();
+    @Output() public deleteStoryBoardEvent = new EventEmitter<number>();
 
 
     public submitted: boolean;
@@ -53,7 +53,10 @@ export class StoryBoardCardInfoComponent implements OnInit, OnChanges {
 
     public navigateStoryBoardEdit() {
         this._router.navigate(['edit'], { relativeTo: this._activatedRoute, queryParams: { Id: this.model.id } });
+    }
 
+    public deleteStoryBoard() {
+        this.deleteStoryBoardEvent.emit(this.model.id);
     }
 
 }

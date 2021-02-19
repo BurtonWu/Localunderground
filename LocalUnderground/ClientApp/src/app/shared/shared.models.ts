@@ -5,3 +5,7 @@ export function AngularDeepCopy(object: any): any {
 export function attachDataImagePrefix(base64String: string) {
     return base64String != null ? 'data:image/png;base64,' + base64String : null;
 }
+
+export enum CategoryId {
+    All = 0
+}

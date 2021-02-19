@@ -15,6 +15,7 @@ export interface StoryboardCreateRequestParams {
     title: string
     synopsis: string;
     coverPortrait: string;
+    categoryId: number;
 }
 
 export interface StoryboardUpdateParams {

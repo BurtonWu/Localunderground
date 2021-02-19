@@ -10,6 +10,7 @@ using LocalUndergroundServer.Features.BillBoard.Models;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.StoryBoard.Engine;
 using LocalUndergroundServer.Data.Models.StoryBoard;
+using LocalUndergroundServer.Features.Classification.Constants;
 
 namespace LocalUndergroundServer.Features.BillBoard.Engine
 {
@@ -28,7 +29,7 @@ namespace LocalUndergroundServer.Features.BillBoard.Engine
         }
 
         public async Task<List<PostCardModel>> GetPostCards(StoryBoardSort sortOrder = StoryBoardSort.Title, int sortDirection = 1, 
-            int currentIndex = 0, int loadCount = 20, string filterText = null, int? categoryId = null)
+            int currentIndex = 0, int loadCount = 20, string filterText = null, CategoryId categoryId = CategoryId.All)
         {
             var storyboards = await _storyboardStore.GetStoryBoards(currentIndex, loadCount, filterText, categoryId);
             var postCards = storyboards.Select(x => new PostCardModel()

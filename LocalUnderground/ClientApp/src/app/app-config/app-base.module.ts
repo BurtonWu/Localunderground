@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { SharedService } from '../shared/shared.services';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,10 @@ import { SharedService } from '../shared/shared.services';
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    SharedModule
-    
+    SharedModule,
+
+    BrowserAnimationsModule,
+    MatSelectModule,
   ],
   providers: [
     SharedService

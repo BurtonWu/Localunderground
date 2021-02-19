@@ -5,6 +5,8 @@ import { StoryBoardEditService } from '../story-board-edit/story-board-edit.serv
 import { StoryboardCreateRequestParams } from '../story-board-edit/story-board-edit.interface';
 import { Router } from '@angular/router';
 import { RoutePath } from 'src/app/shared/shared.constants';
+import { SharedService } from 'src/app/shared/shared.services';
+import { Category } from 'src/app/shared/shared.interface';
 
 @Component({
     selector: 'story-board-create',
@@ -19,18 +21,24 @@ export class StoryBoardCreateComponent implements OnInit {
     public imageData: FormData;
     public reader: FileReader;
     public coverPortrait: string;    
+    public categories: Category[] = [];
+    public selectedCategory: Category;
     private _storyBoardService: StoryBoardEditService;
+    private _sharedService: SharedService
     private _router: Router;
     public constructor(
         storyBoardService: StoryBoardEditService,
+        sharedService: SharedService,
         fb: FormBuilder,
         router: Router
     ) {
+        this._sharedService = sharedService;
         this._storyBoardService = storyBoardService;
         this._router = router;
         this.storyBoardForm = fb.group({
             title: ['', [Validators.required, Validators.maxLength(20)]],
             synopsis: [''],
+            category: [null, [Validators.required]]
         });
 
         this.reader = new FileReader();
@@ -40,23 +48,26 @@ export class StoryBoardCreateComponent implements OnInit {
     }
 
     public ngOnInit() {
-        
+        this._sharedService.GetCategories().subscribe((result) => {
+            this.categories = result;
+        });
     }
 
     public create() {
         // this.storyBoardCreateModel.title = this.title.value;
         // this.storyBoardCreateModel.synopsis = this.description.value;
-        
+        const selectedCategory = <Category>this.category.value;
         const params: StoryboardCreateRequestParams = {
             title: this.title.value,
             synopsis: this.synopsis.value,
-            coverPortrait: this.coverPortrait
+            coverPortrait: this.coverPortrait,
+            categoryId: selectedCategory.categoryId
         };
         this.submitted = true;
         console.log(params);
         this._storyBoardService.createStoryboard(params).subscribe((id) => {
             this._router.navigate([RoutePath.Studio_StoryBoard_Edit], { queryParams: { Id: id } });
-        })
+        });
         // this._billboardService.createBillboard(params).subscribe((response) => {
         //     console.log(response);
         //      this.submitted = false;
@@ -74,6 +85,8 @@ export class StoryBoardCreateComponent implements OnInit {
 
     get title() { return this.storyBoardForm.get('title'); }
     get synopsis() { return this.storyBoardForm.get('synopsis'); }
+    get category() { return this.storyBoardForm.get('category'); }
+
 
     private validateImageFiles(files: FileList): File[] {
         const validatedFiles = [];

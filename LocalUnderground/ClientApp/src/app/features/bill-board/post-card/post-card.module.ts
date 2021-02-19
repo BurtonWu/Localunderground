@@ -13,8 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PostCardComponent
   ],
   imports: [
-    AppBaseModule,
-    SharedModule
+    AppBaseModule
   ],
   exports: [
     PostCardComponent

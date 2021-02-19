@@ -15,6 +15,6 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
         Task<List<StoryBoardStudioCardModel>> GetStoryBoardStudioCards(string userId);
         Task<StoryBoardModel> GetStoryBoardEditModel(int id);
         Task UpdateStoryBoard(int id, string userId, string title, string synopsis, int categoryId);
-
+        Task DeleteStoryBoard(int id, string userId);
     }
 }

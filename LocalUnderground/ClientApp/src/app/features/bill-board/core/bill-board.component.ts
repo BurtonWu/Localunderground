@@ -9,6 +9,7 @@ import { PostCardComponent } from '../post-card/post-card.component';
 import { BillBoardService } from './bill-board.services';
 import { SharedService } from 'src/app/shared/shared.services';
 import { Category } from 'src/app/shared/shared.interface';
+import { CategoryId } from 'src/app/shared/shared.models';
 
 @Component({
     selector: 'bill-board',
@@ -56,8 +57,11 @@ export class BillBoardComponent implements OnInit, OnChanges {
     }
 
     private _init() {
+        const params: PostCardGetParams = {
+            categoryId: CategoryId.All
+        };
         let promises: Promise<any>[] = [
-            this._billBoardService.getPostCards().toPromise(),
+            this._billBoardService.getPostCards(params).toPromise(),
             this._sharedService.GetCategories().toPromise()    
         ];
         Promise.all(promises).then((results) => {

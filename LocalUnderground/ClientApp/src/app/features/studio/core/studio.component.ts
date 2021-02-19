@@ -24,12 +24,7 @@ export class StudioComponent implements OnInit {
     }
 
     public ngOnInit() {
-        console.log('studio');
-        this._storyBoardService.getStoryBoardStudioCards().subscribe((studioCards) => {
-            this.models = studioCards;
-            if(this.models.length > 0) 
-                this.activateModel(0);
-        });
+        this._init();
     }
 
     public activateModel(index: number) {
@@ -38,12 +33,21 @@ export class StudioComponent implements OnInit {
         this.selectedModel = this.models[index];
     }
 
-    public delete(id: number) {
-        // this._storyBoardService.deleteStoryboard(id).subscribe(() => {
-        //     this._storyBoardService.getStoryboards().subscribe((storyBoards) => {
-        //         this.storyBoardCores = storyBoards;
-        //     });
-        // })
+    public deleteStoryBoard(id: number) {
+        this._storyBoardService.deleteStoryboard(id).subscribe(() => {
+            this._init();
+        })
+    }
+
+    private _init() {
+        this._storyBoardService.getStoryBoardStudioCards().subscribe((studioCards) => {
+            this.models = studioCards;
+            if(this.models.length > 0) {
+                this.activateModel(0);
+            } else {
+                this.selectedModel = null;
+            }
+        });
     }
 }
 

@@ -129,6 +129,16 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             }
             await _storyboardStore.UpdateStoryBoard(id, userId, title, synopsis, categoryId);
         }
+
+        public async Task DeleteStoryBoard(int id, string userId)
+        {
+            var storyBoardExist = await _storyboardStore.StoryBoardExists(id, userId);
+            if (!storyBoardExist)
+            {
+                throw new ApplicationException("Invalid StoryBoard.");
+            }
+            await _storyboardStore.DeleteStoryBoard(id);
+        }
     }
 
 }

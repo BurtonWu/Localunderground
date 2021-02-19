@@ -1,5 +1,6 @@
 ﻿using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Data.Models.StoryBoard;
+using LocalUndergroundServer.Features.Classification.Constants;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.StoryBoard.DTO;
 using LocalUndergroundServer.Infrastructure.DataAccess;
@@ -50,7 +51,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             };
         }
 
-        public async Task<List<StoryBoardDTO>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null, int? categoryId = null)
+        public async Task<List<StoryBoardDTO>> GetStoryBoards(int currentIndex, int loadCount = 20, string filterText = null, CategoryId categoryId = CategoryId.All)
         {
             if (_dbContext.StoryBoardCore.Count() == 0)
                 return new List<StoryBoardDTO>();
@@ -58,7 +59,7 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             return await _dbContext.StoryBoardCore
                 //.Skip(currentIndex)
                 //.Take(loadCount)
-                .Where(x => (string.IsNullOrWhiteSpace(filterText) || x.Title == filterText) && (!categoryId.HasValue || x.CategoryId == categoryId.Value))
+                .Where(x => (string.IsNullOrWhiteSpace(filterText) || x.Title == filterText) && (categoryId == CategoryId.All || x.CategoryId == (int)categoryId))
                 .Select(x => new StoryBoardDTO()
                 {
                     Id = x.ID,
@@ -119,15 +120,10 @@ namespace LocalUndergroundServer.Features.StoryBoard.Engine
             return core.ID;
         }
 
-        public async Task<bool> DeleteStoryBoard(int id)
+        public async Task DeleteStoryBoard(int id)
         {
-            var core = await _dbContext.StoryBoardCore.SingleOrDefaultAsync(x => x.ID == id);
-            if (core != null)
-            {
-                _dbContext.StoryBoardCore.Remove(core);
-                return (await _dbContext.SaveChangesAsync()) == 1;
-            }
-            return false;
+            var sqlParameters = _sqlEngine.AddSqlParameter("@StoryBoardID", id);
+            await _sqlEngine.ExecuteStoredProcedure("spDeleteStoryBoard", sqlParameters);
         }
 
 

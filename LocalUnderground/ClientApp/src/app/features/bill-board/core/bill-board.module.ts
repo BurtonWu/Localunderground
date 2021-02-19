@@ -14,8 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     AppBaseModule,
     LayoutModule,
-    PostCardModule,
-    SharedModule
+    PostCardModule
   ],
   exports: [
     BillBoardComponent

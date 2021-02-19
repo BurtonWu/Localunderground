@@ -78,6 +78,11 @@ export class StoryBoardViewComponent implements OnInit, OnChanges {
             console.log(model)
             this.widgets = this.widgets.concat(model.textWidgetModels);
             this.widgets = this.widgets.concat(model.imageWidgetModels);
+            this.widgets.sort(function (a, b) {
+                if (a.sort > b.sort) return 1;
+                else if (a.sort < b.sort) return -1;
+                return 0;
+            });
             console.log(this.widgets);
         });
     }

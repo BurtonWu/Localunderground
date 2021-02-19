@@ -4,6 +4,7 @@ using LocalUndergroundServer.Data.Models.Identity;
 using LocalUndergroundServer.Features.BillBoard.Engine;
 using LocalUndergroundServer.Features.BillBoard.Models;
 using LocalUndergroundServer.Features.BillBoard.Params;
+using LocalUndergroundServer.Features.Classification.Constants;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Infrastructure.DataAccess;
 using LocalUndergroundServer.Infrastructure.Extensions.Startup;
@@ -46,7 +47,7 @@ namespace LocalUndergroundServer.Features.BillBoard
         public async Task<ActionResult<List<PostCardModel>>> GetPostCards([FromQuery] PostCardGetParams model)
         {
             return await _billBoardEngine.GetPostCards((StoryBoardSort)model.SortOrder, model.SortDirection,
-                model.CurrentIndex, model.LoadCount, model.FilterText, model.CategoryId);
+                model.CurrentIndex, model.LoadCount, model.FilterText, (CategoryId)model.CategoryId);
         }
 
     }

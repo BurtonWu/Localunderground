@@ -1,7 +1,7 @@
 <div class="card">
   <img *ngIf="model?.coverPortrait" class="card-img-top" [src]="model.coverPortrait">
   <div class="card-body">
-    <h5 class="card-title">{{model?.title}}</h5>
+    <strong class="card-title">{{model?.title}}</strong>
     <p class="card-text">{{model?.synopsis | strTruncate:[50]}}</p>
   </div>
   <div class="card-footer">

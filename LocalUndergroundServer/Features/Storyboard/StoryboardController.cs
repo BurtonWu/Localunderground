@@ -108,7 +108,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         {
             try
             {
-                await _storyboardEngine.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis, model.CategoryId);
+                await _storyboardEngine.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis, 7);
                 return Ok();
             }
             catch (ApplicationException ex)
@@ -123,8 +123,8 @@ namespace LocalUndergroundServer.Features.StoryBoard
         [Route(Routes.StoryBoard.Base)]
         public async Task<ActionResult> Delete([FromQuery] int storyBoardId)
         {
-            var deleted = await _storyBoardStore.DeleteStoryBoard(storyBoardId);
-            return Ok(deleted);
+            await _storyboardEngine.DeleteStoryBoard(storyBoardId, UserId);
+            return Ok();
         }
     }
 }
