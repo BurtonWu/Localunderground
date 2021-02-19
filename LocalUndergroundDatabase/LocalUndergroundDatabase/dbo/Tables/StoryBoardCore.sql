@@ -6,8 +6,12 @@
     [CoverPortrait] VARBINARY (MAX) NULL,
     [CreatedOn]     DATETIME        NOT NULL,
     [ModifiedOn]    DATETIME        NOT NULL,
-    PRIMARY KEY CLUSTERED ([ID] ASC)
+    [CategoryId]    INT             NOT NULL,
+    PRIMARY KEY CLUSTERED ([ID] ASC),
+    FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Category] ([ID])
 );
+
+
 
 
 
