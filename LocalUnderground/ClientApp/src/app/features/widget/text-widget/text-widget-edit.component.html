@@ -1,13 +1,9 @@
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-lg-12">
-      <textarea class="form-control" [formControl]="bodyControl" placeholder="body..."></textarea>
-      <div *ngIf="submitted && bodyControl.errors?.required" class="alert alert-danger">This field
-        is required</div>
-    </div>
-    <div class="row">
-      <button (click)="openTextWidgetModal()">Open</button>
-      <button class="btn btn-danger" (click)="delete()">Delete</button>
-    </div>
-  </div>
+<div>
+  <textarea class="form-control" [formControl]="bodyControl" placeholder="body..."></textarea>
+  <div *ngIf="submitted && bodyControl.errors?.required" class="alert alert-danger">This field
+    is required</div>
+</div>
+<div>
+  <!-- <button class="btn btn-danger" (click)="openTextWidgetModal()">Open</button> -->
+  <button class="btn btn-danger" (click)="delete()">Delete</button>
 </div>

@@ -10,26 +10,28 @@
         <h2>{{model?.synopsis}}</h2>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="row" *ngFor="let widget of widgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
-          <div class="col-sm-1">
+        <div class="card" *ngFor="let widget of widgets; let i = index;" (cdkDragStarted)="handleDragStart($event)" cdkDrag>
+          <div class="card-header">
             {{widget?.sort}}
             <div class="example-handle" cdkDragHandle>
               <i style="content: url(../../assets/images/arrows-move.svg)"></i>
             </div>
           </div>
-          <div class="col-lg-11" [ngSwitch]="widget.widgetType">
+          <div class="card-body" [ngSwitch]="widget.widgetType">
               <text-widget-edit *ngSwitchCase="1" [model]="widget" (isDeleted)="onWidgetDelete($event)"></text-widget-edit>
               <image-widget-edit *ngSwitchCase="2" [model]="widget"></image-widget-edit>
           </div>
         </div>
       </div>
     </div>
+    <hr/>
     <div class="row">
-      <button (click)="createTextWidget()">Add Text Body</button>
-      <button (click)="createImageWidget()">Add Image</button>
-      <button (click)="saveAll()">Save All</button>
+      <button class="btn btn-outline-primary" (click)="createTextWidget()">Add Text Body</button>
+      <button class="btn btn-outline-primary" (click)="createImageWidget()">Add Image</button>
+      <button class="btn btn-outline-success" (click)="saveAll()">Save All</button>
     </div>
   </form>
 </layout>
