@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardEditService } from '../story-board-edit/story-board-edit.services';
-import { StoryboardCreateRequestParams } from '../story-board-edit/story-board-edit.interface';
+import { StoryBoardEditService } from '../story-board/story-board.services';
+import { StoryboardCreateRequestParams } from '../story-board/story-board.interface';
 import { Router } from '@angular/router';
 import { RoutePath } from 'src/app/shared/shared.constants';
 import { SharedService } from 'src/app/shared/shared.services';
@@ -22,9 +22,8 @@ export class StoryBoardCreateComponent implements OnInit {
     public reader: FileReader;
     public coverPortrait: string;    
     public categories: Category[] = [];
-    public selectedCategory: Category;
     private _storyBoardService: StoryBoardEditService;
-    private _sharedService: SharedService
+    private _sharedService: SharedService;
     private _router: Router;
     public constructor(
         storyBoardService: StoryBoardEditService,

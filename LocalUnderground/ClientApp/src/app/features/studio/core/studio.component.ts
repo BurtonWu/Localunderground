@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControlOptions, } from '@angular/forms';
-import { StoryBoardCore } from '../story-board-edit/story-board-edit.interface';
-import { StoryBoardEditService } from '../story-board-edit/story-board-edit.services';
+import { StoryBoardCore } from '../story-board/story-board.interface';
+import { StoryBoardEditService } from '../story-board/story-board.services';
 import { StoryBoardStudioCardModel } from './studio.interface';
 
 @Component({

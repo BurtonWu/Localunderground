@@ -74,9 +74,9 @@
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
     <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
-    <Build Include="dbo\Stored Procedures\spUploadPanelImage.sql" />
-    <Build Include="dbo\Stored Procedures\spGetPanelImages.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateWidgetSort.sql" />
     <Build Include="dbo\User Defined Types\TVP_WidgetSort.sql" />
+    <Build Include="dbo\Tables\Category.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteStoryBoard.sql" />
   </ItemGroup>
 </Project>

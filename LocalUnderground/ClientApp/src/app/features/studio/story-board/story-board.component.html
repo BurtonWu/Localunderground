@@ -1,0 +1,37 @@
+<layout>
+  <form *ngIf="isReady" [formGroup]="storyBoardForm">
+    <div class="form-group">
+      <label>Title</label>
+      <textarea class="form-control" formControlName="title" placeholder="Title..."></textarea>
+      <div *ngIf="submitted && title.errors?.required" class="alert alert-danger">This field is
+        required</div>
+    </div>
+    <div class="form-group">
+      <label>Synopsis</label>
+      <textarea class="form-control" formControlName="synopsis" placeholder="Synopsis..."></textarea>
+      <div *ngIf="submitted && synopsis.errors?.required" class="alert alert-danger">This field
+        is required</div>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.categoryName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="category.errors?.required">Please choose a category.</mat-error>
+        <!-- <mat-hint>{{animalControl.value?.sound}}</mat-hint> -->
+      </mat-form-field>
+  </div>
+    <hr />
+    <div class="row">
+      <widget [widgets]="widgets" [storyBoardId]="model?.id"></widget>
+    </div>
+    <hr />
+    <div class="row">
+      <button class="btn btn-outline-success" (click)="saveAll()">Save All</button>
+    </div>
+  </form>
+</layout>

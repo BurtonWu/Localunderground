@@ -108,7 +108,7 @@ namespace LocalUndergroundServer.Features.StoryBoard
         {
             try
             {
-                await _storyboardEngine.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis, 7);
+                await _storyboardEngine.UpdateStoryBoard(model.Id, UserId, model.Title, model.Synopsis, model.CategoryId);
                 return Ok();
             }
             catch (ApplicationException ex)
