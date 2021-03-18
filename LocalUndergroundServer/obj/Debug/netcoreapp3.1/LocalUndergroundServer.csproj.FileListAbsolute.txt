@@ -85,6 +85,8 @@ C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\LocalUnde
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\IdentityModel.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\IdentityServer4.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\IdentityServer4.Storage.dll
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -119,6 +121,7 @@ C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -150,6 +153,3 @@ C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUnde
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.dll
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.pdb
 C:\dev\Localunderground\LocalUndergroundServer\obj\Debug\netcoreapp3.1\LocalUndergroundServer.genruntimeconfig.cache
-C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\System.Web.Http.dll
-C:\dev\Localunderground\LocalUndergroundServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
