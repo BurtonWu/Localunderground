@@ -11,7 +11,6 @@ using LocalUndergroundServer.Data.DTO.StoryBoard;
 using LocalUndergroundServer.Features.StoryBoard.Constants;
 using LocalUndergroundServer.Features.ImageWidget.Engine;
 using LocalUndergroundServer.Features.TextWidget.Engine;
-using LocalUndergroundServer.Features.Storyboard.Models;
 using LocalUndergroundServer.Features.Classification.Engine;
 
 namespace LocalUndergroundServer.Features.StoryBoard.Engine

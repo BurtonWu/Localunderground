@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocalUndergroundServer.Features.Storyboard.Models
+namespace LocalUndergroundServer.Features.StoryBoard.Models
 {
     public class StoryBoardStudioCardModel
     {
